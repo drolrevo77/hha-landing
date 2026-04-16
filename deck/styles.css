@@ -1,0 +1,1344 @@
+/* Fonts loaded non-blocking from index.html <head>. */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  background: #0a0a0a;
+  color: #fff;
+  transition: background-color 500ms ease;
+}
+
+body.body-theme-core { background: #0a0a0a; }
+body.body-theme-editorial { background: #f5f1e8; }
+body.body-theme-sticky { background: #d4c9a8; }
+body.body-theme-cinematic { background: #000; }
+body.body-theme-swiss { background: #fafafa; }
+body.body-theme-terminal { background: #0a0f0a; }
+body.body-theme-blueprint { background: #0a1929; }
+body.body-theme-museum { background: #e8e1d4; }
+body.body-theme-financial { background: #fce4d6; }
+body.body-theme-saas { background: #0a0f24; }
+body.body-theme-magazine { background: #1a0606; }
+
+/* ============================================
+   STRUCTURAL
+   ============================================ */
+
+.deck {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1;
+  overflow: hidden;
+  background: transparent;
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
+/* Fallback: animación CSS para browsers SIN View Transitions API.
+   En browsers CON soporte, VT API maneja toda la animación (incluyendo
+   el morphing de letras). Sin transition aquí para que el snapshot
+   post-commit capture el estado visible correctamente. */
+@supports not (view-transition-name: none) {
+  .slide { transition: opacity 400ms ease, visibility 400ms ease; }
+  .slide.active { transition: opacity 450ms ease 120ms, visibility 450ms ease 120ms; }
+  .slide.active .slide-inner > * { animation: stagger-in 500ms ease both; }
+  .slide.active .slide-inner > *:nth-child(1) { animation-delay: 260ms; }
+  .slide.active .slide-inner > *:nth-child(2) { animation-delay: 340ms; }
+  .slide.active .slide-inner > *:nth-child(3) { animation-delay: 420ms; }
+  .slide.active .slide-inner > *:nth-child(4) { animation-delay: 500ms; }
+  .slide.active .slide-inner > *:nth-child(5) { animation-delay: 580ms; }
+  .slide.active .slide-inner > *:nth-child(6) { animation-delay: 660ms; }
+  .slide.active .slide-inner > *:nth-child(7) { animation-delay: 740ms; }
+}
+
+@keyframes stagger-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   VIEW TRANSITIONS — MORPHING ENTRE SLIDES
+   Cada slide tiene un HERO, KICKER y FOOTER que
+   se transforman (posición, tamaño, color, forma)
+   en el HERO/KICKER/FOOTER de la slide siguiente.
+   ============================================ */
+@supports (view-transition-name: none) {
+  /* Desactivar el stagger manual — dejamos que VT haga el morphing */
+  .slide.active .slide-inner > * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* ROOT: swap espacial liviano. Sin blur (costoso), sin scale
+     (costoso en GPU). Solo translate + opacity = fluido. */
+  ::view-transition-old(root) {
+    animation: slide-swap-out 500ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+  ::view-transition-new(root) {
+    animation: slide-swap-in 500ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  @keyframes slide-swap-out {
+    0%   { transform: translate3d(0, 0, 0); opacity: 1; }
+    100% { transform: translate3d(-10%, 0, 0); opacity: 0; }
+  }
+
+  @keyframes slide-swap-in {
+    0%   { transform: translate3d(10%, 0, 0); opacity: 0; }
+    100% { transform: translate3d(0, 0, 0); opacity: 1; }
+  }
+
+  /* Morphing de los anchors semánticos (hero/kicker/footer) */
+  ::view-transition-group(hero),
+  ::view-transition-group(kicker),
+  ::view-transition-group(footer),
+  ::view-transition-old(hero),
+  ::view-transition-new(hero),
+  ::view-transition-old(kicker),
+  ::view-transition-new(kicker),
+  ::view-transition-old(footer),
+  ::view-transition-new(footer) {
+    animation-duration: 500ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    mix-blend-mode: normal;
+  }
+
+  /* HERO por slide — el elemento principal que morphs.
+     Slide 1: hero NO se da a .logo entero porque cada letra migra
+     individualmente hacia el byline de slide 2 (ver "LETTER MORPHING" abajo). */
+  .slide[data-slide="2"].active  .terminal-question   { view-transition-name: hero; }
+  .slide[data-slide="3"].active  .sticky-board        { view-transition-name: hero; }
+  .slide[data-slide="4"].active  .cinematic-main      { view-transition-name: hero; }
+  .slide[data-slide="5"].active  .swiss-statement     { view-transition-name: hero; }
+  .slide[data-slide="6"].active  .editorial-index     { view-transition-name: hero; }
+  .slide[data-slide="7"].active  .blueprint-timeline  { view-transition-name: hero; }
+  .slide[data-slide="8"].active  .museum-grid         { view-transition-name: hero; }
+  .slide[data-slide="9"].active  .financial-title     { view-transition-name: hero; }
+  .slide[data-slide="10"].active .saas-title          { view-transition-name: hero; }
+  .slide[data-slide="11"].active .magazine-hero       { view-transition-name: hero; }
+  .slide[data-slide="12"].active .cta                 { view-transition-name: hero; }
+
+  /* KICKER por slide — el texto pequeño superior que morphs */
+  .slide[data-slide="2"].active  .terminal-header     { view-transition-name: kicker; }
+  .slide[data-slide="3"].active  .sticky-title        { view-transition-name: kicker; }
+  .slide[data-slide="4"].active  .cinematic-top       { view-transition-name: kicker; }
+  .slide[data-slide="5"].active  .swiss-label         { view-transition-name: kicker; }
+  .slide[data-slide="6"].active  .editorial-kicker    { view-transition-name: kicker; }
+  .slide[data-slide="7"].active  .blueprint-header    { view-transition-name: kicker; }
+  .slide[data-slide="8"].active  .museum-collection   { view-transition-name: kicker; }
+  .slide[data-slide="9"].active  .financial-masthead  { view-transition-name: kicker; }
+  .slide[data-slide="10"].active .saas-eyebrow        { view-transition-name: kicker; }
+  .slide[data-slide="11"].active .magazine-topbar     { view-transition-name: kicker; }
+  .slide[data-slide="12"].active .closing-whisper     { view-transition-name: kicker; }
+
+  /* FOOTER por slide — el texto pequeño inferior que morphs.
+     Slide 1 .tagline NO toma "footer" porque las letras de "hha.digital"
+     migran individualmente al terminal prompt de slide 2 (ver "LETTER MORPHING"). */
+  .slide[data-slide="2"].active  .terminal-output     { view-transition-name: footer; }
+  .slide[data-slide="4"].active  .cinematic-whisper   { view-transition-name: footer; }
+  .slide[data-slide="5"].active  .swiss-footer        { view-transition-name: footer; }
+  .slide[data-slide="6"].active  .editorial-byline    { view-transition-name: footer; }
+  .slide[data-slide="7"].active  .timeline-caption    { view-transition-name: footer; }
+  .slide[data-slide="8"].active  .museum-date         { view-transition-name: footer; }
+  .slide[data-slide="9"].active  .financial-footnote  { view-transition-name: footer; }
+  .slide[data-slide="10"].active .saas-note           { view-transition-name: footer; }
+  .slide[data-slide="11"].active .magazine-subhead    { view-transition-name: footer; }
+  .slide[data-slide="12"].active .cta-email           { view-transition-name: footer; }
+
+  /* ============================================
+     LETTER MORPHING — Slide 1 ↔ Slide 2
+     Cada letra de "hha.digital" migra individualmente
+     del logo gigante (slide 1) al byline pequeño (slide 2).
+     ============================================ */
+  .slide[data-slide="1"].active .brand-char[data-char="h1"],
+  .slide[data-slide="2"].active .brand-char[data-char="h1"]  { view-transition-name: brand-h1; }
+  .slide[data-slide="1"].active .brand-char[data-char="h2"],
+  .slide[data-slide="2"].active .brand-char[data-char="h2"]  { view-transition-name: brand-h2; }
+  .slide[data-slide="1"].active .brand-char[data-char="a1"],
+  .slide[data-slide="2"].active .brand-char[data-char="a1"]  { view-transition-name: brand-a1; }
+  .slide[data-slide="1"].active .brand-char[data-char="dot"],
+  .slide[data-slide="2"].active .brand-char[data-char="dot"] { view-transition-name: brand-dot; }
+  .slide[data-slide="1"].active .brand-char[data-char="d"],
+  .slide[data-slide="2"].active .brand-char[data-char="d"]   { view-transition-name: brand-d; }
+  .slide[data-slide="1"].active .brand-char[data-char="i1"],
+  .slide[data-slide="2"].active .brand-char[data-char="i1"]  { view-transition-name: brand-i1; }
+  .slide[data-slide="1"].active .brand-char[data-char="g"],
+  .slide[data-slide="2"].active .brand-char[data-char="g"]   { view-transition-name: brand-g; }
+  .slide[data-slide="1"].active .brand-char[data-char="i2"],
+  .slide[data-slide="2"].active .brand-char[data-char="i2"]  { view-transition-name: brand-i2; }
+  .slide[data-slide="1"].active .brand-char[data-char="t"],
+  .slide[data-slide="2"].active .brand-char[data-char="t"]   { view-transition-name: brand-t; }
+  .slide[data-slide="1"].active .brand-char[data-char="a2"],
+  .slide[data-slide="2"].active .brand-char[data-char="a2"]  { view-transition-name: brand-a2; }
+  .slide[data-slide="1"].active .brand-char[data-char="l"],
+  .slide[data-slide="2"].active .brand-char[data-char="l"]   { view-transition-name: brand-l; }
+
+  /* Brand-char (hha.digital): alineado con el resto a 500ms */
+  ::view-transition-group(brand-h1),
+  ::view-transition-group(brand-h2),
+  ::view-transition-group(brand-a1),
+  ::view-transition-group(brand-dot),
+  ::view-transition-group(brand-d),
+  ::view-transition-group(brand-i1),
+  ::view-transition-group(brand-g),
+  ::view-transition-group(brand-i2),
+  ::view-transition-group(brand-t),
+  ::view-transition-group(brand-a2),
+  ::view-transition-group(brand-l),
+  ::view-transition-old(brand-h1), ::view-transition-new(brand-h1),
+  ::view-transition-old(brand-h2), ::view-transition-new(brand-h2),
+  ::view-transition-old(brand-a1), ::view-transition-new(brand-a1),
+  ::view-transition-old(brand-dot), ::view-transition-new(brand-dot),
+  ::view-transition-old(brand-d), ::view-transition-new(brand-d),
+  ::view-transition-old(brand-i1), ::view-transition-new(brand-i1),
+  ::view-transition-old(brand-g), ::view-transition-new(brand-g),
+  ::view-transition-old(brand-i2), ::view-transition-new(brand-i2),
+  ::view-transition-old(brand-t), ::view-transition-new(brand-t),
+  ::view-transition-old(brand-a2), ::view-transition-new(brand-a2),
+  ::view-transition-old(brand-l), ::view-transition-new(brand-l) {
+    animation-duration: 500ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    mix-blend-mode: normal;
+  }
+
+  /* Nav y counter fijos deben mantenerse durante la transición */
+  .nav { view-transition-name: deck-nav; }
+  .slide-counter { view-transition-name: deck-counter; }
+
+  /* Root más largo para drama */
+  @keyframes vt-fade-out { to { opacity: 0; } }
+  @keyframes vt-fade-in { from { opacity: 0; } to { opacity: 1; } }
+}
+
+/* Decorative elements: NO opacity transition para que el snapshot VT
+   capture su estado visible correctamente. Heredan opacity del .slide. */
+
+.slide-inner {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================
+   NAVIGATION (auto-invert via mix-blend-mode)
+   ============================================ */
+
+.nav {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 100;
+  mix-blend-mode: difference;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.5rem 0.8rem;
+  transition: color 0.2s;
+  font-family: inherit;
+}
+
+.nav-btn:hover:not(:disabled) { color: #fff; }
+.nav-btn:disabled { color: rgba(255,255,255,0.2); cursor: not-allowed; }
+
+.dots { display: flex; gap: 0.5rem; }
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+  padding: 0;
+}
+
+.dot.active { background: #fff; }
+
+.slide-counter {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.6);
+  font-feature-settings: 'tnum';
+  z-index: 100;
+  mix-blend-mode: difference;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ============================================
+   THEME 1 & 12: CORE (hha.digital)
+   ============================================ */
+
+.theme-core {
+  color: #fff;
+}
+
+.theme-core::before {
+  content: '';
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.025) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.theme-core .logo {
+  font-size: clamp(3rem, 9vw, 6rem);
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 0.2em;
+}
+
+.brand-char,
+.auto-char {
+  display: inline-block;
+  white-space: pre;
+}
+
+.auto-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.theme-core .brand-dim { color: #555; }
+
+.theme-core .divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #444, transparent);
+  margin: 2rem auto;
+}
+
+.theme-core .tagline {
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.theme-core .closing-whisper {
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 3rem;
+}
+
+.theme-core .cta {
+  font-size: clamp(1.75rem, 4.5vw, 3rem);
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+  color: #fff;
+}
+
+.theme-core .cta-email {
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.2em;
+  transition: border-color 0.3s;
+  display: inline-block;
+}
+
+.theme-core .cta-email:hover { border-color: #fff; }
+
+/* ============================================
+   THEME 2: EDITORIAL MAGAZINE
+   ============================================ */
+
+.theme-editorial {
+  color: #1a1a1a;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.editorial-rule-top,
+.editorial-rule-bottom {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: #1a1a1a;
+}
+
+.editorial-rule-top { top: 6%; }
+.editorial-rule-bottom { bottom: 6%; }
+
+.theme-editorial .editorial-kicker {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 3rem;
+  font-weight: 400;
+}
+
+.theme-editorial .editorial-byline {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #888;
+  font-weight: 400;
+}
+
+/* ============================================
+   THEME 3: STICKY NOTES CAOS
+   ============================================ */
+
+.theme-sticky { color: #2a2320; }
+
+.theme-sticky::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(139, 115, 85, 0.12), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(139, 115, 85, 0.12), transparent 50%);
+  pointer-events: none;
+}
+
+.theme-sticky .sticky-title {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #5a4a30;
+  margin-bottom: 3rem;
+}
+
+.sticky-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.sticky {
+  padding: 1.75rem 1.25rem;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: #3a2a1a;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15), 0 8px 24px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.sticky-yellow  { background: #fff59d; transform: rotate(-2deg); }
+.sticky-pink    { background: #f8bbd0; transform: rotate(1.5deg); }
+.sticky-mint    { background: #c5e1a5; transform: rotate(-1deg); }
+.sticky-blue    { background: #90caf9; transform: rotate(2deg); }
+.sticky-peach   { background: #ffcc80; transform: rotate(-1.5deg); }
+.sticky-lavender { background: #ce93d8; transform: rotate(1deg); }
+
+/* ============================================
+   THEME 4: CINEMATIC REVELATION
+   ============================================ */
+
+.theme-cinematic {
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+.cinematic-glow {
+  position: absolute;
+  width: 1200px;
+  height: 1200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 30%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.theme-cinematic .cinematic-top {
+  font-size: 0.7rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 4rem;
+}
+
+.cinematic-main {
+  font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.85);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cinematic-word {
+  display: inline-block;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  margin: 0.3em 0;
+  text-shadow: 0 0 40px rgba(255,255,255,0.3);
+  background: linear-gradient(180deg, #fff 0%, #ccc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.theme-cinematic .cinematic-whisper {
+  margin-top: 3rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #555;
+  font-style: italic;
+}
+
+/* ============================================
+   THEME 5: SWISS DESIGN
+   ============================================ */
+
+.theme-swiss {
+  color: #000;
+  font-family: 'Inter', sans-serif;
+}
+
+.swiss-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+.theme-swiss .slide-inner { text-align: left; padding-left: 4rem; padding-right: 4rem; }
+
+.swiss-number {
+  font-size: clamp(6rem, 15vw, 11rem);
+  font-weight: 700;
+  color: #ff3d00;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+
+.swiss-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: #000;
+  margin-bottom: 2.5rem;
+}
+
+.swiss-dot { color: #ff3d00; margin: 0 0.3em; }
+
+.swiss-statement {
+  font-size: clamp(1.75rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #000;
+  letter-spacing: -0.01em;
+  max-width: 1000px;
+  margin-bottom: 3rem;
+}
+
+.swiss-accent { color: #ff3d00; }
+
+.swiss-footer {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #000;
+  border-top: 1px solid #000;
+  padding-top: 1rem;
+  max-width: 300px;
+}
+
+/* ============================================
+   THEME 6: TERMINAL VERDE
+   ============================================ */
+
+.theme-terminal {
+  color: #00ff41;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.theme-terminal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0,255,65,0.02) 2px, rgba(0,255,65,0.02) 3px);
+  pointer-events: none;
+}
+
+.theme-terminal .slide-inner { text-align: left; }
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #00ff41;
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0,255,65,0.2);
+}
+
+.terminal-cursor {
+  animation: blink 1s infinite;
+  color: #00ff41;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.terminal-cmd {
+  font-size: 0.95rem;
+  color: #00ff41;
+  margin-bottom: 1.5rem;
+  opacity: 0.85;
+}
+
+/* Terminal variant: la pregunta como diagnóstico shell (slide 2) */
+.terminal-question {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1.1rem, 2.4vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgba(0, 255, 65, 0.85);
+  margin: 2rem 0 2.5rem;
+  max-width: 950px;
+  letter-spacing: 0.02em;
+}
+
+.terminal-highlight {
+  color: #00ff41;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+  border-bottom: 1px dashed rgba(0, 255, 65, 0.5);
+  padding-bottom: 0.05em;
+}
+
+.terminal-output {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: rgba(0, 255, 65, 0.6);
+  margin-top: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.terminal-blink::after {
+  content: '';
+  display: inline-block;
+  width: 0.5em;
+  height: 1em;
+  background: #00ff41;
+  margin-left: 0.1em;
+  vertical-align: -2px;
+  animation: blink 1s infinite;
+}
+
+/* Editorial variant: el bundle como índice de revista (slide 6) */
+.editorial-masthead {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin-bottom: 2.5rem;
+}
+
+.editorial-masthead em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.editorial-index {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem 3rem;
+  max-width: 1000px;
+  margin: 0 auto 2rem;
+  text-align: left;
+  font-family: 'Playfair Display', Georgia, serif;
+  padding: 0;
+}
+
+.editorial-index li {
+  display: flex;
+  gap: 1.25rem;
+  align-items: baseline;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.12);
+}
+
+.editorial-roman {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #888;
+  min-width: 3ch;
+  font-weight: 400;
+}
+
+.editorial-item {
+  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1.4;
+}
+
+/* ============================================
+   THEME 7: BLUEPRINT TÉCNICO
+   ============================================ */
+
+.theme-blueprint {
+  color: #e1f5fe;
+  font-family: 'Inter', sans-serif;
+}
+
+.blueprint-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(77,171,247,0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(77,171,247,0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.blueprint-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: rgba(77,171,247,0.7);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(77,171,247,0.3);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.blueprint-title {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #e1f5fe;
+  margin-bottom: 2.5rem;
+}
+
+.blueprint-timeline {
+  display: flex;
+  justify-content: space-between;
+  gap: 0;
+  margin: 0 auto 2rem;
+  max-width: 1000px;
+  position: relative;
+}
+
+.blueprint-timeline::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: rgba(77,171,247,0.4);
+  z-index: 0;
+}
+
+.blueprint-timeline .timeline-step {
+  flex: 1;
+  text-align: center;
+  padding: 1.25rem 0.5rem;
+  background: #0a1929;
+  border: 1px solid rgba(77,171,247,0.5);
+  margin: 0 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.blueprint-timeline .step-num {
+  color: #4dabf7;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 0.4rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.blueprint-timeline .step-name {
+  color: #e1f5fe;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.theme-blueprint .timeline-caption {
+  font-size: 0.8rem;
+  color: rgba(77,171,247,0.8);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-top: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.blueprint-scale {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 1rem auto 0;
+  font-size: 0.65rem;
+  color: rgba(77,171,247,0.6);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   THEME 8: MUSEUM GALLERY
+   ============================================ */
+
+.theme-museum {
+  color: #2a2420;
+  padding: 2.5rem 4rem;
+  align-items: flex-start;
+}
+
+.theme-museum .slide-inner { padding-top: 1rem; }
+
+.museum-header {
+  margin-bottom: 1.5rem;
+}
+
+.museum-header .museum-collection {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.5em;
+  color: #8a7860;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.museum-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 2.8vw, 2rem);
+  font-weight: 400;
+  font-style: italic;
+  color: #2a2420;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-bottom: 0.75rem;
+}
+
+.museum-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: #8a7860;
+  font-weight: 400;
+}
+
+.museum-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem 1.5rem;
+  max-width: 1200px;
+  margin: 1.5rem auto 0;
+}
+
+.museum-card {
+  background: transparent;
+  border: none;
+  text-align: left;
+}
+
+.museum-card img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 8px 24px rgba(60,40,20,0.25), 0 2px 6px rgba(60,40,20,0.15);
+  margin-bottom: 0.75rem;
+  background: #0a0a0a;
+}
+
+.museum-label {
+  padding: 0 0.25rem;
+}
+
+.museum-plate {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #8a7860;
+  margin-bottom: 0.25rem;
+}
+
+.museum-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2a2420;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-bottom: 0.3rem;
+}
+
+.museum-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  color: #5a4c3c;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* ============================================
+   THEME 9: FINANCIAL TIMES
+   ============================================ */
+
+.theme-financial {
+  color: #2a1810;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.financial-inner { text-align: left; max-width: 1100px; }
+
+.financial-masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #5a2810;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #2a1810;
+  margin-bottom: 2rem;
+}
+
+.financial-center {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #2a1810;
+}
+
+.financial-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: #2a1810;
+  margin-bottom: 1rem;
+  text-transform: none;
+}
+
+.financial-lede {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  color: #5a2810;
+  line-height: 1.5;
+  max-width: 750px;
+  margin-bottom: 2.5rem;
+}
+
+.financial-table {
+  border-top: 1px solid #2a1810;
+}
+
+.financial-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) 1fr;
+  gap: 2.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(42,24,16,0.3);
+  align-items: center;
+}
+
+.financial-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 900;
+  color: #2a1810;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 0.1em;
+}
+
+.financial-amount .currency {
+  font-size: 0.5em;
+  font-weight: 500;
+}
+
+.financial-amount .asterisk {
+  font-size: 0.6em;
+  color: #8a4020;
+}
+
+.financial-period {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: #8a4020;
+  margin-bottom: 0.3rem;
+}
+
+.financial-label {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-weight: 700;
+  color: #2a1810;
+  margin-bottom: 0.3rem;
+}
+
+.financial-detail {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #5a2810;
+}
+
+.financial-footnote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: #5a2810;
+  margin-top: 1.5rem;
+  line-height: 1.6;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(42,24,16,0.2);
+}
+
+/* ============================================
+   THEME 10: SAAS FUTURISTA
+   ============================================ */
+
+.theme-saas {
+  color: #fff;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+.theme-saas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(15,5,36,0.9) 0%, rgba(10,30,61,0.85) 50%, rgba(5,20,36,0.9) 100%);
+  pointer-events: none;
+}
+
+.saas-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.saas-blob-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(138,43,226,0.35), transparent 70%);
+  top: -100px;
+  left: -100px;
+}
+
+.saas-blob-2 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0,212,255,0.25), transparent 70%);
+  bottom: -150px;
+  right: -150px;
+}
+
+.theme-saas .saas-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #a78bfa, #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.saas-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 3rem;
+  line-height: 1.1;
+}
+
+.saas-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto 2.5rem;
+}
+
+.saas-card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  text-align: left;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.saas-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(167,139,250,0.4);
+}
+
+.saas-icon {
+  font-size: 1.4rem;
+  background: linear-gradient(135deg, #a78bfa, #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.saas-card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0;
+}
+
+.saas-card-desc {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.6);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.theme-saas .saas-note {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 2rem;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   THEME 11: MAGAZINE COVER
+   ============================================ */
+
+.theme-magazine {
+  color: #fff;
+  overflow: hidden;
+  font-family: 'Playfair Display', serif;
+}
+
+.magazine-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(220,38,38,0.4), transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(245,158,11,0.25), transparent 60%),
+    linear-gradient(180deg, #0a0303 0%, #2a0a0a 50%, #1a0606 100%);
+}
+
+.magazine-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  margin-bottom: 3rem;
+}
+
+.magazine-kicker {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 0.5rem;
+}
+
+.magazine-hero {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(5rem, 15vw, 12rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #fff;
+  line-height: 0.9;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  text-transform: none;
+}
+
+.magazine-subhead {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  color: rgba(255,255,255,0.85);
+  font-weight: 400;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  line-height: 1.5;
+}
+
+.magazine-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.3);
+}
+
+.magazine-number {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.magazine-number sup {
+  font-size: 0.5em;
+  vertical-align: super;
+  color: rgba(255,255,255,0.8);
+}
+
+.magazine-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  font-weight: 400;
+}
+
+/* ============================================
+   MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .slide { padding: 2rem 1.25rem; }
+  .sticky-board { grid-template-columns: 1fr; gap: 1.25rem; }
+  .editorial-index { grid-template-columns: 1fr; gap: 0.4rem 0; }
+  .museum-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .theme-museum { padding: 2rem 1.25rem; overflow-y: auto; }
+  .financial-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .saas-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+  .magazine-stats { grid-template-columns: 1fr; gap: 1.5rem; }
+  .blueprint-timeline { flex-direction: column; }
+  .blueprint-timeline::before { display: none; }
+  .blueprint-timeline .timeline-step { margin: 0.3rem 0; }
+  .blueprint-scale { display: none; }
+  .slide-counter { top: 1rem; right: 1rem; font-size: 0.65rem; }
+  .nav { bottom: 1rem; gap: 1rem; }
+  .editorial-rule-top, .editorial-rule-bottom { left: 5%; right: 5%; }
+}
+
+/* ============================================
+   PRINT / PDF EXPORT
+   ============================================ */
+
+@media print {
+  @page { size: A4 landscape; margin: 0; }
+  html, body { overflow: visible; height: auto; }
+  .deck { height: auto; width: 100%; }
+  .slide {
+    position: relative;
+    visibility: visible !important;
+    opacity: 1 !important;
+    page-break-after: always;
+    page-break-inside: avoid;
+    height: 100vh;
+    min-height: 100vh;
+    inset: auto;
+    display: flex;
+  }
+  .slide:last-child { page-break-after: auto; }
+  .nav, .slide-counter { display: none !important; }
+}

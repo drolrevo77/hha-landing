@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+  <rect width="800" height="500" fill="#0a0a0a"/>
+  <g fill="#1a1a1a">
+    <rect x="40" y="60" width="720" height="36"/>
+    <rect x="40" y="110" width="720" height="36"/>
+    <rect x="40" y="160" width="720" height="36"/>
+    <rect x="40" y="210" width="720" height="36"/>
+  </g>
+  <g fill="#2a2a2a">
+    <circle cx="62" cy="78" r="8"/>
+    <circle cx="62" cy="128" r="8"/>
+    <circle cx="62" cy="178" r="8"/>
+    <circle cx="62" cy="228" r="8"/>
+  </g>
+  <g fill="#333">
+    <rect x="90" y="75" width="180" height="6"/>
+    <rect x="90" y="125" width="150" height="6"/>
+    <rect x="90" y="175" width="200" height="6"/>
+    <rect x="90" y="225" width="170" height="6"/>
+  </g>
+  <g fill="#2a2a2a">
+    <rect x="680" y="72" width="60" height="12" rx="1"/>
+    <rect x="680" y="122" width="60" height="12" rx="1"/>
+    <rect x="680" y="172" width="60" height="12" rx="1"/>
+    <rect x="680" y="222" width="60" height="12" rx="1"/>
+  </g>
+  <text x="400" y="400" text-anchor="middle" fill="#fff" font-family="Inter, sans-serif" font-size="44" font-weight="600" letter-spacing="14">BARDOT</text>
+  <text x="400" y="440" text-anchor="middle" fill="#555" font-family="Inter, sans-serif" font-size="10" font-weight="300" letter-spacing="5">GUEST LIST SYSTEM</text>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="om-glow" cx="0.5" cy="0.5" r="0.4">
+      <stop offset="0" stop-color="#D4AF37" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#D4AF37" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="#0a0a0a"/>
+  <circle cx="400" cy="200" r="180" fill="url(#om-glow)"/>
+  <circle cx="400" cy="200" r="80" fill="none" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+  <circle cx="400" cy="200" r="60" fill="none" stroke="#D4AF37" stroke-width="1" opacity="0.6"/>
+  <text x="400" y="215" text-anchor="middle" fill="#D4AF37" font-family="Georgia, serif" font-size="56" opacity="0.9">ॐ</text>
+  <text x="400" y="400" text-anchor="middle" fill="#fff" font-family="Inter, sans-serif" font-size="44" font-weight="600" letter-spacing="14">SADHANA</text>
+  <text x="400" y="440" text-anchor="middle" fill="#555" font-family="Inter, sans-serif" font-size="10" font-weight="300" letter-spacing="5">MEDITATION &amp; SPIRITUAL PRACTICE</text>
+</svg>

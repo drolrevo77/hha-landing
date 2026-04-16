@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+  <rect width="800" height="500" fill="#0a0a0a"/>
+  <g fill="#1a1a1a">
+    <rect x="40" y="60" width="720" height="32"/>
+    <rect x="40" y="100" width="720" height="32"/>
+    <rect x="40" y="140" width="720" height="32"/>
+    <rect x="40" y="180" width="720" height="32"/>
+    <rect x="40" y="220" width="720" height="32"/>
+  </g>
+  <g fill="#2a2a2a">
+    <rect x="60" y="72" width="80" height="8"/>
+    <rect x="60" y="112" width="80" height="8"/>
+    <rect x="60" y="152" width="80" height="8"/>
+    <rect x="60" y="192" width="80" height="8"/>
+    <rect x="60" y="232" width="80" height="8"/>
+  </g>
+  <g fill="#333">
+    <rect x="170" y="74" width="120" height="4"/>
+    <rect x="170" y="114" width="100" height="4"/>
+    <rect x="170" y="154" width="140" height="4"/>
+    <rect x="170" y="194" width="110" height="4"/>
+    <rect x="170" y="234" width="130" height="4"/>
+  </g>
+  <g fill="#444">
+    <rect x="340" y="70" width="40" height="12"/>
+    <rect x="340" y="110" width="40" height="12"/>
+    <rect x="340" y="150" width="40" height="12"/>
+    <rect x="340" y="190" width="40" height="12"/>
+    <rect x="340" y="230" width="40" height="12"/>
+  </g>
+  <g fill="#2a2a2a">
+    <rect x="400" y="70" width="320" height="12"/>
+    <rect x="400" y="110" width="280" height="12"/>
+    <rect x="400" y="150" width="340" height="12"/>
+    <rect x="400" y="190" width="260" height="12"/>
+    <rect x="400" y="230" width="300" height="12"/>
+  </g>
+  <text x="400" y="400" text-anchor="middle" fill="#fff" font-family="Inter, sans-serif" font-size="40" font-weight="600" letter-spacing="12">CUADRILLA APP</text>
+  <text x="400" y="440" text-anchor="middle" fill="#555" font-family="Inter, sans-serif" font-size="10" font-weight="300" letter-spacing="5">MINING CREW &amp; HOURS TRACKING</text>
+</svg>

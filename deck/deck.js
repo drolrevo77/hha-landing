@@ -1,0 +1,269 @@
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.querySelector('.dots');
+  const prevBtn = document.querySelector('.prev');
+  const nextBtn = document.querySelector('.next');
+  const counter = document.getElementById('current');
+  const total = slides.length;
+  let current = 0;
+  let isTransitioning = false;
+
+  const themeNames = Array.from(slides).map(s => {
+    const cls = s.className.split(' ').find(c => c.startsWith('theme-'));
+    return cls ? cls.replace('theme-', '') : 'core';
+  });
+
+  /* ============================================================
+     AUTO TOKENIZER — parte cada texto en spans por letra,
+     asignando data-char secuencial. La letra N de cualquier slide
+     morphs a la letra N de la siguiente slide (match por ordinal).
+     Skip: spans que ya son brand-char (el logo HHA.DIGITAL que
+     tiene su propio matching semántico).
+     ============================================================ */
+
+  const SKIP_CLASSES = ['brand-char', 'auto-char'];
+  const SKIP_PARENT_CLASSES = ['brand-char']; // no re-tokenizar dentro del logo
+
+  function shouldSkip(node) {
+    let el = node.parentElement;
+    while (el) {
+      for (const cls of SKIP_CLASSES) {
+        if (el.classList && el.classList.contains(cls)) return true;
+      }
+      for (const cls of SKIP_PARENT_CLASSES) {
+        if (el.classList && el.classList.contains(cls)) return true;
+      }
+      el = el.parentElement;
+    }
+    return false;
+  }
+
+  function tokenizeSlide(slide) {
+    const walker = document.createTreeWalker(
+      slide,
+      NodeFilter.SHOW_TEXT,
+      { acceptNode: (node) => {
+        if (shouldSkip(node)) return NodeFilter.FILTER_REJECT;
+        if (!node.textContent || node.textContent.trim().length === 0) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }}
+    );
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+
+    /* Memoize computed display per parent to avoid layout thrashing in loop */
+    const displayCache = new WeakMap();
+    function getDisplay(el) {
+      if (displayCache.has(el)) return displayCache.get(el);
+      const d = getComputedStyle(el).display;
+      displayCache.set(el, d);
+      return d;
+    }
+
+    let charIdx = 0;
+    nodes.forEach(textNode => {
+      const text = textNode.textContent;
+      const parent = textNode.parentElement;
+      const parentDisplay = getDisplay(parent);
+      const isFlexOrGrid = parentDisplay === 'flex' || parentDisplay === 'grid' ||
+                           parentDisplay === 'inline-flex' || parentDisplay === 'inline-grid';
+
+      const frag = document.createDocumentFragment();
+      /* Split by whitespace boundaries. Each "word" becomes an inline-block
+         wrapper (so line breaks only happen between words, not inside).
+         Each char inside a word is a separate <span class="auto-char"> for
+         view-transition-name morphing. Whitespace is preserved as text nodes
+         between word wrappers. */
+      const parts = text.split(/(\s+)/);
+      for (const part of parts) {
+        if (part.length === 0) continue;
+        if (/^\s+$/.test(part)) {
+          frag.appendChild(document.createTextNode(part));
+        } else {
+          const wordSpan = document.createElement('span');
+          wordSpan.className = 'auto-word';
+          for (const ch of part) {
+            const span = document.createElement('span');
+            span.className = 'auto-char';
+            span.dataset.char = String(++charIdx);
+            span.textContent = ch;
+            wordSpan.appendChild(span);
+          }
+          frag.appendChild(wordSpan);
+        }
+      }
+
+      if (isFlexOrGrid) {
+        const wrapper = document.createElement('span');
+        wrapper.className = 'auto-wrap';
+        wrapper.appendChild(frag);
+        textNode.parentNode.replaceChild(wrapper, textNode);
+      } else {
+        textNode.parentNode.replaceChild(frag, textNode);
+      }
+    });
+  }
+
+  function applyAutoNames(slide) {
+    slide.querySelectorAll('.auto-char').forEach(s => {
+      s.style.viewTransitionName = 'char-' + s.dataset.char;
+    });
+  }
+
+  function clearAutoNames(slide) {
+    slide.querySelectorAll('.auto-char').forEach(s => {
+      s.style.viewTransitionName = '';
+    });
+  }
+
+  /* Tokenize todas las slides al cargar */
+  slides.forEach(slide => tokenizeSlide(slide));
+
+  /* Generar CSS de duraciones para las char transitions.
+     View-transition pseudo-names no admiten wildcards — hay que listar cada N. */
+  const maxChars = Math.max(...Array.from(slides).map(s =>
+    s.querySelectorAll('.auto-char').length
+  ));
+  const charCssStyle = document.createElement('style');
+  let charCss = '@supports (view-transition-name: none) {\n';
+  for (let i = 1; i <= maxChars; i++) {
+    charCss += `::view-transition-group(char-${i}),`;
+  }
+  charCss = charCss.slice(0, -1) + ' { animation-duration: 500ms; animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }\n';
+  for (let i = 1; i <= maxChars; i++) {
+    charCss += `::view-transition-old(char-${i}),::view-transition-new(char-${i}),`;
+  }
+  charCss = charCss.slice(0, -1) + ' { animation-duration: 500ms; animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }\n';
+  charCss += '}';
+  charCssStyle.textContent = charCss;
+  document.head.appendChild(charCssStyle);
+
+  /* Build dots */
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', `Ir a slide ${i + 1}`);
+    dot.addEventListener('click', () => go(i));
+    dotsContainer.appendChild(dot);
+  });
+  const dots = document.querySelectorAll('.dot');
+
+  function setBodyTheme(idx) {
+    const themes = themeNames.map(t => 'body-theme-' + t);
+    document.body.classList.remove(...themes);
+    document.body.classList.add('body-theme-' + themeNames[idx]);
+  }
+
+  function go(n) {
+    n = Math.max(0, Math.min(total - 1, n));
+    if (n === current || isTransitioning) return;
+
+    /* Apply auto names to outgoing slide BEFORE transition starts
+       so the pre-commit snapshot has them. */
+    applyAutoNames(slides[current]);
+
+    const commit = () => {
+      clearAutoNames(slides[current]);
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = n;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      applyAutoNames(slides[current]);
+      counter.textContent = String(current + 1).padStart(2, '0');
+      setBodyTheme(current);
+      updateButtons();
+      history.replaceState(null, '', '#slide-' + (current + 1));
+    };
+
+    isTransitioning = true;
+    const cleanup = () => {
+      /* Clean auto names from active slide AFTER transition ends.
+         view-transition-name causes stacking context + contain:layout paint
+         which breaks inline rendering (words stick together). Only applied
+         during the transition itself. */
+      clearAutoNames(slides[current]);
+      isTransitioning = false;
+    };
+
+    if (document.startViewTransition) {
+      try {
+        const t = document.startViewTransition(commit);
+        t.finished.finally(cleanup);
+      } catch (err) {
+        /* If VT API throws (throttling, memory pressure, bug), fallback to
+           synchronous commit so the deck never freezes on isTransitioning. */
+        console.warn('View Transition failed, falling back to direct commit:', err);
+        commit();
+        cleanup();
+      }
+    } else {
+      commit();
+      setTimeout(cleanup, 500);
+    }
+  }
+
+  function updateButtons() {
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+  }
+
+  prevBtn.addEventListener('click', () => go(current - 1));
+  nextBtn.addEventListener('click', () => go(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      go(current + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      go(current - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      go(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      go(total - 1);
+    }
+  });
+
+  let touchStartX = 0;
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 60) {
+      go(dx > 0 ? current - 1 : current + 1);
+    }
+  }, { passive: true });
+
+  /* Reassemble obfuscated email mailto links (anti-scraping):
+     <a data-u="apps" data-d="hha.digital">apps[at]hha[dot]digital</a>
+     → href="mailto:apps@hha.digital" built at runtime only. */
+  document.querySelectorAll('a[data-u][data-d]').forEach(el => {
+    el.href = 'mailto:' + el.dataset.u + '@' + el.dataset.d;
+  });
+
+  /* Initial state: NO auto names applied in static state.
+     They're only applied transiently during navigation (see go()). */
+  setBodyTheme(0);
+
+  const hashMatch = window.location.hash.match(/slide-(\d+)/);
+  if (hashMatch) {
+    const n = parseInt(hashMatch[1], 10) - 1;
+    if (n >= 0 && n < total && n !== 0) {
+      slides[0].classList.remove('active');
+      dots[0].classList.remove('active');
+      current = n;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      counter.textContent = String(current + 1).padStart(2, '0');
+      setBodyTheme(current);
+    }
+  }
+
+  updateButtons();
+})();

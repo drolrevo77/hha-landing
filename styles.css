@@ -135,8 +135,7 @@ body.body-theme-magazine { background: #1a0606; }
   .slide[data-slide="6"].active  .editorial-index     { view-transition-name: hero; }
   .slide[data-slide="7"].active  .blueprint-timeline  { view-transition-name: hero; }
   .slide[data-slide="8"].active  .financial-title     { view-transition-name: hero; }
-  .slide[data-slide="9"].active  .saas-title          { view-transition-name: hero; }
-  .slide[data-slide="10"].active .cta                 { view-transition-name: hero; }
+  .slide[data-slide="9"].active  .cta                 { view-transition-name: hero; }
 
   /* KICKER por slide — el texto pequeño superior que morphs */
   .slide[data-slide="2"].active  .terminal-header     { view-transition-name: kicker; }
@@ -146,8 +145,7 @@ body.body-theme-magazine { background: #1a0606; }
   .slide[data-slide="6"].active  .editorial-kicker    { view-transition-name: kicker; }
   .slide[data-slide="7"].active  .blueprint-header    { view-transition-name: kicker; }
   .slide[data-slide="8"].active  .financial-masthead  { view-transition-name: kicker; }
-  .slide[data-slide="9"].active  .saas-eyebrow        { view-transition-name: kicker; }
-  .slide[data-slide="10"].active .closing-whisper     { view-transition-name: kicker; }
+  .slide[data-slide="9"].active  .closing-whisper     { view-transition-name: kicker; }
 
   /* FOOTER por slide — el texto pequeño inferior que morphs.
      Slide 1 .tagline NO toma "footer" porque las letras de "hha.digital"
@@ -159,8 +157,7 @@ body.body-theme-magazine { background: #1a0606; }
   .slide[data-slide="6"].active  .editorial-byline    { view-transition-name: footer; }
   .slide[data-slide="7"].active  .timeline-caption    { view-transition-name: footer; }
   .slide[data-slide="8"].active  .financial-footnote  { view-transition-name: footer; }
-  .slide[data-slide="9"].active  .saas-note           { view-transition-name: footer; }
-  .slide[data-slide="10"].active .cta-email           { view-transition-name: footer; }
+  .slide[data-slide="9"].active  .cta-email           { view-transition-name: footer; }
 
   /* ============================================
      LETTER MORPHING — Slide 1 ↔ Slide 2

@@ -129,40 +129,38 @@ body.body-theme-magazine { background: #1a0606; }
      Slide 1: hero NO se da a .logo entero porque cada letra migra
      individualmente hacia el byline de slide 2 (ver "LETTER MORPHING" abajo). */
   .slide[data-slide="2"].active  .terminal-question   { view-transition-name: hero; }
-  .slide[data-slide="3"].active  .sticky-board        { view-transition-name: hero; }
+  .slide[data-slide="3"].active  .magazine-hero       { view-transition-name: hero; }
   .slide[data-slide="4"].active  .cinematic-main      { view-transition-name: hero; }
   .slide[data-slide="5"].active  .swiss-statement     { view-transition-name: hero; }
   .slide[data-slide="6"].active  .editorial-index     { view-transition-name: hero; }
   .slide[data-slide="7"].active  .blueprint-timeline  { view-transition-name: hero; }
   .slide[data-slide="8"].active  .financial-title     { view-transition-name: hero; }
   .slide[data-slide="9"].active  .saas-title          { view-transition-name: hero; }
-  .slide[data-slide="10"].active .magazine-hero       { view-transition-name: hero; }
-  .slide[data-slide="11"].active .cta                 { view-transition-name: hero; }
+  .slide[data-slide="10"].active .cta                 { view-transition-name: hero; }
 
   /* KICKER por slide — el texto pequeño superior que morphs */
   .slide[data-slide="2"].active  .terminal-header     { view-transition-name: kicker; }
-  .slide[data-slide="3"].active  .sticky-title        { view-transition-name: kicker; }
+  .slide[data-slide="3"].active  .magazine-topbar     { view-transition-name: kicker; }
   .slide[data-slide="4"].active  .cinematic-top       { view-transition-name: kicker; }
   .slide[data-slide="5"].active  .swiss-label         { view-transition-name: kicker; }
   .slide[data-slide="6"].active  .editorial-kicker    { view-transition-name: kicker; }
   .slide[data-slide="7"].active  .blueprint-header    { view-transition-name: kicker; }
   .slide[data-slide="8"].active  .financial-masthead  { view-transition-name: kicker; }
   .slide[data-slide="9"].active  .saas-eyebrow        { view-transition-name: kicker; }
-  .slide[data-slide="10"].active .magazine-topbar     { view-transition-name: kicker; }
-  .slide[data-slide="11"].active .closing-whisper     { view-transition-name: kicker; }
+  .slide[data-slide="10"].active .closing-whisper     { view-transition-name: kicker; }
 
   /* FOOTER por slide — el texto pequeño inferior que morphs.
      Slide 1 .tagline NO toma "footer" porque las letras de "hha.digital"
      migran individualmente al terminal prompt de slide 2 (ver "LETTER MORPHING"). */
   .slide[data-slide="2"].active  .terminal-output     { view-transition-name: footer; }
+  .slide[data-slide="3"].active  .magazine-subhead    { view-transition-name: footer; }
   .slide[data-slide="4"].active  .cinematic-whisper   { view-transition-name: footer; }
   .slide[data-slide="5"].active  .swiss-footer        { view-transition-name: footer; }
   .slide[data-slide="6"].active  .editorial-byline    { view-transition-name: footer; }
   .slide[data-slide="7"].active  .timeline-caption    { view-transition-name: footer; }
   .slide[data-slide="8"].active  .financial-footnote  { view-transition-name: footer; }
   .slide[data-slide="9"].active  .saas-note           { view-transition-name: footer; }
-  .slide[data-slide="10"].active .magazine-subhead    { view-transition-name: footer; }
-  .slide[data-slide="11"].active .cta-email           { view-transition-name: footer; }
+  .slide[data-slide="10"].active .cta-email           { view-transition-name: footer; }
 
   /* ============================================
      LETTER MORPHING — Slide 1 ↔ Slide 2
@@ -1268,6 +1266,30 @@ body.body-theme-magazine { background: #1a0606; }
   margin: 0 auto;
   padding-top: 2rem;
   border-top: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Variant for 6-item dolor list in 3×2 grid (slide 3) */
+.magazine-stats-grid {
+  gap: 1.5rem 2rem;
+  max-width: 1000px;
+}
+
+.magazine-stats-grid .magazine-number {
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  font-style: italic;
+  color: rgba(255,255,255,0.6);
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+}
+
+.magazine-stats-grid .magazine-label {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: rgba(255,255,255,0.9);
+  font-style: italic;
 }
 
 .magazine-number {

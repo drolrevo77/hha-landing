@@ -900,38 +900,57 @@ body.body-theme-magazine { background: #1a0606; }
   letter-spacing: 0.1em;
 }
 
-/* Slide 7 (terminal) — timeline como deploy script */
+/* Slide 7 (terminal) — timeline friendly: 5 pasos con título + descripción */
 .terminal-timeline {
   list-style: none;
   padding: 0;
   margin: 1.5rem 0;
   font-family: 'JetBrains Mono', monospace;
+  max-width: 900px;
 }
 
 .terminal-timeline li {
   display: grid;
   grid-template-columns: auto auto 1fr;
-  gap: 1.25rem;
+  grid-template-rows: auto auto;
+  column-gap: 1.25rem;
+  row-gap: 0.35rem;
   align-items: baseline;
-  padding: 0.5rem 0;
+  padding: 0.9rem 0;
   font-size: clamp(0.85rem, 1.3vw, 1.05rem);
   color: rgba(0, 255, 65, 0.9);
-  border-bottom: 1px dashed rgba(0, 255, 65, 0.08);
+  border-bottom: 1px dashed rgba(0, 255, 65, 0.1);
 }
 
+.terminal-timeline .terminal-arrow { grid-row: 1; }
+
 .terminal-week {
-  color: rgba(0, 255, 65, 0.6);
+  grid-row: 1;
+  color: rgba(0, 255, 65, 0.55);
   font-size: 0.85em;
   letter-spacing: 0.05em;
-  min-width: 9ch;
+  min-width: 7ch;
 }
 
 .terminal-step {
+  grid-row: 1;
   color: rgba(0, 255, 65, 0.95);
   font-weight: 500;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   font-size: 0.95em;
+}
+
+.terminal-desc {
+  grid-column: 3;
+  grid-row: 2;
+  color: rgba(0, 255, 65, 0.65);
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  line-height: 1.5;
 }
 
 /* ============================================

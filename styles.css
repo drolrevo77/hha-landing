@@ -128,7 +128,7 @@ body.body-theme-magazine { background: #1a0606; }
   /* HERO por slide — el elemento principal que morphs.
      Slide 1: hero NO se da a .logo entero porque cada letra migra
      individualmente hacia el byline de slide 2 (ver "LETTER MORPHING" abajo). */
-  .slide[data-slide="2"].active  .blueprint-subs      { view-transition-name: hero; }
+  .slide[data-slide="2"].active  .blueprint-timeline  { view-transition-name: hero; }
   .slide[data-slide="3"].active  .magazine-hero       { view-transition-name: hero; }
   .slide[data-slide="4"].active  .cinematic-main      { view-transition-name: hero; }
   .slide[data-slide="5"].active  .swiss-statement     { view-transition-name: hero; }
@@ -871,6 +871,15 @@ body.body-theme-magazine { background: #1a0606; }
   text-transform: uppercase;
 }
 
+.blueprint-timeline .step-price {
+  color: rgba(77,171,247,0.8);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  margin-top: 0.35rem;
+}
+
 .theme-blueprint .timeline-caption {
   font-size: 0.8rem;
   color: rgba(77,171,247,0.8);
@@ -888,53 +897,6 @@ body.body-theme-magazine { background: #1a0606; }
   font-size: 0.65rem;
   color: rgba(77,171,247,0.6);
   font-family: 'JetBrains Mono', monospace;
-  letter-spacing: 0.1em;
-}
-
-/* Slide 2 (blueprint) — suscripciones como módulos técnicos */
-.blueprint-subs {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem 2rem;
-  max-width: 1000px;
-  margin: 0 auto 1.5rem;
-  text-align: left;
-}
-
-.blueprint-module {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 1rem;
-  align-items: baseline;
-  padding: 0.75rem 1rem;
-  border: 1px solid rgba(77,171,247,0.25);
-  background: rgba(77,171,247,0.04);
-  border-radius: 2px;
-  font-family: 'JetBrains Mono', monospace;
-  transition: border-color 0.3s;
-}
-
-.blueprint-module:hover { border-color: rgba(77,171,247,0.5); }
-
-.blueprint-module-num {
-  color: #4dabf7;
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  font-weight: 500;
-}
-
-.blueprint-module-name {
-  color: #e1f5fe;
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-}
-
-.blueprint-module-price {
-  color: rgba(77,171,247,0.8);
-  font-size: 0.82rem;
-  font-weight: 700;
   letter-spacing: 0.1em;
 }
 

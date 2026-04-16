@@ -953,6 +953,19 @@ body.body-theme-magazine { background: #1a0606; }
   line-height: 1.5;
 }
 
+/* Separador `://` entre pasos — guiño path/URL */
+.terminal-sep {
+  display: block;
+  padding: 0.35rem 0 0.35rem 3.5rem;
+  color: rgba(0, 255, 65, 0.3);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+  letter-spacing: 0.3em;
+  border: none !important;
+  grid-template-columns: none !important;
+  grid-template-rows: none !important;
+}
+
 /* ============================================
    THEME 8: MUSEUM GALLERY
    ============================================ */

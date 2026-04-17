@@ -165,7 +165,7 @@
       current = n;
       slides[current].classList.add('active');
       applyAutoNames(slides[current]);
-      counter.textContent = String(current + 1).padStart(2, '0');
+      if (counter) counter.textContent = String(current + 1).padStart(2, '0');
       updateProgress(current);
       setBodyTheme(current);
       updateButtons();
@@ -201,16 +201,30 @@
 
   function updateButtons() {
     prevBtn.disabled = current === 0;
-    nextBtn.disabled = current === total - 1;
+    /* En la última slide, el botón siguiente se convierte en "reiniciar"
+       y lleva de vuelta a la primera — nunca se deshabilita. */
+    if (current === total - 1) {
+      nextBtn.textContent = '↺';
+      nextBtn.setAttribute('aria-label', 'Volver al inicio');
+    } else {
+      nextBtn.textContent = '→';
+      nextBtn.setAttribute('aria-label', 'Siguiente');
+    }
+    nextBtn.disabled = false;
+  }
+
+  function goNext() {
+    if (current === total - 1) go(0);
+    else go(current + 1);
   }
 
   prevBtn.addEventListener('click', () => go(current - 1));
-  nextBtn.addEventListener('click', () => go(current + 1));
+  nextBtn.addEventListener('click', goNext);
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
       e.preventDefault();
-      go(current + 1);
+      goNext();
     } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
       e.preventDefault();
       go(current - 1);
@@ -254,7 +268,7 @@
       slides[0].classList.remove('active');
       current = n;
       slides[current].classList.add('active');
-      counter.textContent = String(current + 1).padStart(2, '0');
+      if (counter) counter.textContent = String(current + 1).padStart(2, '0');
       updateProgress(current);
       setBodyTheme(current);
     }

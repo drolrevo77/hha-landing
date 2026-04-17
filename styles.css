@@ -407,8 +407,7 @@ body.body-theme-magazine { background: #1a0606; }
 .theme-core .cta-email {
   font-size: clamp(1.1rem, 2.2vw, 1.6rem);
   font-weight: 500;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
+  letter-spacing: 0.12em;
   color: #fff;
   text-decoration: none;
   border-bottom: 1px solid #333;
@@ -419,116 +418,10 @@ body.body-theme-magazine { background: #1a0606; }
 
 .theme-core .cta-email:hover { border-color: #fff; }
 
-/* ============================================
-   CONTACT FORM — slide 8 (captura inline sin salir de la web)
-   ============================================ */
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  max-width: 520px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.contact-form-row {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.contact-input,
-.contact-textarea {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.18);
-  color: #fff;
-  padding: 0.8rem 1rem;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 300;
-  letter-spacing: 0.01em;
-  width: 100%;
-  transition: border-color 220ms ease, background 220ms ease;
-  border-radius: 0;
-}
-
-.contact-input:focus,
-.contact-textarea:focus {
-  outline: none;
-  border-color: rgba(255,255,255,0.6);
-  background: rgba(255,255,255,0.03);
-}
-
-.contact-input::placeholder,
-.contact-textarea::placeholder {
-  color: rgba(255,255,255,0.4);
-  font-weight: 300;
-}
-
-.contact-textarea {
-  resize: vertical;
-  min-height: 100px;
-  font-family: 'Inter', sans-serif;
-  line-height: 1.5;
-}
-
-.contact-submit {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.35);
-  color: #fff;
-  padding: 0.85rem 2.25rem;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  cursor: pointer;
-  margin-top: 0.5rem;
-  align-self: center;
-  transition: border-color 250ms ease, box-shadow 250ms ease, background 250ms ease;
-  border-radius: 0;
-}
-
-.contact-submit:hover:not(:disabled) {
-  border-color: #fff;
-  box-shadow: 0 0 24px rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.04);
-}
-
-.contact-submit:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.contact-fallback {
-  margin-top: 1.25rem;
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.5);
-  letter-spacing: 0.15em;
-  text-align: center;
-}
-
-.contact-fallback .cta-email {
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: none;
-  color: rgba(255,255,255,0.85);
-  border-bottom: 1px solid rgba(255,255,255,0.25);
-}
-
 /* Slide 8 tagline "hha.digital" va siempre en minúsculas (regla de marca) */
 .slide[data-slide="8"] .tagline {
   text-transform: none;
   letter-spacing: 0.12em;
-}
-
-.contact-success {
-  text-align: center;
-  color: #d5d5d5;
-  font-size: 1.1rem;
-  font-weight: 300;
-  padding: 2.5rem 0;
-  letter-spacing: 0.05em;
-  line-height: 1.5;
 }
 
 /* ============================================
@@ -1872,14 +1765,6 @@ body.body-theme-magazine { background: #1a0606; }
   .theme-core .cta-email { font-size: clamp(0.95rem, 4.2vw, 1.2rem); letter-spacing: 0.2em; }
   .theme-core .closing-whisper { margin-bottom: 1.25rem; }
 
-  /* Form de contacto (slide 8): columna en mobile, inputs más compactos */
-  .contact-form-row { flex-direction: column; gap: 0.6rem; }
-  .contact-form { gap: 0.6rem; max-width: 100%; }
-  .contact-input, .contact-textarea { font-size: 0.9rem; padding: 0.7rem 0.85rem; }
-  .contact-textarea { min-height: 80px; }
-  .contact-submit { font-size: 0.8rem; padding: 0.75rem 2rem; letter-spacing: 0.2em; }
-  .contact-fallback { font-size: 0.72rem; margin-top: 1rem; }
-  .contact-fallback .cta-email { font-size: 0.75rem; }
 
   /* SLIDE 3 (Blueprint): reducir margins + dar aire al footer caption */
   .blueprint-header { flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; font-size: 0.6rem; letter-spacing: 0.15em; }

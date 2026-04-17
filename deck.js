@@ -33,7 +33,6 @@
     'editorial-index',    // 11 ítems de la slide 5
     'terminal-timeline',  // 5 pasos detallados de la slide 6
     'rotating-word',      // texto se cambia vía JS, no debe tokenizarse
-    'contact-form',       // form inputs/textarea no deben tokenizarse
   ];
 
   function shouldSkip(node) {
@@ -274,44 +273,6 @@
         el.classList.remove('is-fading');
       }, 230);
     }, 2600);
-  });
-
-  /* Contact form — submit vía fetch a Formspree (no redirect).
-     Si el endpoint aún no está configurado, cae al fallback mailto
-     para que el formulario nunca falle silencioso. */
-  document.querySelectorAll('.contact-form').forEach(form => {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const action = form.getAttribute('action') || '';
-      const submitBtn = form.querySelector('.contact-submit');
-      const originalBtnHtml = submitBtn.innerHTML;
-
-      /* Si el endpoint es el placeholder, avisar y no enviar */
-      if (action.indexOf('YOUR_FORM_ID') !== -1) {
-        alert('El formulario aún no está configurado. Por favor escríbenos a apps@hha.digital.');
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Enviando…';
-
-      try {
-        const res = await fetch(action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) {
-          form.innerHTML = '<p class="contact-success">Recibido.<br>Te escribimos pronto.</p>';
-        } else {
-          throw new Error('bad-response');
-        }
-      } catch (err) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnHtml;
-        alert('No pudimos enviar tu mensaje. Por favor escríbenos directo a apps@hha.digital.');
-      }
-    });
   });
 
   /* Reassemble obfuscated email mailto links (anti-scraping):

@@ -936,6 +936,29 @@ body.body-theme-magazine { background: #1a0606; }
   font-family: 'JetBrains Mono', monospace;
 }
 
+/* "Proyecto personal" como la 7ma caja implícita — glow azul brillante
+   con pulse sutil, resaltando que tambien construimos para individuos,
+   no solo para industrias con sus cajas visibles arriba. */
+.timeline-caption .caption-glow {
+  color: #4dabf7;
+  font-weight: 500;
+  animation: caption-glow-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes caption-glow-pulse {
+  0%, 100% {
+    text-shadow:
+      0 0 6px rgba(77,171,247,0.5),
+      0 0 14px rgba(77,171,247,0.3);
+  }
+  50% {
+    text-shadow:
+      0 0 10px rgba(77,171,247,0.8),
+      0 0 22px rgba(77,171,247,0.5),
+      0 0 34px rgba(77,171,247,0.25);
+  }
+}
+
 .blueprint-scale {
   display: flex;
   justify-content: space-between;

@@ -508,10 +508,17 @@ body.body-theme-magazine { background: #1a0606; }
 }
 
 .contact-fallback .cta-email {
-  font-size: 0.8rem;
-  letter-spacing: 0.2em;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: none;
   color: rgba(255,255,255,0.85);
   border-bottom: 1px solid rgba(255,255,255,0.25);
+}
+
+/* Slide 8 tagline "hha.digital" va siempre en minúsculas (regla de marca) */
+.slide[data-slide="8"] .tagline {
+  text-transform: none;
+  letter-spacing: 0.12em;
 }
 
 .contact-success {
@@ -558,8 +565,7 @@ body.body-theme-magazine { background: #1a0606; }
 .theme-editorial .editorial-byline {
   font-family: 'Inter', sans-serif;
   font-size: 0.7rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
+  letter-spacing: 0.12em;
   color: #888;
   font-weight: 400;
 }
@@ -797,16 +803,16 @@ body.body-theme-magazine { background: #1a0606; }
 
 .theme-terminal .slide-inner { text-align: left; }
 
-/* Título narrativo del proceso — sans-serif bold en verde terminal con
-   glow sutil. Contrasta con el monospace del body, da contexto al lector.
-   La línea verde queda como border-bottom del título (es el separador
-   principal entre el título y el contenido shell). */
+/* Título del proceso — JetBrains Mono uppercase para consistencia con
+   los step-names del body (Investigación, Diseñar, etc.). La línea verde
+   queda como border-bottom del título (separador principal). */
 .terminal-title {
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
   font-size: clamp(1.4rem, 2.6vw, 1.9rem);
   color: #00ff41;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   line-height: 1.15;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
@@ -1001,8 +1007,7 @@ body.body-theme-magazine { background: #1a0606; }
   justify-content: space-between;
   font-size: 0.7rem;
   color: rgba(77,171,247,0.7);
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
+  letter-spacing: 0.15em;
   margin-bottom: 3rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid rgba(77,171,247,0.3);
@@ -1413,15 +1418,16 @@ body.body-theme-magazine { background: #1a0606; }
 .decision-tree {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0;
-  margin-top: 2rem;
+  margin: 2rem auto 0;
   max-width: 900px;
 }
 
 .decision-root {
-  position: relative;
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
-  padding-right: 2.5rem;
 }
 
 .decision-root-text {
@@ -1432,14 +1438,16 @@ body.body-theme-magazine { background: #1a0606; }
   line-height: 1.35;
 }
 
-/* Línea que sale del root hacia el tronco vertical */
+/* Línea del root hacia el tronco vertical — inline flex con el texto.
+   translateY compensa la asimetría del italic Playfair: el centro visual
+   de las letras queda debajo del centro geométrico de la line-box. */
 .decision-connector {
-  position: absolute;
-  right: 0;
-  top: 50%;
   width: 2.5rem;
   height: 1px;
   background: #8a4020;
+  flex-shrink: 0;
+  margin-left: 1.25rem;
+  transform: translateY(0.25em);
 }
 
 .decision-branches {
@@ -1704,6 +1712,13 @@ body.body-theme-magazine { background: #1a0606; }
   font-weight: 600;
   letter-spacing: 0.3em;
   text-transform: uppercase;
+}
+
+/* Override: el brand "hha.digital" siempre en minúsculas (regla de marca),
+   aunque el topbar del Magazine tenga text-transform: uppercase */
+.magazine-topbar .magazine-brand {
+  text-transform: none;
+  letter-spacing: 0.12em;
   color: rgba(255,255,255,0.7);
   padding-bottom: 1.5rem;
   border-bottom: 1px solid rgba(255,255,255,0.2);

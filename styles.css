@@ -127,65 +127,74 @@ body.body-theme-magazine { background: #1a0606; }
 
   /* HERO por slide — el elemento principal que morphs.
      Slide 1: hero NO se da a .logo entero porque cada letra migra
-     individualmente hacia el byline de slide 2 (ver "LETTER MORPHING" abajo). */
-  .slide[data-slide="2"].active  .blueprint-timeline  { view-transition-name: hero; }
-  .slide[data-slide="3"].active  .magazine-hero       { view-transition-name: hero; }
-  .slide[data-slide="4"].active  .cinematic-main      { view-transition-name: hero; }
-  .slide[data-slide="5"].active  .swiss-statement     { view-transition-name: hero; }
-  .slide[data-slide="6"].active  .editorial-index     { view-transition-name: hero; }
-  .slide[data-slide="7"].active  .terminal-timeline   { view-transition-name: hero; }
-  .slide[data-slide="8"].active  .financial-title     { view-transition-name: hero; }
-  .slide[data-slide="9"].active  .cta                 { view-transition-name: hero; }
+     individualmente hacia los topbars de slides 2 y 3 (ver "LETTER MORPHING" abajo). */
+  .slide[data-slide="2"].active  .magazine-hero       { view-transition-name: hero; }
+  .slide[data-slide="3"].active  .blueprint-timeline  { view-transition-name: hero; }
+  .slide[data-slide="4"].active  .swiss-statement     { view-transition-name: hero; }
+  .slide[data-slide="5"].active  .editorial-index     { view-transition-name: hero; }
+  .slide[data-slide="6"].active  .terminal-timeline   { view-transition-name: hero; }
+  .slide[data-slide="7"].active  .financial-title     { view-transition-name: hero; }
+  .slide[data-slide="8"].active  .cta                 { view-transition-name: hero; }
 
   /* KICKER por slide — el texto pequeño superior que morphs */
-  .slide[data-slide="2"].active  .blueprint-header    { view-transition-name: kicker; }
-  .slide[data-slide="3"].active  .magazine-topbar     { view-transition-name: kicker; }
-  .slide[data-slide="4"].active  .cinematic-top       { view-transition-name: kicker; }
-  .slide[data-slide="5"].active  .swiss-label         { view-transition-name: kicker; }
-  .slide[data-slide="6"].active  .editorial-kicker    { view-transition-name: kicker; }
-  .slide[data-slide="7"].active  .terminal-header     { view-transition-name: kicker; }
-  .slide[data-slide="8"].active  .financial-masthead  { view-transition-name: kicker; }
-  .slide[data-slide="9"].active  .closing-whisper     { view-transition-name: kicker; }
+  .slide[data-slide="2"].active  .magazine-topbar     { view-transition-name: kicker; }
+  .slide[data-slide="3"].active  .blueprint-header    { view-transition-name: kicker; }
+  .slide[data-slide="4"].active  .swiss-label         { view-transition-name: kicker; }
+  .slide[data-slide="5"].active  .editorial-kicker    { view-transition-name: kicker; }
+  .slide[data-slide="6"].active  .terminal-header     { view-transition-name: kicker; }
+  .slide[data-slide="7"].active  .financial-masthead  { view-transition-name: kicker; }
+  .slide[data-slide="8"].active  .closing-whisper     { view-transition-name: kicker; }
 
   /* FOOTER por slide — el texto pequeño inferior que morphs.
      Slide 1 .tagline NO toma "footer" porque las letras de "hha.digital"
-     migran individualmente al blueprint header de slide 2 (ver "LETTER MORPHING"). */
-  .slide[data-slide="2"].active  .timeline-caption    { view-transition-name: footer; }
-  .slide[data-slide="3"].active  .magazine-subhead    { view-transition-name: footer; }
-  .slide[data-slide="4"].active  .cinematic-whisper   { view-transition-name: footer; }
-  .slide[data-slide="5"].active  .swiss-footer        { view-transition-name: footer; }
-  .slide[data-slide="6"].active  .editorial-byline    { view-transition-name: footer; }
-  .slide[data-slide="7"].active  .terminal-output     { view-transition-name: footer; }
-  .slide[data-slide="8"].active  .financial-footnote  { view-transition-name: footer; }
-  .slide[data-slide="9"].active  .cta-email           { view-transition-name: footer; }
+     migran individualmente al topbar de slide 2 (ver "LETTER MORPHING"). */
+  .slide[data-slide="2"].active  .magazine-subhead    { view-transition-name: footer; }
+  .slide[data-slide="3"].active  .timeline-caption    { view-transition-name: footer; }
+  .slide[data-slide="4"].active  .swiss-footer        { view-transition-name: footer; }
+  .slide[data-slide="5"].active  .editorial-byline    { view-transition-name: footer; }
+  .slide[data-slide="6"].active  .terminal-output     { view-transition-name: footer; }
+  .slide[data-slide="7"].active  .financial-footnote  { view-transition-name: footer; }
+  .slide[data-slide="8"].active  .cta-email           { view-transition-name: footer; }
 
   /* ============================================
-     LETTER MORPHING — Slide 1 ↔ Slide 2
+     LETTER MORPHING — Slides 1 ↔ 2 ↔ 3
      Cada letra de "hha.digital" migra individualmente
-     del logo gigante (slide 1) al byline pequeño (slide 2).
+     del logo gigante (slide 1) al topbar del Magazine (slide 2)
+     y luego al blueprint header (slide 3).
      ============================================ */
   .slide[data-slide="1"].active .brand-char[data-char="h1"],
-  .slide[data-slide="2"].active .brand-char[data-char="h1"]  { view-transition-name: brand-h1; }
+  .slide[data-slide="2"].active .brand-char[data-char="h1"],
+  .slide[data-slide="3"].active .brand-char[data-char="h1"]  { view-transition-name: brand-h1; }
   .slide[data-slide="1"].active .brand-char[data-char="h2"],
-  .slide[data-slide="2"].active .brand-char[data-char="h2"]  { view-transition-name: brand-h2; }
+  .slide[data-slide="2"].active .brand-char[data-char="h2"],
+  .slide[data-slide="3"].active .brand-char[data-char="h2"]  { view-transition-name: brand-h2; }
   .slide[data-slide="1"].active .brand-char[data-char="a1"],
-  .slide[data-slide="2"].active .brand-char[data-char="a1"]  { view-transition-name: brand-a1; }
+  .slide[data-slide="2"].active .brand-char[data-char="a1"],
+  .slide[data-slide="3"].active .brand-char[data-char="a1"]  { view-transition-name: brand-a1; }
   .slide[data-slide="1"].active .brand-char[data-char="dot"],
-  .slide[data-slide="2"].active .brand-char[data-char="dot"] { view-transition-name: brand-dot; }
+  .slide[data-slide="2"].active .brand-char[data-char="dot"],
+  .slide[data-slide="3"].active .brand-char[data-char="dot"] { view-transition-name: brand-dot; }
   .slide[data-slide="1"].active .brand-char[data-char="d"],
-  .slide[data-slide="2"].active .brand-char[data-char="d"]   { view-transition-name: brand-d; }
+  .slide[data-slide="2"].active .brand-char[data-char="d"],
+  .slide[data-slide="3"].active .brand-char[data-char="d"]   { view-transition-name: brand-d; }
   .slide[data-slide="1"].active .brand-char[data-char="i1"],
-  .slide[data-slide="2"].active .brand-char[data-char="i1"]  { view-transition-name: brand-i1; }
+  .slide[data-slide="2"].active .brand-char[data-char="i1"],
+  .slide[data-slide="3"].active .brand-char[data-char="i1"]  { view-transition-name: brand-i1; }
   .slide[data-slide="1"].active .brand-char[data-char="g"],
-  .slide[data-slide="2"].active .brand-char[data-char="g"]   { view-transition-name: brand-g; }
+  .slide[data-slide="2"].active .brand-char[data-char="g"],
+  .slide[data-slide="3"].active .brand-char[data-char="g"]   { view-transition-name: brand-g; }
   .slide[data-slide="1"].active .brand-char[data-char="i2"],
-  .slide[data-slide="2"].active .brand-char[data-char="i2"]  { view-transition-name: brand-i2; }
+  .slide[data-slide="2"].active .brand-char[data-char="i2"],
+  .slide[data-slide="3"].active .brand-char[data-char="i2"]  { view-transition-name: brand-i2; }
   .slide[data-slide="1"].active .brand-char[data-char="t"],
-  .slide[data-slide="2"].active .brand-char[data-char="t"]   { view-transition-name: brand-t; }
+  .slide[data-slide="2"].active .brand-char[data-char="t"],
+  .slide[data-slide="3"].active .brand-char[data-char="t"]   { view-transition-name: brand-t; }
   .slide[data-slide="1"].active .brand-char[data-char="a2"],
-  .slide[data-slide="2"].active .brand-char[data-char="a2"]  { view-transition-name: brand-a2; }
+  .slide[data-slide="2"].active .brand-char[data-char="a2"],
+  .slide[data-slide="3"].active .brand-char[data-char="a2"]  { view-transition-name: brand-a2; }
   .slide[data-slide="1"].active .brand-char[data-char="l"],
-  .slide[data-slide="2"].active .brand-char[data-char="l"]   { view-transition-name: brand-l; }
+  .slide[data-slide="2"].active .brand-char[data-char="l"],
+  .slide[data-slide="3"].active .brand-char[data-char="l"]   { view-transition-name: brand-l; }
 
   /* Brand-char (hha.digital): alineado con el resto a 500ms */
   ::view-transition-group(brand-h1),
@@ -608,17 +617,35 @@ body.body-theme-magazine { background: #1a0606; }
 
 .swiss-dot { color: #ff3d00; margin: 0 0.3em; }
 
+.swiss-kicker {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 1.25rem;
+}
+
 .swiss-statement {
-  font-size: clamp(1.75rem, 4.5vw, 3.2rem);
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.2;
   color: #000;
   letter-spacing: -0.01em;
   max-width: 1000px;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .swiss-accent { color: #ff3d00; }
+
+.swiss-whisper {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 2.5rem;
+}
 
 .swiss-footer {
   display: flex;
@@ -1510,14 +1537,14 @@ body.body-theme-magazine { background: #1a0606; }
   .theme-core .cta-email { font-size: clamp(0.95rem, 4.2vw, 1.2rem); letter-spacing: 0.2em; }
   .theme-core .closing-whisper { margin-bottom: 1.5rem; }
 
-  /* SLIDE 2 (Blueprint): reducir margins + dar aire al footer caption */
+  /* SLIDE 3 (Blueprint): reducir margins + dar aire al footer caption */
   .blueprint-header { flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; font-size: 0.6rem; letter-spacing: 0.15em; }
   .blueprint-title { font-size: clamp(1rem, 4.5vw, 1.4rem); margin-bottom: 1.25rem; }
   .blueprint-timeline { margin-bottom: 1.25rem; }
   .blueprint-timeline .timeline-step { padding: 0.85rem 0.5rem; }
   .theme-blueprint .timeline-caption { font-size: 0.7rem; line-height: 1.5; letter-spacing: 0.15em; margin-top: 1rem; }
 
-  /* SLIDE 3 (Magazine): que los 3 pilares respiren y no se tapen con nav */
+  /* SLIDE 2 (Magazine): que los 3 pilares respiren y no se tapen con nav */
   .theme-magazine .magazine-topbar { flex-wrap: wrap; gap: 0.5rem 1rem; }
   .theme-magazine .magazine-kicker { margin-bottom: 0.5rem; }
   .theme-magazine .magazine-hero { font-size: clamp(2.4rem, 14vw, 4rem); line-height: 0.95; margin-bottom: 2rem; }
@@ -1527,35 +1554,26 @@ body.body-theme-magazine { background: #1a0606; }
   .theme-magazine .magazine-label-em { font-size: clamp(1.3rem, 6vw, 1.9rem); }
   .theme-magazine .magazine-label-sub { font-size: 0.8rem; }
 
-  /* SLIDE 4 (Cinematic): reducir huecos, glow más pequeño, fix render mobile del gradient text */
-  .cinematic-glow { width: 500px; height: 500px; }
-  .theme-cinematic .cinematic-top { margin-bottom: 1.5rem; letter-spacing: 0.35em; }
-  .cinematic-main { font-size: clamp(1.1rem, 4.5vw, 1.5rem); line-height: 1.4; }
-  .cinematic-word {
-    font-size: clamp(1.9rem, 8vw, 2.6rem);
-    margin: 0.15em 0;
-    background: none;
-    -webkit-text-fill-color: #fff;
-    color: #fff;
-    text-shadow: 0 0 30px rgba(255,255,255,0.4);
-  }
-  .theme-cinematic .cinematic-whisper { margin-top: 1.5rem; font-size: 0.72rem; letter-spacing: 0.2em; }
-
-  /* SLIDE 5 (Swiss): padding lateral razonable */
+  /* SLIDE 4 (Swiss fusionado): padding lateral razonable + jerarquía compacta */
   .theme-swiss .slide-inner { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .swiss-kicker { font-size: 0.7rem; letter-spacing: 0.3em; margin-bottom: 1rem; }
+  .swiss-number { font-size: clamp(4rem, 18vw, 6rem); margin-bottom: 0.75rem; }
+  .swiss-label { font-size: 0.75rem; letter-spacing: 0.25em; margin-bottom: 1.5rem; }
+  .swiss-statement { font-size: clamp(1.4rem, 6vw, 2rem); line-height: 1.25; margin-bottom: 1.25rem; }
+  .swiss-whisper { font-size: 0.72rem; letter-spacing: 0.18em; margin-bottom: 1.5rem; }
 
-  /* SLIDE 6 (Editorial): lista compacta para que los 11 items quepan */
+  /* SLIDE 5 (Editorial): lista compacta para que los 11 items quepan */
   .theme-editorial .editorial-masthead { font-size: clamp(1.6rem, 7vw, 2.4rem); line-height: 1.1; }
   .editorial-index { font-size: 0.85rem; }
   .editorial-index li { padding: 0.25rem 0; }
   .editorial-roman { min-width: 2ch; margin-right: 0.5rem; font-size: 0.8rem; }
   .editorial-item { font-size: 0.85rem; line-height: 1.35; }
 
-  /* SLIDE 7 (Terminal): asegurar que plazo no toque nav */
+  /* SLIDE 6 (Terminal): asegurar que plazo no toque nav */
   .theme-terminal .slide-inner { padding-bottom: 1.5rem; }
   .terminal-timeline { margin: 1rem 0; }
 
-  /* SLIDE 8 (Financial): asegurar aire inferior */
+  /* SLIDE 7 (Financial): asegurar aire inferior */
   .financial-inner { max-width: 100%; }
   .financial-masthead { font-size: 0.65rem; letter-spacing: 0.15em; }
   .financial-title { font-size: clamp(1.8rem, 8vw, 2.8rem); }

@@ -169,7 +169,6 @@
       updateProgress(current);
       setBodyTheme(current);
       updateButtons();
-      history.replaceState(null, '', '#slide-' + (current + 1));
     };
 
     isTransitioning = true;
@@ -261,6 +260,9 @@
   setBodyTheme(0);
   updateProgress(0);
 
+  /* Legacy deep-link support: si alguien entra con #slide-N de una versión
+     anterior, respetamos esa slide pero limpiamos la URL inmediatamente
+     para que no quede visible. */
   const hashMatch = window.location.hash.match(/slide-(\d+)/);
   if (hashMatch) {
     const n = parseInt(hashMatch[1], 10) - 1;
@@ -272,6 +274,9 @@
       updateProgress(current);
       setBodyTheme(current);
     }
+  }
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
   }
 
   updateButtons();

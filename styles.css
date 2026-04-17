@@ -239,6 +239,26 @@ body.body-theme-magazine { background: #1a0606; }
    NAVIGATION (auto-invert via mix-blend-mode)
    ============================================ */
 
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(128, 128, 128, 0.15);
+  z-index: 101;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+.progress-fill {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  width: 11.11%;
+  transition: width 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left;
+}
+
 .nav {
   position: fixed;
   bottom: 2rem;
@@ -246,7 +266,7 @@ body.body-theme-magazine { background: #1a0606; }
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 3rem;
   z-index: 100;
   mix-blend-mode: difference;
 }
@@ -958,6 +978,10 @@ body.body-theme-magazine { background: #1a0606; }
   text-transform: none;
   line-height: 1.5;
   font-style: italic;
+  flex-basis: 100%;
+  width: 100%;
+  margin-left: 1.8rem;
+  margin-top: 0.25rem;
 }
 
 /* ============================================
@@ -1502,11 +1526,18 @@ body.body-theme-magazine { background: #1a0606; }
   .theme-magazine .magazine-label-em { font-size: clamp(1.3rem, 6vw, 1.9rem); }
   .theme-magazine .magazine-label-sub { font-size: 0.8rem; }
 
-  /* SLIDE 4 (Cinematic): reducir huecos, glow más pequeño */
+  /* SLIDE 4 (Cinematic): reducir huecos, glow más pequeño, fix render mobile del gradient text */
   .cinematic-glow { width: 500px; height: 500px; }
   .theme-cinematic .cinematic-top { margin-bottom: 1.5rem; letter-spacing: 0.35em; }
   .cinematic-main { font-size: clamp(1.1rem, 4.5vw, 1.5rem); line-height: 1.4; }
-  .cinematic-word { font-size: clamp(1.9rem, 8vw, 2.6rem); margin: 0.15em 0; }
+  .cinematic-word {
+    font-size: clamp(1.9rem, 8vw, 2.6rem);
+    margin: 0.15em 0;
+    background: none;
+    -webkit-text-fill-color: #fff;
+    color: #fff;
+    text-shadow: 0 0 30px rgba(255,255,255,0.4);
+  }
   .theme-cinematic .cinematic-whisper { margin-top: 1.5rem; font-size: 0.72rem; letter-spacing: 0.2em; }
 
   /* SLIDE 5 (Swiss): padding lateral razonable */

@@ -1,6 +1,7 @@
 (function() {
   const slides = document.querySelectorAll('.slide');
-  const dotsContainer = document.querySelector('.dots');
+  const progressBar = document.querySelector('.progress-bar');
+  const progressFill = document.querySelector('.progress-fill');
   const prevBtn = document.querySelector('.prev');
   const nextBtn = document.querySelector('.next');
   const counter = document.getElementById('current');
@@ -138,16 +139,11 @@
   charCssStyle.textContent = charCss;
   document.head.appendChild(charCssStyle);
 
-  /* Build dots */
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('role', 'tab');
-    dot.setAttribute('aria-label', `Ir a slide ${i + 1}`);
-    dot.addEventListener('click', () => go(i));
-    dotsContainer.appendChild(dot);
-  });
-  const dots = document.querySelectorAll('.dot');
+  function updateProgress(idx) {
+    const pct = ((idx + 1) / total) * 100;
+    progressFill.style.width = pct + '%';
+    progressBar.setAttribute('aria-valuenow', idx + 1);
+  }
 
   function setBodyTheme(idx) {
     const themes = themeNames.map(t => 'body-theme-' + t);
@@ -166,12 +162,11 @@
     const commit = () => {
       clearAutoNames(slides[current]);
       slides[current].classList.remove('active');
-      dots[current].classList.remove('active');
       current = n;
       slides[current].classList.add('active');
-      dots[current].classList.add('active');
       applyAutoNames(slides[current]);
       counter.textContent = String(current + 1).padStart(2, '0');
+      updateProgress(current);
       setBodyTheme(current);
       updateButtons();
       history.replaceState(null, '', '#slide-' + (current + 1));
@@ -250,17 +245,17 @@
   /* Initial state: NO auto names applied in static state.
      They're only applied transiently during navigation (see go()). */
   setBodyTheme(0);
+  updateProgress(0);
 
   const hashMatch = window.location.hash.match(/slide-(\d+)/);
   if (hashMatch) {
     const n = parseInt(hashMatch[1], 10) - 1;
     if (n >= 0 && n < total && n !== 0) {
       slides[0].classList.remove('active');
-      dots[0].classList.remove('active');
       current = n;
       slides[current].classList.add('active');
-      dots[current].classList.add('active');
       counter.textContent = String(current + 1).padStart(2, '0');
+      updateProgress(current);
       setBodyTheme(current);
     }
   }

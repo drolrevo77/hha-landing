@@ -352,9 +352,15 @@ body.body-theme-magazine { background: #1a0606; }
   margin-bottom: 0.2em;
 }
 
-.brand-char {
+.brand-char,
+.auto-char {
   display: inline-block;
   white-space: pre;
+}
+
+.auto-word {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .theme-core .brand-dim { color: #888; }

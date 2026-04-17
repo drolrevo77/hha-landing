@@ -1453,7 +1453,16 @@ body.body-theme-magazine { background: #1a0606; }
    ============================================ */
 
 @media (max-width: 768px) {
-  .slide { padding: 2rem 1.25rem; }
+  /* Slide container: padding vertical generoso + bottom para no tapar con nav */
+  .slide { padding: 3.5rem 1.25rem 6rem; overflow-y: auto; scrollbar-width: none; }
+  .slide::-webkit-scrollbar { display: none; }
+  .slide-inner { max-width: 100%; }
+
+  /* Nav + contador: mantener compactos pero con aire */
+  .slide-counter { top: 1rem; right: 1rem; font-size: 0.65rem; letter-spacing: 0.2em; }
+  .nav { bottom: 1rem; gap: 1rem; }
+
+  /* Grids universales → 1 columna */
   .sticky-board { grid-template-columns: 1fr; gap: 1.25rem; }
   .editorial-index { grid-template-columns: 1fr; gap: 0.4rem 0; }
   .museum-grid { grid-template-columns: 1fr; gap: 1.5rem; }
@@ -1465,9 +1474,67 @@ body.body-theme-magazine { background: #1a0606; }
   .blueprint-timeline::before { display: none; }
   .blueprint-timeline .timeline-step { margin: 0.3rem 0; }
   .blueprint-scale { display: none; }
-  .slide-counter { top: 1rem; right: 1rem; font-size: 0.65rem; }
-  .nav { bottom: 1rem; gap: 1rem; }
   .editorial-rule-top, .editorial-rule-bottom { left: 5%; right: 5%; }
+
+  /* SLIDE 1 (Core): logo hha.digital en una sola línea */
+  .theme-core .logo { font-size: clamp(2.2rem, 11vw, 3.5rem); letter-spacing: 0.12em; }
+  .theme-core .hero-statement { font-size: clamp(1rem, 4vw, 1.3rem); }
+  .theme-core .tagline { letter-spacing: 0.2em; font-size: 0.7rem; }
+  .theme-core .divider { margin: 1.25rem auto; }
+  .theme-core .cta { font-size: clamp(1.4rem, 6vw, 2rem); margin-bottom: 1.5rem; }
+  .theme-core .cta-email { font-size: clamp(0.95rem, 4.2vw, 1.2rem); letter-spacing: 0.2em; }
+  .theme-core .closing-whisper { margin-bottom: 1.5rem; }
+
+  /* SLIDE 2 (Blueprint): reducir margins + dar aire al footer caption */
+  .blueprint-header { flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; font-size: 0.6rem; letter-spacing: 0.15em; }
+  .blueprint-title { font-size: clamp(1rem, 4.5vw, 1.4rem); margin-bottom: 1.25rem; }
+  .blueprint-timeline { margin-bottom: 1.25rem; }
+  .blueprint-timeline .timeline-step { padding: 0.85rem 0.5rem; }
+  .theme-blueprint .timeline-caption { font-size: 0.7rem; line-height: 1.5; letter-spacing: 0.15em; margin-top: 1rem; }
+
+  /* SLIDE 3 (Magazine): que los 3 pilares respiren y no se tapen con nav */
+  .theme-magazine .magazine-topbar { flex-wrap: wrap; gap: 0.5rem 1rem; }
+  .theme-magazine .magazine-kicker { margin-bottom: 0.5rem; }
+  .theme-magazine .magazine-hero { font-size: clamp(2.4rem, 14vw, 4rem); line-height: 0.95; }
+  .theme-magazine .magazine-subhead { font-size: clamp(0.9rem, 3.8vw, 1.05rem); margin-bottom: 1.25rem; }
+  .theme-magazine .magazine-stats { margin-top: 0.5rem; }
+  .theme-magazine .magazine-stat { padding: 0.4rem 0; }
+  .theme-magazine .magazine-label-em { font-size: clamp(1.3rem, 6vw, 1.9rem); }
+  .theme-magazine .magazine-label-sub { font-size: 0.8rem; }
+
+  /* SLIDE 4 (Cinematic): reducir huecos, glow más pequeño */
+  .cinematic-glow { width: 500px; height: 500px; }
+  .theme-cinematic .cinematic-top { margin-bottom: 1.5rem; letter-spacing: 0.35em; }
+  .cinematic-main { font-size: clamp(1.1rem, 4.5vw, 1.5rem); line-height: 1.4; }
+  .cinematic-word { font-size: clamp(1.9rem, 8vw, 2.6rem); margin: 0.15em 0; }
+  .theme-cinematic .cinematic-whisper { margin-top: 1.5rem; font-size: 0.72rem; letter-spacing: 0.2em; }
+
+  /* SLIDE 5 (Swiss): padding lateral razonable */
+  .theme-swiss .slide-inner { padding-left: 1.25rem; padding-right: 1.25rem; }
+
+  /* SLIDE 6 (Editorial): lista compacta para que los 11 items quepan */
+  .theme-editorial .editorial-masthead { font-size: clamp(1.6rem, 7vw, 2.4rem); line-height: 1.1; }
+  .editorial-index { font-size: 0.85rem; }
+  .editorial-index li { padding: 0.25rem 0; }
+  .editorial-roman { min-width: 2ch; margin-right: 0.5rem; font-size: 0.8rem; }
+  .editorial-item { font-size: 0.85rem; line-height: 1.35; }
+
+  /* SLIDE 7 (Terminal): asegurar que plazo no toque nav */
+  .theme-terminal .slide-inner { padding-bottom: 1.5rem; }
+  .terminal-timeline { margin: 1rem 0; }
+
+  /* SLIDE 8 (Financial): asegurar aire inferior */
+  .financial-inner { max-width: 100%; }
+  .financial-masthead { font-size: 0.65rem; letter-spacing: 0.15em; }
+  .financial-title { font-size: clamp(1.8rem, 8vw, 2.8rem); }
+  .financial-lede { font-size: clamp(0.95rem, 3.8vw, 1.1rem); }
+}
+
+/* Mobile pequeño (iPhone SE y similares ≤400px): ajustes extra */
+@media (max-width: 400px) {
+  .slide { padding: 3rem 1rem 5.5rem; }
+  .theme-core .logo { font-size: clamp(2rem, 10vw, 2.8rem); letter-spacing: 0.1em; }
+  .blueprint-header .blueprint-date { display: none; }
 }
 
 /* ============================================

@@ -32,6 +32,7 @@
     'brand-char',         // no re-tokenizar dentro del logo
     'editorial-index',    // 11 ítems de la slide 5
     'terminal-timeline',  // 5 pasos detallados de la slide 6
+    'rotating-word',      // texto se cambia vía JS, no debe tokenizarse
   ];
 
   function shouldSkip(node) {
@@ -256,6 +257,23 @@
       go(dx > 0 ? current - 1 : current + 1);
     }
   }, { passive: true });
+
+  /* Rotating word en slide 4 (Swiss) — cicla entre verbos cada ~2.6s
+     con fade + slide sutil. El data-words es pipe-separated para
+     mantener el HTML legible. */
+  document.querySelectorAll('.rotating-word[data-words]').forEach(el => {
+    const words = (el.dataset.words || '').split('|').filter(Boolean);
+    if (words.length < 2) return;
+    let i = 0;
+    setInterval(() => {
+      el.classList.add('is-fading');
+      setTimeout(() => {
+        i = (i + 1) % words.length;
+        el.textContent = words[i];
+        el.classList.remove('is-fading');
+      }, 230);
+    }, 2600);
+  });
 
   /* Reassemble obfuscated email mailto links (anti-scraping):
      <a data-u="apps" data-d="hha.digital">apps[at]hha[dot]digital</a>

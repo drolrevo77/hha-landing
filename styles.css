@@ -638,6 +638,20 @@ body.body-theme-magazine { background: #1a0606; }
 
 .swiss-accent { color: #ff3d00; }
 
+/* Palabra que rota entre verbos (decidir/analizar/entender/...) —
+   contraste azul deliberado contra el naranja Swiss. */
+.rotating-word {
+  color: #0066ff;
+  display: inline-block;
+  transition: opacity 220ms cubic-bezier(0.4, 0, 0.2, 1),
+              transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rotating-word.is-fading {
+  opacity: 0;
+  transform: translateY(-0.25em);
+}
+
 .swiss-whisper {
   font-size: 0.8rem;
   font-weight: 400;

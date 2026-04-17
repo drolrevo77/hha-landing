@@ -1259,6 +1259,156 @@ body.body-theme-magazine { background: #1a0606; }
 }
 
 /* ============================================
+   DECISION TREE — visualización de ramas para slide 7
+   Demuestra visualmente que construimos este tipo de
+   diagramas / flows como parte del trabajo.
+   ============================================ */
+.decision-tree {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 2rem;
+  max-width: 900px;
+}
+
+.decision-root {
+  position: relative;
+  flex-shrink: 0;
+  padding-right: 2.5rem;
+}
+
+.decision-root-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.7vw, 1.3rem);
+  color: #5a2810;
+  line-height: 1.35;
+}
+
+/* Línea que sale del root hacia el tronco vertical */
+.decision-connector {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 2.5rem;
+  height: 1px;
+  background: #8a4020;
+}
+
+.decision-branches {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  flex: 1;
+}
+
+/* Tronco vertical que une ambas cajas */
+.decision-branches::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 2.5rem;
+  bottom: 2.5rem;
+  width: 1px;
+  background: #8a4020;
+}
+
+.decision-box {
+  position: relative;
+  border: 1px solid #8a4020;
+  padding: 1rem 1.5rem 1rem 1.25rem;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 2.5rem;
+}
+
+/* Línea horizontal del tronco vertical hasta el borde izquierdo de la caja */
+.decision-box::before {
+  content: '';
+  position: absolute;
+  left: -2.5rem;
+  top: 50%;
+  width: 2.5rem;
+  height: 1px;
+  background: #8a4020;
+}
+
+.decision-badge {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #2a1810;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-style: italic;
+  color: #2a1810;
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  background: rgba(255,255,255,0.3);
+}
+
+.decision-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.decision-heading {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  color: #2a1810;
+  line-height: 1.2;
+  margin-bottom: 0.15rem;
+}
+
+.decision-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #5a2810;
+  line-height: 1.45;
+}
+
+/* Mobile: árbol en columna */
+@media (max-width: 768px) {
+  .decision-tree {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  .decision-root {
+    padding-right: 0;
+    padding-bottom: 1.25rem;
+    text-align: center;
+  }
+  .decision-connector {
+    right: 50%;
+    top: auto;
+    bottom: 0;
+    width: 1px;
+    height: 1.25rem;
+    transform: translateX(50%);
+  }
+  .decision-branches {
+    gap: 0.75rem;
+  }
+  .decision-branches::before { display: none; }
+  .decision-box {
+    margin-left: 0;
+    padding: 0.85rem 1rem;
+  }
+  .decision-box::before { display: none; }
+  .decision-heading { font-size: 1rem; }
+  .decision-sub { font-size: 0.85rem; }
+}
+
+/* ============================================
    THEME 10: SAAS FUTURISTA
    ============================================ */
 

@@ -1,247 +1,1404 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>hha.digital | Tu idea. Tu app.</title>
-  <meta name="description" content="Convertimos tu idea en una app completa, hecha a tu medida. Tuya desde el día uno.">
-  <meta name="theme-color" content="#0a0a0a">
-  <meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hha.digital | Software propio, hecho a tu medida.</title>
+<meta name="description" content="Creamos la app de tu proyecto/negocio a la medida. No es una suscripción: es propiedad tuya, con el código y la data. Mantención mensual opcional.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0033ff">
+<link rel="canonical" href="https://hha.digital/">
 
-  <!-- Open Graph / social preview -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://hha.digital/">
-  <meta property="og:title" content="hha.digital | Tu idea. Tu app.">
-  <meta property="og:description" content="Convertimos tu idea en una app completa, hecha a tu medida. Tuya desde el día uno.">
-  <meta property="og:site_name" content="hha.digital">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="hha.digital | Tu idea. Tu app.">
-  <meta name="twitter:description" content="Convertimos tu idea en una app completa, hecha a tu medida. Tuya desde el día uno.">
+<!-- Open Graph -->
+<meta property="og:title" content="hha.digital | Software propio, a tu medida.">
+<meta property="og:description" content="Creamos la app de tu proyecto/negocio a la medida. No es una suscripción: es propiedad tuya, con el código y la data. Mantención mensual opcional.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hha.digital/">
+<meta property="og:image" content="assets/og.png">
+<meta property="og:site_name" content="hha.digital">
 
-  <link rel="canonical" href="https://hha.digital/">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="hha.digital | Software propio, a tu medida.">
+<meta name="twitter:description" content="Creamos la app de tu proyecto/negocio a la medida. No es una suscripción: es propiedad tuya, con el código y la data. Mantención mensual opcional.">
+<meta name="twitter:image" content="assets/og.png">
 
-  <!-- Inline SVG favicon — minimalist HD logo -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0a0a'/%3E%3Ctext x='32' y='42' font-family='Inter,sans-serif' font-size='24' font-weight='600' fill='%23fff' text-anchor='middle' letter-spacing='2'%3EHD%3C/text%3E%3C/svg%3E">
+<!-- Favicon: blue tile + white dot (la marca) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%230033ff'/%3E%3Crect x='30' y='22' width='12' height='40' fill='white'/%3E%3Crect x='30' y='40' width='30' height='12' fill='white'/%3E%3Crect x='48' y='40' width='12' height='22' fill='white'/%3E%3Ccircle cx='70' cy='56' r='7' fill='white'/%3E%3C/svg%3E">
 
-  <!-- Google Fonts — non-blocking load (preconnect + async stylesheet) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&display=swap">
-  </noscript>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=20260417t">
+<style>
+  :root{
+    --ink:#0a0a0a;
+    --ink-soft:#141414;
+    --paper:#ffffff;
+    --brand:#0033ff;
+    --brand-deep:#0026c9;
+    --wa:#25d366;
+    --wa-deep:#1da851;
+    --muted-on-dark:rgba(255,255,255,0.66);
+    --muted-on-light:#5b5b5b;
+    --line-on-light:rgba(10,10,10,0.14);
+    --pad-y:clamp(4.5rem,11vw,9rem);
+    --pad-x:clamp(1.25rem,5vw,4.5rem);
+    --wrap:1200px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Inter',-apple-system,system-ui,sans-serif;
+    background:var(--ink);
+    color:#fff;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit}
+
+  /* ============ SHARED TYPE ============ */
+  .display{
+    font-family:'Bebas Neue',Impact,sans-serif;
+    font-weight:400;
+    letter-spacing:0.005em;
+    line-height:0.88;
+    text-transform:uppercase;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;
+    font-size:0.72rem;
+    letter-spacing:0.34em;
+    text-transform:uppercase;
+    display:inline-block;
+  }
+  /* Wordmark: siempre minúscula */
+  .brand{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    text-transform:none;
+    letter-spacing:-0.01em;
+  }
+
+  /* Marker highlights (color-block emphasis) */
+  .mk{
+    background:var(--brand);
+    color:#fff;
+    padding:0 0.14em;
+    box-decoration-break:clone;
+    -webkit-box-decoration-break:clone;
+  }
+  .mk-inv{
+    background:#fff;
+    color:var(--brand);
+    padding:0 0.14em;
+    box-decoration-break:clone;
+    -webkit-box-decoration-break:clone;
+  }
+  .hl{color:var(--brand)}
+  /* "was": la identidad vieja (inquilino) que se deja atrás */
+  .was{
+    text-decoration:line-through;
+    text-decoration-thickness:0.06em;
+    color:var(--muted-on-light);
+    opacity:0.8;
+  }
+
+  /* ============ LAYOUT ============ */
+  .section{
+    padding:var(--pad-y) var(--pad-x);
+    position:relative;
+  }
+  .wrap{max-width:var(--wrap);margin:0 auto;width:100%}
+
+  .s-ink{background:var(--ink);color:#fff}
+  .s-paper{background:var(--paper);color:var(--ink)}
+  .s-brand{background:var(--brand);color:#fff}
+
+  .s-paper .eyebrow{color:var(--brand)}
+  .s-ink .eyebrow{color:var(--brand)}
+  .s-brand .eyebrow{color:#fff;opacity:0.85}
+
+  /* ============ HEADER ============ */
+  header.site{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:var(--ink);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .site-inner{
+    max-width:var(--wrap);
+    margin:0 auto;
+    padding:0.85rem var(--pad-x);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+  }
+  .logo{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:1.25rem;
+    letter-spacing:-0.02em;
+    color:#fff;
+    text-decoration:none;
+  }
+  .logo .dot{color:var(--brand-bright,#5c78ff)}
+
+  /* ============ BUTTONS ============ */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:0.55rem;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:1rem;
+    letter-spacing:0.01em;
+    text-decoration:none;
+    padding:0.95rem 1.4rem;
+    border:2px solid transparent;
+    border-radius:2px;
+    cursor:pointer;
+    transition:transform 0.15s ease,background 0.15s ease,color 0.15s ease;
+    line-height:1;
+  }
+  .btn svg{width:1.1em;height:1.1em;flex:0 0 auto;fill:currentColor}
+  .btn:hover{transform:translateY(-2px)}
+
+  .btn-brand{background:var(--brand);color:#fff}
+  .btn-brand:hover{background:var(--brand-deep)}
+  .btn-wa{background:var(--wa);color:#04180d}
+  .btn-wa:hover{background:var(--wa-deep);color:#fff}
+  .btn-on-brand{background:#fff;color:var(--brand)}
+  .btn-on-brand:hover{background:var(--ink);color:#fff}
+  .btn-ghost{background:transparent;border-color:currentColor;color:inherit}
+  .btn-ghost:hover{background:currentColor}
+  .btn-ghost:hover span{color:var(--ink)}
+
+  .btn-header{padding:0.65rem 1.05rem;font-size:0.9rem}
+
+  .btn-sm{padding:0.75rem 1.1rem;font-size:0.9rem}
+
+  .secondary-link{
+    font-size:0.95rem;
+    color:inherit;
+    opacity:0.75;
+    text-decoration:none;
+    border-bottom:1px solid currentColor;
+    padding-bottom:1px;
+  }
+  .secondary-link:hover{opacity:1}
+
+  /* ============ HERO ============ */
+  .hero{
+    background:var(--ink);
+    min-height:calc(100svh - 58px);
+    display:flex;
+    align-items:center;
+    padding:clamp(2rem,6vw,4rem) var(--pad-x) clamp(3rem,7vw,5rem);
+  }
+  .hero-grid{
+    max-width:var(--wrap);
+    margin:0 auto;
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:clamp(2rem,5vw,4rem);
+    align-items:center;
+  }
+  .hero h1{
+    font-family:'Bebas Neue',Impact,sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    line-height:0.86;
+    letter-spacing:0.005em;
+    font-size:clamp(3rem,13vw,7.5rem);
+    margin-bottom:clamp(1.2rem,3vw,1.8rem);
+  }
+  .hero-sub{
+    font-size:clamp(1rem,2.4vw,1.2rem);
+    line-height:1.5;
+    color:var(--muted-on-dark);
+    max-width:48ch;
+    margin-bottom:clamp(1.6rem,4vw,2.2rem);
+  }
+  .hero-cta{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:1rem 1.4rem;
+    margin-bottom:clamp(1.8rem,4vw,2.4rem);
+  }
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.6rem;
+    list-style:none;
+  }
+  .chip{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:500;
+    font-size:0.7rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:#fff;
+    border:1px solid rgba(255,255,255,0.22);
+    border-radius:100px;
+    padding:0.4rem 0.85rem;
+    white-space:nowrap;
+  }
+  .chip::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--wa);margin-right:0.5em;vertical-align:middle}
+
+  /* Problema en una sola linea: planilla / CRM ajeno / app propia */
+  .problem-line{margin-top:0.9rem;max-width:35rem;font-family:'Space Grotesk',sans-serif;font-size:1rem;line-height:1.55;color:rgba(255,255,255,0.66)}
+  .problem-line b{color:rgba(255,255,255,0.92);font-weight:600}
+  .problem-line .pl-hi{color:#fff;background:rgba(255,90,90,0.18);padding:0 0.22em;border-radius:3px;font-weight:500}
+  .problem-line .pl-good{color:#fff;background:var(--brand);padding:0.02em 0.34em;border-radius:4px;font-weight:600;white-space:nowrap}
+
+  /* App mockup (desktop only) */
+  .mockup{
+    display:block;
+    justify-self:center;
+    width:min(290px,82%);
+    margin:2.5rem auto 0;
+  }
+  .device{
+    position:relative;
+    background:linear-gradient(150deg,#48484a 0%,#1c1c1e 34%,#0a0a0b 100%);
+    border-radius:46px;
+    padding:10px;
+    box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.09),inset 0 1px 1px rgba(255,255,255,0.14);
+  }
+  .screen{
+    position:relative;
+    border-radius:36px;
+    overflow:hidden;
+    color:#fff;
+  }
+  /* iOS home screen: "tu app entre las que usas todos los días" */
+  .screen.ios{
+    background:radial-gradient(120% 90% at 30% 0%,#26262e 0%,#16161b 46%,#0a0a0e 100%);
+    display:flex;flex-direction:column;min-height:548px;
+  }
+  /* Dynamic Island */
+  .ios-island{
+    position:absolute;top:9px;left:50%;transform:translateX(-50%);
+    width:95px;height:27px;background:#000;border-radius:14px;z-index:6;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.04);
+  }
+  /* Home indicator */
+  .ios-homebar{
+    position:absolute;bottom:7px;left:50%;transform:translateX(-50%);
+    width:110px;height:5px;border-radius:3px;background:rgba(255,255,255,0.55);z-index:6;
+  }
+  .ios-status{
+    position:relative;z-index:5;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:0.9rem 1.15rem 0.15rem;
+    font-family:'Space Grotesk',sans-serif;font-size:0.78rem;font-weight:600;color:#fff;letter-spacing:0.02em;
+  }
+  .ios-sysicons{display:inline-flex;align-items:center;gap:5px}
+  .ios-sysicons svg{height:11px;width:auto;display:block;fill:#fff}
+  .ios-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:0.85rem 0.35rem;padding:0.85rem 0.8rem 0.65rem;
+    flex:1;align-content:start;
+  }
+  .app{display:flex;flex-direction:column;align-items:center;gap:0.3rem}
+  .app .ic{
+    width:100%;max-width:50px;aspect-ratio:1;border-radius:13px;
+    display:grid;place-items:center;font-size:1.4rem;line-height:1;
+    box-shadow:0 3px 7px rgba(0,0,0,0.4);overflow:hidden;
+  }
+  .app .ic svg{width:62%;height:62%;display:block}
+  .app .lbl{font-size:0.55rem;color:rgba(255,255,255,0.92);font-weight:500;text-align:center;white-space:nowrap}
+  .app.mine .ic{
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(130% 120% at 26% 16%, rgba(255,255,255,0.4), rgba(255,255,255,0) 46%),
+      linear-gradient(145deg,#ffd257 0%,#ffab24 46%,#f5820c 100%);
+    border:1px solid rgba(255,255,255,0.24);
+    color:#fff;
+    transition:transform .2s ease,opacity .2s ease;
+    animation:minePulse 3s ease-in-out infinite;
+  }
+  .app.mine .ic svg{width:56%;height:56%}
+  .app.mine .ic svg path,.app.mine .ic svg circle,.app.mine .ic svg rect{fill:#3a1c00}
+  .app.mine .ic::after{
+    content:"";position:absolute;top:0;left:-70%;width:48%;height:100%;pointer-events:none;
+    background:linear-gradient(105deg,transparent,rgba(255,255,255,0.45),transparent);
+    transform:skewX(-16deg);
+    animation:mineSheen 4.2s ease-in-out infinite;
+  }
+  .app.mine .lbl{color:#fff;font-weight:700}
+  .app.mine.swap .ic{transform:scale(0.78);opacity:0.35}
+  @keyframes minePulse{
+    0%,100%{box-shadow:0 6px 20px rgba(230,130,0,0.5),0 0 0 2px rgba(255,190,80,0.4),0 0 18px 4px rgba(255,165,30,0.55)}
+    50%{box-shadow:0 10px 32px rgba(235,120,0,0.66),0 0 0 3px rgba(255,205,110,0.55),0 0 36px 11px rgba(255,175,45,0.85)}
+  }
+  @keyframes mineSheen{0%,16%{left:-70%}62%{left:150%}100%{left:150%}}
+  /* Píldora "Buscar" (entre grid y dock) */
+  .ios-search{
+    align-self:center;
+    display:inline-flex;align-items:center;gap:0.32rem;
+    margin:0.15rem auto 0.7rem;
+    padding:0.3rem 0.78rem;border-radius:100px;
+    background:rgba(255,255,255,0.18);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    color:#fff;font-family:'Space Grotesk',sans-serif;font-size:0.62rem;font-weight:500;letter-spacing:0.02em;
+  }
+  .ios-search svg{width:11px;height:11px;display:block;fill:none}
+  .ios-dock{
+    position:relative;z-index:5;
+    margin:0.2rem 0.7rem 1.35rem;background:rgba(255,255,255,0.14);
+    border-radius:26px;padding:0.62rem 0.55rem;
+    display:flex;justify-content:space-evenly;align-items:center;
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  }
+  .ios-dock .ic{
+    width:48px;height:48px;border-radius:12px;
+    display:grid;place-items:center;font-size:1.35rem;line-height:1;box-shadow:0 3px 7px rgba(0,0,0,0.4);overflow:hidden;
+  }
+  .ios-dock .ic svg{width:60%;height:60%;display:block}
+  .ios-dock .app{gap:0.26rem}
+  .ios-dock .app.mine{position:relative;overflow:visible}
+  .ios-dock .app.mine .lbl{
+    position:absolute;top:calc(100% + 3px);left:50%;transform:translateX(-50%);
+    font-size:0.5rem;white-space:nowrap;
+  }
+  @media (prefers-reduced-motion:reduce){.app.mine .ic{animation:none}}
+
+  /* ============ SECTION TITULARS ============ */
+  .titular{
+    font-family:'Bebas Neue',Impact,sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    line-height:0.88;
+    letter-spacing:0.005em;
+    font-size:clamp(2.6rem,9vw,6rem);
+    margin-top:0.8rem;
+  }
+  .titular .brand{font-size:0.86em;letter-spacing:-0.01em}
+  .lede-lg{
+    font-size:clamp(1.05rem,2.5vw,1.4rem);
+    line-height:1.5;
+    margin-top:1.4rem;
+    max-width:34ch;
+  }
+  .s-brand .lede-lg{color:rgba(255,255,255,0.9)}
+  .s-ink .lede-lg{color:var(--muted-on-dark)}
+  .s-paper .lede-lg{color:var(--muted-on-light)}
+
+  /* ============ PILARES ============ */
+  .pillars{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:2.5rem 2rem;
+    margin-top:clamp(2.5rem,6vw,4rem);
+  }
+  .pillar .num{
+    font-family:'Bebas Neue',Impact,sans-serif;
+    font-size:clamp(3.5rem,9vw,5.5rem);
+    line-height:0.8;
+    color:var(--brand);
+    display:block;
+  }
+  .pillar h3{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:1.35rem;
+    margin:0.6rem 0 0.6rem;
+  }
+  .pillar p{font-size:1rem;line-height:1.55;color:var(--muted-on-light)}
+
+  /* ============ INDUSTRIAS ============ */
+  .ind-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1px;
+    margin-top:clamp(2.5rem,6vw,3.5rem);
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.12);
+  }
+  .ind{
+    background:var(--ink);
+    padding:clamp(1.6rem,4vw,2.4rem) 1rem;
+    text-align:center;
+    font-family:'Bebas Neue',Impact,sans-serif;
+    font-size:clamp(1.6rem,5vw,2.4rem);
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    transition:background 0.15s ease,color 0.15s ease;
+  }
+  .ind:hover{background:var(--brand);color:#fff}
+  .ind-caption{
+    margin-top:1.8rem;
+    font-size:1.05rem;
+    color:var(--muted-on-dark);
+    line-height:1.5;
+  }
+  .ind-caption .hl{color:var(--brand-bright,#7d90ff);font-weight:600}
+
+  /* ============ BUNDLE ============ */
+  .bundle{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:0;
+    margin-top:clamp(2.5rem,6vw,3.5rem);
+    border-top:2px solid var(--ink);
+  }
+  .bundle li{
+    list-style:none;
+    display:flex;
+    align-items:center;
+    gap:1rem;
+    padding:1rem 0;
+    border-bottom:1px solid var(--line-on-light);
+    font-size:clamp(1.05rem,2vw,1.25rem);
+    font-weight:500;
+  }
+  .bundle .bx{
+    flex:0 0 auto;
+    width:26px;height:26px;
+    background:var(--brand);
+    display:inline-flex;align-items:center;justify-content:center;
+    border-radius:3px;
+  }
+  .bundle .bx svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  .bundle .n{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.75rem;
+    color:var(--brand);
+    font-weight:700;
+    min-width:2.2ch;
+  }
+
+  /* ============ PROCESO ============ */
+  .steps{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:0;
+    margin-top:clamp(2.5rem,6vw,3.5rem);
+  }
+  .step{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:1.2rem;
+    align-items:baseline;
+    padding:1.3rem 0;
+    border-top:1px solid rgba(255,255,255,0.28);
+  }
+  .step:last-child{border-bottom:1px solid rgba(255,255,255,0.28)}
+  .step .sn{
+    font-family:'Bebas Neue',Impact,sans-serif;
+    font-size:clamp(2.6rem,7vw,4rem);
+    line-height:0.8;
+    color:#fff;
+    opacity:0.85;
+  }
+  .step h3{
+    font-family:'Bebas Neue',Impact,sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    font-size:clamp(1.8rem,4.5vw,2.6rem);
+    letter-spacing:0.02em;
+    line-height:0.95;
+  }
+  .step p{margin-top:0.25rem;font-size:1rem;color:rgba(255,255,255,0.85)}
+
+  /* ============ PRUEBA ============ */
+  /* Guard anti-desborde horizontal en móvil */
+  html,body{overflow-x:hidden}
+  /* Carrusel de portafolio */
+  .carousel-wrap{margin-top:clamp(2.5rem,6vw,3.5rem)}
+  .carousel{
+    display:flex;
+    gap:0.9rem;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scroll-behavior:smooth;
+    padding-bottom:0.4rem;
+    scrollbar-width:none;
+    list-style:none;
+    margin:0;
+  }
+  .carousel::-webkit-scrollbar{display:none}
+  .ev-card{
+    scroll-snap-align:start;
+    flex:0 0 78%;
+    max-width:300px;
+    min-width:0;
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:3px;
+    overflow:hidden;
+    background:var(--ink-soft);
+  }
+  .ev-card.inv .ev-name{color:var(--ink)}
+  .ev-shot{
+    min-height:138px;
+    display:flex;
+    align-items:flex-end;
+    padding:1.05rem;
+    background:var(--ev-grad,linear-gradient(135deg,#0033ff,#0026c9));
+  }
+  .ev-name{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:1.75rem;
+    letter-spacing:0.02em;
+    color:#fff;
+    line-height:1.02;
+  }
+  .ev-body{padding:1.05rem 1.1rem 1.25rem}
+  .ev-body p{color:var(--muted-on-dark);font-size:0.92rem;line-height:1.45;margin-bottom:0.75rem;min-height:2.6em}
+  .ev-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.66rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brand-bright,#7d90ff);
+  }
+  .carousel-dots{display:flex;gap:6px;justify-content:center;margin-top:0.9rem}
+  .carousel-dots .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.25);transition:background .2s,width .2s}
+  .carousel-dots .dot.active{background:var(--brand-bright,#7d90ff);width:22px;border-radius:4px}
+  .carousel-nav{display:none}
+  .carousel-btn{
+    width:44px;height:44px;border-radius:50%;
+    border:1px solid rgba(255,255,255,0.22);
+    background:var(--ink-soft);color:#fff;
+    font-size:1.3rem;cursor:pointer;
+    display:grid;place-items:center;line-height:1;
+  }
+  .carousel-btn:hover{background:var(--brand);border-color:var(--brand)}
+  @media (prefers-reduced-motion:reduce){.carousel{scroll-behavior:auto}}
+  .reversal{
+    margin-top:2.2rem;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:1.2rem 1.6rem;
+  }
+  .reversal p{
+    font-size:clamp(1.05rem,2.3vw,1.3rem);
+    line-height:1.45;
+    max-width:34ch;
+    font-weight:500;
+  }
+  .reversal .hl{color:var(--brand-bright,#7d90ff)}
+
+  /* ============ MENSUALIDAD A/B ============ */
+  .ab{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:1.25rem;
+    margin-top:clamp(2.5rem,6vw,3.5rem);
+  }
+  .branch{padding:1.8rem;border-radius:3px}
+  .branch .tag{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;
+    font-size:0.72rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    display:inline-block;
+    margin-bottom:0.9rem;
+  }
+  .branch h3{
+    font-family:'Bebas Neue',Impact,sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    font-size:clamp(2rem,5vw,2.8rem);
+    letter-spacing:0.01em;
+    line-height:0.9;
+    margin-bottom:0.7rem;
+  }
+  .branch p{font-size:1.02rem;line-height:1.55}
+  .branch-a{background:var(--brand);color:#fff}
+  .branch-a .tag{color:#fff;opacity:0.9}
+  .branch-b{background:var(--ink);color:#fff;border:2px solid var(--ink)}
+  .branch-b .tag{color:var(--brand-bright,#7d90ff)}
+  .branch-b p{color:var(--muted-on-dark)}
+
+  /* ============ CTA FINAL ============ */
+  .final h2{
+    font-family:'Bebas Neue',Impact,sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    line-height:0.86;
+    font-size:clamp(3rem,12vw,7rem);
+    letter-spacing:0.005em;
+  }
+  .final-cta{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:1rem 1.4rem;
+    margin-top:clamp(1.8rem,4vw,2.6rem);
+  }
+
+  /* ============ FOOTER ============ */
+  footer.site{
+    background:#000;
+    color:rgba(255,255,255,0.7);
+    padding:2.5rem var(--pad-x) 6rem;
+    border-top:1px solid rgba(255,255,255,0.1);
+  }
+  .foot-inner{
+    max-width:var(--wrap);
+    margin:0 auto;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:0.6rem 1.4rem;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.8rem;
+    letter-spacing:0.08em;
+  }
+  .foot-sign{
+    flex-basis:100%;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:clamp(1.15rem,2.6vw,1.6rem);
+    letter-spacing:-0.01em;
+    color:#fff;
+    margin-bottom:1.1rem;
+  }
+  .foot-inner a{text-decoration:none;color:rgba(255,255,255,0.7)}
+  .foot-inner a:hover{color:#fff}
+  .foot-inner .sep{opacity:0.4}
+  .foot-inner .brand{color:#fff;font-size:0.95rem}
+
+  /* ============ FLOATING WHATSAPP ============ */
+  .wa-float{
+    position:fixed;
+    right:clamp(0.9rem,3vw,1.5rem);
+    bottom:clamp(0.9rem,3vw,1.5rem);
+    z-index:60;
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    background:var(--wa);
+    color:#04180d;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    text-decoration:none;
+    padding:0.8rem 1.1rem;
+    border-radius:100px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35);
+    transition:transform 0.15s ease,background 0.15s ease,color 0.15s ease;
+  }
+  .wa-float svg{width:1.3em;height:1.3em;fill:currentColor}
+  .wa-float:hover{transform:translateY(-2px);background:var(--wa-deep);color:#fff}
+  .wa-float .lbl{white-space:nowrap}
+
+  /* ============ FOCUS ============ */
+  a:focus-visible,button:focus-visible{
+    outline:3px solid var(--brand);
+    outline-offset:3px;
+  }
+  .s-brand a:focus-visible,.s-brand button:focus-visible,
+  .hero a:focus-visible,.s-ink a:focus-visible,.final a:focus-visible{
+    outline-color:#fff;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (min-width:720px){
+    .pillars{grid-template-columns:repeat(3,1fr)}
+    .ind-grid{grid-template-columns:repeat(3,1fr)}
+    .bundle{grid-template-columns:1fr 1fr;column-gap:2.5rem}
+    .ev-card{flex-basis:300px}
+    .carousel-nav{display:flex;gap:0.6rem;justify-content:flex-end;margin-top:0.6rem}
+    .ab{grid-template-columns:1fr 1fr}
+  }
+  @media (min-width:960px){
+    .hero-grid{grid-template-columns:1.15fr 0.85fr}
+    .mockup{display:block;justify-self:end;margin-top:0;width:min(300px,100%)}
+  }
+
+  /* Brand-bright token for on-dark accents (defined late for cascade clarity) */
+  :root{--brand-bright:#7d90ff}
+
+  /* ============ LAYOUT 2 COLUMNAS (dos en dos) ============ */
+  .hero-grid{grid-template-columns:1.04fr 0.96fr;align-items:center}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,3vw,2.5rem);align-items:start}
+  .pair > .col{min-width:0}
+  .pair-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:0.9;letter-spacing:0.005em;font-size:clamp(1.7rem,5.2vw,3.2rem);margin-top:0.5rem}
+  .applist{list-style:none;margin-top:1rem;display:grid;gap:0.5rem}
+  .applist li{display:flex;flex-direction:column;gap:0.15rem;padding:0.55rem 0.7rem;border:1px solid rgba(255,255,255,0.14);border-radius:3px}
+  .s-paper .applist li{border-color:var(--line-on-light)}
+  .ap-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.9rem;line-height:1.12}
+  .ap-tag{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--brand)}
+  .pair-note{margin-top:0.8rem;font-size:0.8rem;line-height:1.4;color:var(--muted-on-light)}
+  .s-ink .pair-note{color:var(--muted-on-dark)}
+  .pay-mini{list-style:none;margin-top:1.2rem;display:grid;gap:0.8rem}
+  .pay-mini li{padding-left:0.9rem;border-left:2px solid var(--brand);font-size:0.92rem;line-height:1.42}
+  .pay-mini b{font-family:'Space Grotesk',sans-serif;font-weight:700}
+  .s-ink .branch-b{background:var(--ink-soft);border-color:rgba(255,255,255,0.16)}
+
+  /* iPhone: nuestra app dorada resalta; las demás atenuadas */
+  .ios-grid .app:not(.mine) .ic,.ios-dock > .ic{filter:brightness(0.62) saturate(0.9);opacity:0.72}
+  .ios-grid .app.mine{min-width:0}
+  .ios-grid .app.mine .lbl{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+  /* ============ MÓVIL: filas de 2 columnas compactas ============ */
+  @media (max-width:719px){
+    .hero{min-height:auto;padding-top:1.4rem;padding-bottom:1.8rem}
+    .hero-grid{grid-template-columns:0.98fr 1.02fr;gap:0.7rem;align-items:center}
+    .hero h1{font-size:clamp(1.8rem,7vw,4rem);margin-bottom:0.6rem}
+    .hero-sub{font-size:0.82rem;line-height:1.4;margin-bottom:0.9rem;max-width:none}
+    .hero-cta{flex-direction:column;align-items:flex-start;gap:0.55rem;margin-bottom:0}
+    .hero-cta .btn{padding:0.65rem 0.9rem;font-size:0.8rem}
+    .hero-cta .secondary-link{font-size:0.72rem}
+    /* iPhone proporcionado y con aire (no apretado, barra sin encimar apps) */
+    .mockup{width:100%;max-width:200px;margin:0}
+    .screen.ios{min-height:0}
+    .ios-island{width:40px;height:12px;top:7px}
+    .ios-homebar{width:76px;height:4px;bottom:6px}
+    .ios-status{padding:0.8rem 0.6rem 0.3rem;font-size:0.6rem}
+    .ios-sysicons{gap:2px;align-items:center}
+    .ios-sysicons svg{height:7px}
+    .ios-grid{gap:0.6rem 0.22rem;padding:0.55rem 0.6rem 0.5rem}
+    .app .lbl{font-size:0.46rem}
+    .ios-search{margin:0.25rem auto 0.6rem;font-size:0.56rem}
+    .ios-dock{margin:0.25rem 0.5rem 0.95rem;padding:0.5rem 0.4rem}
+    .ios-dock .ic{width:38px;height:38px}
+    .section{padding-top:2.4rem;padding-bottom:2.4rem}
+    .pair{gap:0.9rem}
+    .pair-title{font-size:clamp(1.3rem,5.6vw,2.4rem)}
+    .eyebrow{font-size:0.56rem;letter-spacing:0.16em}
+    .pillars{grid-template-columns:1fr;gap:0.8rem;margin-top:0.9rem}
+    .pillar .num{font-size:1.9rem}
+    .pillar h3{font-size:0.92rem;margin:0.15rem 0 0.15rem}
+    .pillar p{font-size:0.76rem;line-height:1.36}
+    .applist li{padding:0.45rem 0.55rem}
+    .ap-name{font-size:0.78rem}
+    .pay-mini li{font-size:0.8rem}
+    .final-cta{flex-direction:column;align-items:flex-start;gap:0.6rem;margin-top:1rem}
+    .final-cta .btn{padding:0.7rem 0.95rem;font-size:0.82rem}
+    /* Carrusel de proyectos: una tarjeta a la vez + puntitos */
+    .carousel-wrap{margin-top:1rem}
+    .carousel{gap:0.6rem}
+    .carousel .ev-card{flex-basis:88%;max-width:none}
+    .ev-shot{min-height:94px;padding:0.8rem}
+    .ev-name{font-size:1.25rem}
+    .ev-body{padding:0.8rem 0.85rem 0.95rem}
+    .ev-body p{font-size:0.78rem;line-height:1.4;min-height:0;margin-bottom:0.55rem}
+  }
+
+  /* ============ FAQ (acordeón) ============ */
+  .faq{margin-top:clamp(1.6rem,4vw,2.6rem);border-top:1px solid var(--line-on-light)}
+  .faq details{border-bottom:1px solid var(--line-on-light)}
+  .faq summary{cursor:pointer;list-style:none;display:block;position:relative;padding:1.05rem 2.2rem 1.05rem 0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1rem,2.6vw,1.25rem);line-height:1.3}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";position:absolute;right:0.1rem;top:0.85rem;font-weight:400;font-size:1.6rem;line-height:1;color:var(--brand);transition:transform .2s ease}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq p{margin:0;padding:0 0 1.15rem;color:var(--muted-on-light);font-size:1rem;line-height:1.55;max-width:66ch}
+  .foot-copy{flex-basis:100%;opacity:0.5;font-size:0.72rem;letter-spacing:0.04em;margin-top:0.5rem}
+
+  /* ============ WIZARD DE COTIZACIÓN (modal) ============ */
+  .qm{position:fixed;inset:0;z-index:200;display:none}
+  .qm.open{display:block}
+  .qm-scrim{position:absolute;inset:0;background:rgba(0,0,0,0.62);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);animation:qmFade .2s ease}
+  .qm-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,92vw);max-height:90vh;display:flex;flex-direction:column;background:#111114;color:#fff;border:1px solid rgba(255,255,255,0.12);border-radius:6px;box-shadow:0 40px 90px rgba(0,0,0,0.6);overflow:hidden;animation:qmPop .25s cubic-bezier(0.2,0.8,0.2,1)}
+  @keyframes qmFade{from{opacity:0}to{opacity:1}}
+  @keyframes qmPop{from{opacity:0;transform:translate(-50%,-46%)}to{opacity:1;transform:translate(-50%,-50%)}}
+  .qm-head{display:flex;align-items:center;gap:0.8rem;padding:1.1rem 1.3rem 0.9rem}
+  .qm-progress{flex:1;height:4px;background:rgba(255,255,255,0.12);border-radius:100px;overflow:hidden}
+  .qm-bar{display:block;height:100%;width:25%;background:var(--brand);border-radius:100px;transition:width .3s ease}
+  .qm-step-label{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted-on-dark);white-space:nowrap}
+  .qm-close{background:none;border:none;color:#fff;font-size:1.7rem;line-height:1;cursor:pointer;opacity:0.7;padding:0 0.15rem}
+  .qm-close:hover{opacity:1}
+  .qm-form{display:flex;flex-direction:column;min-height:0;flex:1;position:relative}
+  .qm-hp{position:absolute;left:-9999px;top:-9999px;width:0;height:0;opacity:0}
+  .qm-step{padding:0.4rem 1.3rem 0.9rem;overflow-y:auto;animation:qmStepIn .28s ease}
+  .qm-step[hidden]{display:none}
+  @keyframes qmStepIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+  .qm-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:0.95;letter-spacing:0.01em;font-size:clamp(1.8rem,6vw,2.5rem);margin:0.35rem 0 0.5rem}
+  .qm-help{color:var(--muted-on-dark);font-size:0.95rem;line-height:1.5;margin-bottom:1rem}
+  .qm-input{width:100%;background:#1a1a1f;border:1px solid rgba(255,255,255,0.16);border-radius:3px;color:#fff;font-family:'Inter',sans-serif;font-size:1rem;padding:0.85rem 0.9rem;margin-bottom:0.7rem}
+  .qm-input::placeholder{color:rgba(255,255,255,0.4)}
+  .qm-input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(0,51,255,0.25)}
+  .qm-area{resize:vertical;min-height:120px;line-height:1.5}
+  .qm-chips{display:flex;flex-wrap:wrap;gap:0.5rem}
+  .qm-chip{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.9rem;color:#fff;background:#1a1a1f;border:1px solid rgba(255,255,255,0.16);border-radius:100px;padding:0.55rem 1rem;cursor:pointer;transition:.15s}
+  .qm-chip:hover{border-color:rgba(255,255,255,0.4)}
+  .qm-chip.sel{background:var(--brand);border-color:var(--brand)}
+  .qm-opts{display:flex;flex-direction:column;gap:0.55rem}
+  .qm-opt{text-align:left;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem;color:#fff;background:#1a1a1f;border:1px solid rgba(255,255,255,0.16);border-radius:4px;padding:0.85rem 1rem;cursor:pointer;transition:.15s}
+  .qm-opt:hover{border-color:rgba(255,255,255,0.4)}
+  .qm-opt.sel{border-color:var(--brand);box-shadow:inset 0 0 0 2px rgba(0,51,255,0.5);background:#16181f}
+  .qm-error{color:#ff6b6b;font-size:0.82rem;margin-top:0.2rem;min-height:1em}
+  .qm-foot{display:flex;gap:0.7rem;align-items:center;padding:0.9rem 1.3rem 1.2rem;border-top:1px solid rgba(255,255,255,0.08);margin-top:auto}
+  .qm-btn{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.95rem;border-radius:3px;padding:0.8rem 1.4rem;cursor:pointer;border:2px solid transparent;transition:.15s}
+  .qm-back{background:none;color:var(--muted-on-dark);border-color:rgba(255,255,255,0.2)}
+  .qm-back:hover{color:#fff;border-color:#fff}
+  .qm-next,.qm-send{background:var(--brand);color:#fff;margin-left:auto}
+  .qm-next:hover,.qm-send:hover{background:var(--brand-deep)}
+  .qm-send[disabled]{opacity:0.65;cursor:wait}
+  .qm-success{text-align:center;padding:1.6rem 1.3rem 1.2rem}
+  .qm-check{width:66px;height:66px;margin:0 auto 1rem;border-radius:50%;display:grid;place-items:center;font-size:2.1rem;color:#3a1c00;background:linear-gradient(145deg,#ffd257,#f5820c);box-shadow:0 0 34px rgba(255,165,30,0.55)}
+  body.qm-lock{overflow:hidden}
+  .quote-float{position:fixed;right:clamp(0.9rem,3vw,1.5rem);bottom:clamp(0.9rem,3vw,1.5rem);z-index:120;display:inline-flex;align-items:center;gap:0.5rem;background:var(--brand);color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.95rem;border:none;cursor:pointer;padding:0.85rem 1.15rem;border-radius:100px;box-shadow:0 10px 30px rgba(0,0,0,0.35);transition:.15s}
+  .quote-float:hover{background:var(--brand-deep);transform:translateY(-2px)}
+  .quote-float svg{width:1.2em;height:1.2em;fill:currentColor}
+  @media (max-width:600px){
+    .qm-card{left:0;right:0;bottom:0;top:auto;transform:none;width:100%;max-height:92vh;border-radius:14px 14px 0 0;animation:qmSheet .3s ease}
+    @keyframes qmSheet{from{transform:translateY(100%)}to{transform:none}}
+    .qm-title{font-size:2rem}
+    .quote-float span{display:none}
+    .quote-float{padding:0.9rem;border-radius:50%}
+    .quote-float svg{width:1.5em;height:1.5em}
+  }
+
+  /* ============ REDUCED MOTION ============ */
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{animation-duration:0.001ms!important;animation-iteration-count:1!important;transition-duration:0.001ms!important}
+  }
+</style>
 </head>
 <body>
 
-  <div class="deck">
+<!-- ================= HEADER ================= -->
+<header class="site">
+  <div class="site-inner">
+    <a class="logo" href="#top" aria-label="hha.digital, inicio">hha<span class="dot">.</span>digital</a>
+  </div>
+</header>
 
-    <!-- Slide 1: hha.digital core -->
-    <section class="slide theme-core active" data-slide="1">
-      <div class="slide-inner">
-        <h1 class="logo" aria-label="hha.digital"><span class="brand-char" data-char="h1">h</span><span class="brand-char" data-char="h2">h</span><span class="brand-char" data-char="a1">a</span><span class="brand-char brand-dim" data-char="dot">.</span><span class="brand-char brand-dim" data-char="d">d</span><span class="brand-char brand-dim" data-char="i1">i</span><span class="brand-char brand-dim" data-char="g">g</span><span class="brand-char brand-dim" data-char="i2">i</span><span class="brand-char brand-dim" data-char="t">t</span><span class="brand-char brand-dim" data-char="a2">a</span><span class="brand-char brand-dim" data-char="l">l</span></h1>
-        <div class="divider"></div>
-        <p class="hero-statement">Tu idea. Tu software.</p>
-        <p class="tagline">Tu negocio. Tus reglas.</p>
-      </div>
-    </section>
+<main id="top">
 
-    <!-- Slide 2: Magazine cover — abre con el valor "Hecha para ti." -->
-    <section class="slide theme-magazine" data-slide="2">
-      <div class="magazine-gradient"></div>
-      <div class="slide-inner">
-        <div class="magazine-topbar">
-          <span class="magazine-brand"><span class="brand-char" data-char="h1">h</span><span class="brand-char" data-char="h2">h</span><span class="brand-char" data-char="a1">a</span><span class="brand-char" data-char="dot">.</span><span class="brand-char" data-char="d">d</span><span class="brand-char" data-char="i1">i</span><span class="brand-char" data-char="g">g</span><span class="brand-char" data-char="i2">i</span><span class="brand-char" data-char="t">t</span><span class="brand-char" data-char="a2">a</span><span class="brand-char" data-char="l">l</span></span>
-          <span>DISEÑO</span>
-          <span>— 2026 —</span>
+  <!-- ================= 1. HERO ================= -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-grid">
+      <div>
+        <h1 id="hero-title"><span style="display:block">Deja de arrendar software.</span> <span class="mk" style="display:inline-block;margin-top:0.12em">Ten el tuyo.</span></h1>
+        <p class="hero-sub">Creamos la app de tu proyecto/negocio a la medida de cómo operas. No es una suscripción: es propiedad tuya, con el código y la data.</p>
+        <div class="hero-cta">
+          <button class="btn btn-brand js-open-quote" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c.6 0 1 .4 1 1v11c0 .6-.4 1-1 1H8.5L4 20.5V5c0-.6.4-1 1-1z"/></svg>
+            Cuéntanos tu idea
+          </button>
+          <a class="secondary-link" href="mailto:contacto@hha.digital">o escríbenos a contacto@hha.digital</a>
         </div>
-        <p class="magazine-kicker">La diferencia</p>
-        <h1 class="magazine-hero">Hecha para ti.</h1>
-        <p class="magazine-subhead">No adaptas tu negocio al software. El software se adapta a cómo operas tú.</p>
-        <div class="magazine-stats">
-          <div class="magazine-stat">
-            <div class="magazine-label-em">Tus datos</div>
-            <div class="magazine-label-sub">bajo tu control</div>
+      </div>
+
+      <div class="mockup" aria-hidden="true">
+        <div class="device">
+          <div class="screen ios">
+            <div class="ios-island" aria-hidden="true"></div>
+            <div class="ios-status">
+              <span class="ios-time">12:24</span>
+              <span class="ios-sysicons">
+                <svg viewBox="0 0 20 12" aria-hidden="true"><rect x="0" y="6.5" width="3.6" height="5.5" rx="1"/><rect x="5.47" y="4.3" width="3.6" height="7.7" rx="1"/><rect x="10.93" y="2.2" width="3.6" height="9.8" rx="1"/><rect x="16.4" y="0.3" width="3.6" height="11.7" rx="1"/></svg>
+                <svg viewBox="0 0 18 13" aria-hidden="true"><path d="M9 2.9c2.9 0 5.6 1.1 7.6 3.1l-1.7 1.7A8.4 8.4 0 0 0 9 5.2 8.4 8.4 0 0 0 3.1 7.7L1.4 6A11 11 0 0 1 9 2.9z"/><path d="M9 7.1c1.8 0 3.4.7 4.5 1.9l-1.7 1.7A4.1 4.1 0 0 0 9 9.3c-1.1 0-2 .4-2.8 1.2L4.5 9A6.3 6.3 0 0 1 9 7.1z"/><circle cx="9" cy="12" r="1.4"/></svg>
+                <svg viewBox="0 0 27 13" aria-hidden="true"><rect x="0.6" y="1" width="22" height="11" rx="3" fill="none" stroke="#fff" stroke-opacity="0.6" stroke-width="1.1"/><rect x="2.2" y="2.6" width="17.4" height="7.8" rx="1.7" fill="#fff"/><rect x="24" y="4.4" width="2" height="4.2" rx="1" fill="#fff" fill-opacity="0.6"/></svg>
+              </span>
+            </div>
+            <div class="ios-grid">
+              <div class="app"><span class="ic" style="background:linear-gradient(155deg,#6d6d70,#232326)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.4" fill="none" stroke="#e8e8ee" stroke-width="1.7"/><circle cx="12" cy="12" r="4.6" fill="#cfcfd6"/><circle cx="12" cy="12" r="2.5" fill="#7f7f88"/><circle cx="10.4" cy="10.4" r="1.15" fill="#fff" opacity="0.92"/><circle cx="18.1" cy="6" r="1.15" fill="#ffd23e"/></svg></span><span class="lbl">Cámara</span></div>
+              <div class="app"><span class="ic" style="background:linear-gradient(180deg,#4ce866,#20c144)"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 4.7c-4.4 0-8 2.9-8 6.6 0 2.1 1.1 3.9 2.9 5.1-.2 1-.7 1.9-1.5 2.6 1.3-.1 2.6-.5 3.7-1.3.9.3 1.9.5 2.9.5 4.4 0 8-2.9 8-6.6s-3.6-6.9-8-6.9z"/></svg></span><span class="lbl">Mensajes</span></div>
+              <div class="app"><span class="ic" style="background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.9"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="16.7" cy="7.3" r="1" fill="#fff" stroke="none"/></svg></span><span class="lbl">Instagram</span></div>
+              <div class="app"><span class="ic" style="background:#fff"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1.5" y="5" width="21" height="14" rx="4.5" fill="#ff0000"/><path d="M10 8.6l6 3.4-6 3.4z" fill="#fff"/></svg></span><span class="lbl">YouTube</span></div>
+              <div class="app mine"><span class="ic" id="mineIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l1.9 5.6 5.6 1.9-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.9z"/><path d="M18.6 14l.8 2.2 2.1.8-2.1.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg></span><span class="lbl" id="mineLbl">Tu App</span></div>
+              <div class="app"><span class="ic" style="background:linear-gradient(160deg,#1c1c1e,#000)"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25f4ee" transform="translate(-0.9,0.5)" d="M13.3 3.5c.4 2 1.9 3.6 3.9 3.9v2.5c-1.2 0-2.3-.3-3.3-.9v5.2c0 2.6-2.1 4.8-4.8 4.8s-4.8-2.2-4.8-4.8 2.1-4.8 4.8-4.8c.3 0 .6 0 .9.1v2.6c-.3-.1-.6-.2-.9-.2-1.3 0-2.3 1-2.3 2.3s1 2.3 2.3 2.3 2.3-1 2.3-2.3V3.5z"/><path fill="#fe2c55" transform="translate(0.9,-0.5)" d="M13.3 3.5c.4 2 1.9 3.6 3.9 3.9v2.5c-1.2 0-2.3-.3-3.3-.9v5.2c0 2.6-2.1 4.8-4.8 4.8s-4.8-2.2-4.8-4.8 2.1-4.8 4.8-4.8c.3 0 .6 0 .9.1v2.6c-.3-.1-.6-.2-.9-.2-1.3 0-2.3 1-2.3 2.3s1 2.3 2.3 2.3 2.3-1 2.3-2.3V3.5z"/><path fill="#fff" d="M13.3 3.5c.4 2 1.9 3.6 3.9 3.9v2.5c-1.2 0-2.3-.3-3.3-.9v5.2c0 2.6-2.1 4.8-4.8 4.8s-4.8-2.2-4.8-4.8 2.1-4.8 4.8-4.8c.3 0 .6 0 .9.1v2.6c-.3-.1-.6-.2-.9-.2-1.3 0-2.3 1-2.3 2.3s1 2.3 2.3 2.3 2.3-1 2.3-2.3V3.5z"/></svg></span><span class="lbl">TikTok</span></div>
+              <div class="app"><span class="ic" style="background:linear-gradient(160deg,#2b88ff,#0a5ae0)"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M13.5 21v-7.1h2.4l.36-2.78H13.5V9.3c0-.8.22-1.35 1.38-1.35h1.47V5.46c-.25-.03-1.13-.11-2.14-.11-2.12 0-3.57 1.29-3.57 3.67v2.05H8.23v2.78h2.41V21z"/></svg></span><span class="lbl">Facebook</span></div>
+              <div class="app"><span class="ic" style="background:#fff"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none"><path d="M6.2 16.2V9.4" stroke="#4285f4" stroke-width="2.6" stroke-linecap="round"/><path d="M6.2 9.4 12 13.7" stroke="#ea4335" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 13.7 17.8 9.4" stroke="#34a853" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.8 9.4V16.2" stroke="#fbbc04" stroke-width="2.6" stroke-linecap="round"/></svg></span><span class="lbl">Gmail</span></div>
+              <div class="app"><span class="ic" style="background:#fff"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 8 8.5 6v11l-5 2z" fill="#34a853"/><path d="M8.5 6 15.5 8v11L8.5 17z" fill="#fbbc04"/><path d="M15.5 8 20.5 6v11l-5-2z" fill="#4285f4"/><path d="M12 4a4 4 0 0 0-4 4c0 2.9 4 6.8 4 6.8s4-3.9 4-6.8a4 4 0 0 0-4-4z" fill="#ea4335"/><circle cx="12" cy="8" r="1.5" fill="#fff"/></svg></span><span class="lbl">Maps</span></div>
+              <div class="app"><span class="ic" style="background:linear-gradient(160deg,#1c1c1e,#000)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 3.5h2.5v17H8.4z" fill="#b1060f"/><path d="M13.1 3.5h2.5v17h-2.5z" fill="#b1060f"/><path d="M8.4 3.5h2.5l5.2 17h-2.5z" fill="#e50914"/></svg></span><span class="lbl">Netflix</span></div>
+              <div class="app"><span class="ic" style="background:linear-gradient(160deg,#1c1c1e,#000)"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M14.9 4h2.6l-5.7 6.5L18.6 20h-5.3l-4.1-5.4L4.4 20H1.8l6.1-7L4 4h5.4l3.7 4.9zM14 18.4h1.5L7.1 5.5H5.5z"/></svg></span><span class="lbl">X</span></div>
+              <div class="app"><span class="ic" style="background:#fff"><svg viewBox="0 0 24 24" aria-hidden="true"><g transform="translate(12,12)"><ellipse cx="0" cy="-4.6" rx="2.4" ry="4.4" fill="#fbbc04" opacity="0.85"/><ellipse cx="0" cy="-4.6" rx="2.4" ry="4.4" fill="#ea4335" opacity="0.85" transform="rotate(60)"/><ellipse cx="0" cy="-4.6" rx="2.4" ry="4.4" fill="#d81b8c" opacity="0.85" transform="rotate(120)"/><ellipse cx="0" cy="-4.6" rx="2.4" ry="4.4" fill="#7b3ff2" opacity="0.85" transform="rotate(180)"/><ellipse cx="0" cy="-4.6" rx="2.4" ry="4.4" fill="#2aa5f0" opacity="0.85" transform="rotate(240)"/><ellipse cx="0" cy="-4.6" rx="2.4" ry="4.4" fill="#34c759" opacity="0.85" transform="rotate(300)"/></g></svg></span><span class="lbl">Fotos</span></div>
+              <div class="app"><span class="ic" style="background:linear-gradient(180deg,#2aabee,#229ed9)"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M5 11.7 18 6.3c.7-.28 1.3.2 1.1 1L17 17.1c-.15.7-.6.9-1.2.5l-3-2.2-1.5 1.45c-.2.2-.36.36-.72.36l.26-3.1 5.9-5.35c.26-.23-.06-.36-.4-.14l-7.3 4.6-3.14-.98c-.68-.2-.7-.68.14-1z"/></svg></span><span class="lbl">Telegram</span></div>
+              <div class="app"><span class="ic" style="background:#fff"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12 L2.04 6.25 A11.5 11.5 0 0 1 21.96 6.25 Z" fill="#ea4335"/><path d="M12 12 L12 23.5 A11.5 11.5 0 0 1 2.04 6.25 Z" fill="#34a853"/><path d="M12 12 L21.96 6.25 A11.5 11.5 0 0 1 12 23.5 Z" fill="#fbbc04"/><circle cx="12" cy="12" r="5" fill="#fff"/><circle cx="12" cy="12" r="4.1" fill="#4285f4"/></svg></span><span class="lbl">Chrome</span></div>
+              <div class="app"><span class="ic" style="background:linear-gradient(160deg,#0d78dc,#084f9e)"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M7.2 9.6H4.5V19h2.7zM5.85 5.5a1.57 1.57 0 1 0 0 3.14 1.57 1.57 0 0 0 0-3.14zM19.5 19v-5.16c0-2.76-1.47-4.04-3.44-4.04-1.59 0-2.3.87-2.7 1.49V9.6H10.7c.04.76 0 9.4 0 9.4h2.66v-5.25c0-.24.02-.48.09-.65.19-.48.63-.97 1.36-.97.96 0 1.34.73 1.34 1.8V19z"/></svg></span><span class="lbl">LinkedIn</span></div>
+              <div class="app"><span class="ic" style="background:#fffc00"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 4c2.3 0 3.9 1.7 4 4 .03.6-.02 1.2-.06 1.8 0 .2.1.35.3.4.3.1.7-.1 1-.2.15-.05.32-.08.47-.03.25.08.4.35.28.6-.2.45-1 .7-1.45.9-.2.08-.3.28-.24.5.5 1.7 2 2.9 3.6 3.3.25.06.4.3.32.55-.15.5-1.1.75-1.6.9-.15.04-.25.15-.28.3-.03.18-.06.4-.28.48-.4.14-1.1-.1-1.7-.1-.5 0-.9.1-1.3.4-.6.44-1.3 1-2.6 1s-2-.56-2.6-1c-.4-.3-.8-.4-1.3-.4-.6 0-1.3.24-1.7.1-.22-.08-.25-.3-.28-.48-.03-.15-.13-.26-.28-.3-.5-.15-1.45-.4-1.6-.9-.08-.25.07-.49.32-.55 1.6-.4 3.1-1.6 3.6-3.3.06-.22-.04-.42-.24-.5-.45-.2-1.25-.45-1.45-.9-.12-.25.03-.52.28-.6.15-.05.32-.02.47.03.3.1.7.3 1 .2.2-.05.3-.2.3-.4-.04-.6-.09-1.2-.06-1.8.1-2.3 1.7-4 4-4z"/></svg></span><span class="lbl">Snapchat</span></div>
+            </div>
+            <div class="ios-search" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.1" fill="none" stroke="#fff" stroke-width="2"/><line x1="15.6" y1="15.6" x2="20" y2="20" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+              <span>Buscar</span>
+            </div>
+            <div class="ios-dock">
+              <span class="ic" style="background:linear-gradient(180deg,#5ce072,#26bf42)"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6.6 4.6c-1 0-2 .8-2.1 2C4.4 13.7 10 19.3 17 19.4c1.2-.1 2-1.1 2-2.1v-2.3c0-.5-.3-.9-.8-1l-2.9-.8c-.4-.1-.9 0-1.2.4l-1 1.3c-1.9-.9-3.4-2.4-4.3-4.3l1.3-1c.4-.3.5-.8.4-1.2l-.8-2.9c-.1-.5-.5-.8-1-.8z"/></svg></span>
+              <span class="ic" style="background:linear-gradient(160deg,#28d36c,#15b64e)"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M17.5 14.4c-.3-.15-1.7-.84-2-.94-.26-.1-.45-.15-.64.15-.19.28-.73.94-.9 1.13-.16.19-.33.21-.61.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.73-1.63-2.02-.17-.29-.02-.45.13-.6.13-.13.3-.34.45-.51.15-.17.2-.29.3-.48.1-.19.05-.36-.02-.51-.08-.15-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49h-.55c-.19 0-.5.07-.76.36s-1 .98-1 2.38 1.02 2.76 1.17 2.95c.15.19 2.02 3.08 4.9 4.32.68.29 1.22.47 1.63.6.69.22 1.31.19 1.8.11.55-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34zM12 2a10 10 0 0 0-8.6 15.06L2 22l5.06-1.33A10 10 0 1 0 12 2z"/></svg></span>
+              <span class="ic" style="background:linear-gradient(165deg,#22d962,#149a44)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#0a0a0a" stroke-linecap="round"><path d="M6.3 9.1c3.7-1 7.9-.6 11.2 1.4" stroke-width="1.8"/><path d="M7.1 12.3c3-.8 6.4-.5 9.2 1.1" stroke-width="1.6"/><path d="M7.9 15.3c2.4-.6 5.1-.4 7.3.9" stroke-width="1.4"/></svg></span>
+            </div>
+            <div class="ios-homebar" aria-hidden="true"></div>
           </div>
-          <div class="magazine-stat">
-            <div class="magazine-label-em">Tus informes</div>
-            <div class="magazine-label-sub">en tiempo real</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BANDA PROCESO (thin, reemplaza pantalla de Problema) ================= -->
+  <section class="s-brand" style="padding:1.15rem var(--pad-x)">
+    <div class="wrap" style="display:flex;flex-wrap:wrap;gap:0.4rem 1rem;align-items:baseline;justify-content:center;text-align:center">
+      <span class="eyebrow" style="opacity:0.85">El proceso</span>
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1rem,2.6vw,1.3rem);color:#fff">De la idea a producción en 2 a 3 semanas.</span>
+    </div>
+  </section>
+
+  <!-- ================= FILA 2: DIFERENCIA | CÓMO SE PAGA ================= -->
+  <section class="section s-paper">
+    <div class="wrap">
+      <div class="pair">
+        <div class="col">
+          <span class="eyebrow">La diferencia</span>
+          <h2 class="pair-title">De <span class="was">inquilino</span> a <span class="mk">dueño</span>.</h2>
+          <div class="pillars">
+            <div class="pillar">
+              <span class="num">01</span>
+              <h3>A tu manera</h3>
+              <p>Cada función existe porque tú la necesitas. Nada genérico, nada de más.</p>
+            </div>
+            <div class="pillar">
+              <span class="num">02</span>
+              <h3>Dueño de tu información</h3>
+              <p>Tus datos no viven en la plataforma de otro: son tuyos y portables cuando los necesites.</p>
+            </div>
+            <div class="pillar">
+              <span class="num">03</span>
+              <h3>Una app, no diez</h3>
+              <p>Una sola aplicación reemplaza la pila de suscripciones que hoy pagas por separado.</p>
+            </div>
           </div>
-          <div class="magazine-stat">
-            <div class="magazine-label-em">Tus decisiones</div>
-            <div class="magazine-label-sub">más rápidas</div>
-          </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Slide 3: Blueprint técnico — el catálogo de features -->
-    <section class="slide theme-blueprint" data-slide="3">
-      <div class="blueprint-grid"></div>
-      <div class="slide-inner">
-        <div class="blueprint-header">
-          <span class="blueprint-file"><span class="brand-char" data-char="h1">h</span><span class="brand-char" data-char="h2">h</span><span class="brand-char" data-char="a1">a</span><span class="brand-char" data-char="dot">.</span><span class="brand-char" data-char="d">d</span><span class="brand-char" data-char="i1">i</span><span class="brand-char" data-char="g">g</span><span class="brand-char" data-char="i2">i</span><span class="brand-char" data-char="t">t</span><span class="brand-char" data-char="a2">a</span><span class="brand-char" data-char="l">l</span> / centralizar / v1.0</span>
-          <span class="blueprint-date">2026</span>
-        </div>
-        <h3 class="blueprint-title">Cualquier idea. Cualquier app.</h3>
-        <div class="timeline blueprint-timeline">
-          <div class="timeline-step"><div class="step-num">01</div><div class="step-name">Retail</div></div>
-          <div class="timeline-step"><div class="step-num">02</div><div class="step-name">Salud</div></div>
-          <div class="timeline-step"><div class="step-num">03</div><div class="step-name">Educación</div></div>
-          <div class="timeline-step"><div class="step-num">04</div><div class="step-name">Gastronomía</div></div>
-          <div class="timeline-step"><div class="step-num">05</div><div class="step-name">Financiero</div></div>
-          <div class="timeline-step"><div class="step-num">06</div><div class="step-name">Entretención</div></div>
-        </div>
-        <p class="timeline-caption">Cualquier industria o <span class="caption-glow">proyecto personal</span>. Construimos lo que necesites.</p>
-      </div>
-    </section>
-
-    <!-- Slide 4: Swiss design fusionado — tu poder + declaración centralización -->
-    <section class="slide theme-swiss" data-slide="4">
-      <div class="swiss-grid"></div>
-      <div class="slide-inner">
-        <p class="swiss-kicker">— Tu poder —</p>
-        <div class="swiss-number">04</div>
-        <p class="swiss-label">hha<span class="swiss-dot">•</span>digital</p>
-        <h2 class="swiss-statement">
-          Toda la información de tu negocio en un solo lugar.<br>
-          <span class="swiss-accent">Para <span class="rotating-word" data-words="decidir|analizar|entender|planificar">decidir</span> mejor.</span>
-        </h2>
-        <div class="swiss-footer">
-          <span>2026 —</span>
-          <span>World Wide Reach</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 5: Editorial magazine — el bundle como índice de revista -->
-    <section class="slide theme-editorial" data-slide="5">
-      <div class="editorial-rule-top"></div>
-      <div class="slide-inner">
-        <p class="editorial-kicker">— Lo que recibes —</p>
-        <h2 class="editorial-masthead">Una app <em>completa,</em> desde el día uno.</h2>
-        <ol class="editorial-index">
-          <li><span class="editorial-roman">i.</span><span class="editorial-item">Descubrimiento y análisis de necesidades</span></li>
-          <li><span class="editorial-roman">ii.</span><span class="editorial-item">Diseño UX/UI mobile-first</span></li>
-          <li><span class="editorial-roman">iii.</span><span class="editorial-item">App web responsive</span></li>
-          <li><span class="editorial-roman">iv.</span><span class="editorial-item">Autenticación y roles de usuarios</span></li>
-          <li><span class="editorial-roman">v.</span><span class="editorial-item">Base de datos segura</span></li>
-          <li><span class="editorial-roman">vi.</span><span class="editorial-item">Panel admin para gestionarla</span></li>
-          <li><span class="editorial-roman">vii.</span><span class="editorial-item">PWA instalable en celular</span></li>
-          <li><span class="editorial-roman">viii.</span><span class="editorial-item">Hosting y dominio configurados</span></li>
-          <li><span class="editorial-roman">ix.</span><span class="editorial-item">Deploy a producción con SSL</span></li>
-          <li><span class="editorial-roman">x.</span><span class="editorial-item">Capacitación inicial</span></li>
-          <li><span class="editorial-roman">xi.</span><span class="editorial-item">Documentación de uso</span></li>
-        </ol>
-        <p class="editorial-byline">hha.digital · todo incluido</p>
-      </div>
-      <div class="editorial-rule-bottom"></div>
-    </section>
-
-    <!-- Slide 6: Terminal verde — el proceso de construcción en 5 pasos friendly -->
-    <section class="slide theme-terminal" data-slide="6">
-      <div class="slide-inner">
-        <h3 class="terminal-title">El proceso</h3>
-        <div class="terminal-body">
-          <div class="terminal-header">
-            <span class="terminal-cmd">$ empezar</span>
-            <span class="terminal-prompt">&lt;app:dev_now&gt;</span>
-            <span class="terminal-cursor">█</span>
-          </div>
-          <ul class="terminal-timeline">
-            <li>
-              <span class="terminal-week">paso 01</span>
-              <span class="terminal-arrow">→</span>
-              <span class="terminal-step">Investigación</span><span class="terminal-sep-inline">://</span>
-              <span class="terminal-desc">Entendemos tu operación.</span>
-            </li>
-            <li>
-              <span class="terminal-week">paso 02</span>
-              <span class="terminal-arrow">→</span>
-              <span class="terminal-step">Diseñar</span><span class="terminal-sep-inline">://</span>
-              <span class="terminal-desc">Dibujamos la app juntos.</span>
-            </li>
-            <li>
-              <span class="terminal-week">paso 03</span>
-              <span class="terminal-arrow">→</span>
-              <span class="terminal-step">Construir</span><span class="terminal-sep-inline">://</span>
-              <span class="terminal-desc">La programamos. Tú ves el avance.</span>
-            </li>
-            <li>
-              <span class="terminal-week">paso 04</span>
-              <span class="terminal-arrow">→</span>
-              <span class="terminal-step">Testing</span><span class="terminal-sep-inline">://</span>
-              <span class="terminal-desc">Afinamos cada detalle contigo.</span>
-            </li>
-            <li>
-              <span class="terminal-week">paso 05</span>
-              <span class="terminal-arrow">→</span>
-              <span class="terminal-step">Deploy</span><span class="terminal-sep-inline">://</span>
-              <span class="terminal-desc">Tu app online.</span>
-            </li>
+        <div class="col">
+          <span class="eyebrow">Cero letra chica</span>
+          <h2 class="pair-title">Un pago. <span class="hl">Cero sorpresas</span>.</h2>
+          <ul class="pay-mini">
+            <li><b>Pagas el desarrollo una vez</b> y la app es tuya, con código y datos, desde el día uno.</li>
+            <li><b>La mantención es opcional:</b> si quieres la cuidamos por ti; si no, te la llevas completa.</li>
           </ul>
-          <p class="terminal-output">plazo:// 2-3 semanas ~complejidad</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Slide 7: Financial — modelo comercial simplificado, sin precios -->
-    <section class="slide theme-financial" data-slide="7">
-      <div class="slide-inner financial-inner">
-        <div class="financial-masthead">
-          <span class="financial-left">SERVICIOS</span>
-          <span class="financial-center">hha.digital</span>
-          <span class="financial-right">2026</span>
-        </div>
-        <h2 class="financial-title">… ¿Y el Mantenimiento?</h2>
-        <div class="decision-tree">
-          <div class="decision-root">
-            <p class="decision-root-text">Este puede ser</p>
-            <div class="decision-connector"></div>
-          </div>
-          <div class="decision-branches">
-            <div class="decision-box">
-              <div class="decision-badge">A</div>
-              <div class="decision-content">
-                <div class="decision-heading">Con hha.digital</div>
-                <div class="decision-sub">Mensualidad continua. Nos hacemos cargo del servidor, las actualizaciones y los bugs que aparezcan en el camino.</div>
-              </div>
+  <!-- ================= FILA 3: TRABAJO | CIERRE ================= -->
+  <section class="section s-ink">
+    <div class="wrap">
+      <div class="pair">
+        <div class="col">
+          <span class="eyebrow">Desarrollos</span>
+          <h2 class="pair-title">Algunos de nuestros <span class="mk">desarrollos</span>.</h2>
+          <div class="carousel-wrap">
+            <ul class="carousel" role="list">
+              <li class="ev-card" style="--ev-grad:linear-gradient(135deg,#0033ff,#0026c9)">
+                <div class="ev-shot"><span class="ev-name">App para<br>mascotas</span></div>
+                <div class="ev-body">
+                  <p>Vacunas, historial médico, citas, nutrición y ficha de emergencia de cada mascota.</p>
+                  <span class="ev-tag">Mascotas</span>
+                </div>
+              </li>
+              <li class="ev-card inv" style="--ev-grad:#ffffff">
+                <div class="ev-shot"><span class="ev-name">App para<br>vida nocturna</span></div>
+                <div class="ev-body">
+                  <p>Listas de invitados y control de acceso en la puerta, en tiempo real, con informes por noche.</p>
+                  <span class="ev-tag">Entretención</span>
+                </div>
+              </li>
+              <li class="ev-card" style="--ev-grad:linear-gradient(135deg,#0033ff,#0026c9)">
+                <div class="ev-shot"><span class="ev-name">App de<br>meditación</span></div>
+                <div class="ev-body">
+                  <p>Rutina diaria de práctica: mantras, posturas, ayunos e historial con estadísticas.</p>
+                  <span class="ev-tag">Bienestar</span>
+                </div>
+              </li>
+              <li class="ev-card inv" style="--ev-grad:#ffffff">
+                <div class="ev-shot"><span class="ev-name">App de<br>contabilidad</span></div>
+                <div class="ev-body">
+                  <p>Contabilidad y cumplimiento tributario: flujo de caja, libro mayor, balances y F29.</p>
+                  <span class="ev-tag">Finanzas</span>
+                </div>
+              </li>
+              <li class="ev-card" style="--ev-grad:linear-gradient(135deg,#0033ff,#0026c9)">
+                <div class="ev-shot"><span class="ev-name">App de gestión<br>de proyectos</span></div>
+                <div class="ev-body">
+                  <p>Panel de administración que monitorea las horas de trabajo de cada empleado, por proyecto.</p>
+                  <span class="ev-tag">Operación</span>
+                </div>
+              </li>
+            </ul>
+            <div class="carousel-dots" aria-hidden="true"></div>
+            <div class="carousel-nav">
+              <button class="carousel-btn" type="button" aria-label="Anterior" data-dir="-1">‹</button>
+              <button class="carousel-btn" type="button" aria-label="Siguiente" data-dir="1">›</button>
             </div>
-            <div class="decision-box">
-              <div class="decision-badge">B</div>
-              <div class="decision-content">
-                <div class="decision-heading">Con tu equipo</div>
-                <div class="decision-sub">Te entregamos el código completo, documentación y acceso al servidor. La opera quien tú decidas: tu team, un freelance o otra agencia.</div>
-              </div>
-            </div>
+          </div>
+        </div>
+        <div class="col">
+          <span class="eyebrow">Hablemos</span>
+          <h2 class="pair-title"><span style="display:block">¿Tienes una idea?</span> <span class="mk" style="display:inline-block;margin-top:0.1em">Construyámosla.</span></h2>
+          <div class="final-cta">
+            <button class="btn btn-brand js-open-quote" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c.6 0 1 .4 1 1v11c0 .6-.4 1-1 1H8.5L4 20.5V5c0-.6.4-1 1-1z"/></svg>
+              Solicita tu cotización
+            </button>
+            <a class="secondary-link" href="mailto:contacto@hha.digital">o escríbenos a contacto@hha.digital</a>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Slide 8: hha.digital core (closing) — CTA simple con email -->
-    <section class="slide theme-core" data-slide="8">
-      <div class="slide-inner">
-        <p class="closing-whisper">— El primer paso —</p>
-        <p class="cta">Escríbenos a</p>
-        <a href="#contact" class="cta-email" data-u="apps" data-d="hha.digital">apps<span aria-hidden="true">&#64;</span>hha<span aria-hidden="true">&#46;</span>digital</a>
-        <div class="divider"></div>
-        <p class="tagline">hha.digital</p>
+  <!-- ================= FAQ ================= -->
+  <section class="section s-paper" aria-labelledby="faq-title">
+    <div class="wrap">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2 class="pair-title" id="faq-title">Lo que sueles preguntarte.</h2>
+      <div class="faq">
+        <details>
+          <summary>¿Cuánto cuesta?</summary>
+          <p>Depende de tu proyecto, porque cada app es a medida. La primera conversación y la cotización son gratis y sin compromiso.</p>
+        </details>
+        <details>
+          <summary>¿Cuánto se demora?</summary>
+          <p>De 2 a 3 semanas desde que definimos juntos qué vamos a construir.</p>
+        </details>
+        <details>
+          <summary>¿La app queda a mi nombre?</summary>
+          <p>Sí. El código y los datos son tuyos desde el día uno. No es un arriendo ni una suscripción.</p>
+        </details>
+        <details>
+          <summary>¿Estoy obligado a pagar una mensualidad?</summary>
+          <p>No. La mantención es opcional: si no la quieres, te entregamos todo y sigues por tu cuenta.</p>
+        </details>
+        <details>
+          <summary>¿Necesito saber de tecnología?</summary>
+          <p>Para nada. Nos encargamos de todo: diseño, desarrollo, hosting y puesta en marcha. Tú solo la usas.</p>
+        </details>
       </div>
-    </section>
+    </div>
+  </section>
 
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site">
+  <div class="foot-inner">
+    <span class="foot-sign">Tu idea, tu software.</span>
+    <span class="brand">hha.digital</span>
+    <span class="sep">/</span>
+    <a href="mailto:contacto@hha.digital">contacto@hha.digital</a>
+    <span class="foot-copy">© 2026 hha.digital. Todos los derechos reservados.</span>
   </div>
+</footer>
 
-  <div class="progress-bar" role="progressbar" aria-label="Progreso del deck" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1">
-    <div class="progress-fill"></div>
+<!-- ================= FLOTANTE: SOLICITA COTIZACIÓN ================= -->
+<button class="quote-float js-open-quote" type="button" aria-label="Solicita tu cotización">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c.6 0 1 .4 1 1v11c0 .6-.4 1-1 1H8.5L4 20.5V5c0-.6.4-1 1-1z"/></svg>
+  <span>Solicita tu cotización</span>
+</button>
+
+<!-- ================= MODAL WIZARD DE COTIZACIÓN ================= -->
+<div class="qm" id="quoteModal" role="dialog" aria-modal="true" aria-labelledby="qm-title" hidden>
+  <div class="qm-scrim" data-qm-close></div>
+  <div class="qm-card">
+    <div class="qm-head">
+      <div class="qm-progress"><span class="qm-bar" id="qmBar"></span></div>
+      <span class="qm-step-label" id="qmStepLabel">Paso 1 de 4</span>
+      <button class="qm-close" type="button" data-qm-close aria-label="Cerrar">&times;</button>
+    </div>
+    <form class="qm-form" id="quoteForm" novalidate>
+      <input type="checkbox" name="botcheck" class="qm-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="qm-step" data-step="1">
+        <span class="eyebrow">Tu idea</span>
+        <h3 class="qm-title" id="qm-title">Cuéntanos tu idea.</h3>
+        <p class="qm-help">¿Qué quieres construir y qué esperas que haga la app?</p>
+        <textarea name="idea" class="qm-input qm-area" required placeholder="Ej: una app para gestionar las reservas, los clientes y los pagos de mi restaurante…"></textarea>
+        <p class="qm-error" data-error></p>
+      </div>
+
+      <div class="qm-step" data-step="2" hidden>
+        <span class="eyebrow">Categoría</span>
+        <h3 class="qm-title">¿Qué tipo de proyecto es?</h3>
+        <p class="qm-help">Elige el más cercano.</p>
+        <div class="qm-chips" id="qmRubro">
+          <button type="button" class="qm-chip" data-val="Retail">Retail</button>
+          <button type="button" class="qm-chip" data-val="Salud">Salud</button>
+          <button type="button" class="qm-chip" data-val="Educación">Educación</button>
+          <button type="button" class="qm-chip" data-val="Gastronomía">Gastronomía</button>
+          <button type="button" class="qm-chip" data-val="Financiero">Financiero</button>
+          <button type="button" class="qm-chip" data-val="Entretención">Entretención</button>
+          <button type="button" class="qm-chip" data-val="Proyecto personal">Proyecto personal</button>
+          <button type="button" class="qm-chip" data-val="Otro">Otro</button>
+        </div>
+        <input type="hidden" name="rubro" id="qmRubroVal">
+        <p class="qm-error" data-error></p>
+      </div>
+
+      <div class="qm-step" data-step="3" hidden>
+        <span class="eyebrow">Presupuesto</span>
+        <h3 class="qm-title">¿En qué rango te mueves?</h3>
+        <p class="qm-help">Solo para orientarnos, un rango basta.</p>
+        <div class="qm-opts" id="qmBudget">
+          <button type="button" class="qm-opt" data-val="Menos de $1M">Menos de $1.000.000</button>
+          <button type="button" class="qm-opt" data-val="$1M a $3M">$1.000.000 a $3.000.000</button>
+          <button type="button" class="qm-opt" data-val="$3M a $8M">$3.000.000 a $8.000.000</button>
+          <button type="button" class="qm-opt" data-val="Más de $8M">Más de $8.000.000</button>
+        </div>
+        <input type="hidden" name="presupuesto" id="qmBudgetVal">
+        <p class="qm-error" data-error></p>
+      </div>
+
+      <div class="qm-step" data-step="4" hidden>
+        <span class="eyebrow">Plazo</span>
+        <h3 class="qm-title">¿Para cuándo lo necesitas?</h3>
+        <p class="qm-help">Nos ayuda a organizar el trabajo.</p>
+        <div class="qm-opts" id="qmPlazo">
+          <button type="button" class="qm-opt" data-val="Lo antes posible">Lo antes posible</button>
+          <button type="button" class="qm-opt" data-val="En 1 a 3 meses">En 1 a 3 meses</button>
+          <button type="button" class="qm-opt" data-val="En 3 a 6 meses">En 3 a 6 meses</button>
+        </div>
+        <input type="hidden" name="plazo" id="qmPlazoVal">
+        <p class="qm-error" data-error></p>
+      </div>
+
+      <div class="qm-step" data-step="5" hidden>
+        <span class="eyebrow">Casi listo</span>
+        <h3 class="qm-title">¿Cómo te contactamos?</h3>
+        <p class="qm-help">Te respondemos rápido con una propuesta.</p>
+        <input name="nombre" class="qm-input" required placeholder="Tu nombre">
+        <input name="correo" type="email" class="qm-input" required placeholder="Tu correo">
+        <input name="telefono" type="tel" class="qm-input" required placeholder="Tu teléfono">
+        <p class="qm-error" data-error></p>
+      </div>
+
+      <div class="qm-step qm-success" data-step="done" hidden>
+        <div class="qm-check" aria-hidden="true">&#10003;</div>
+        <h3 class="qm-title">¡Listo! Recibimos tu solicitud.</h3>
+        <p class="qm-help">Te contactamos muy pronto. Gracias por confiar en nosotros.</p>
+        <button type="button" class="btn btn-brand" data-qm-close>Cerrar</button>
+      </div>
+
+      <div class="qm-foot" id="qmFoot">
+        <button type="button" class="qm-btn qm-back" id="qmBack" hidden>Atrás</button>
+        <button type="button" class="qm-btn qm-next" id="qmNext">Siguiente</button>
+        <button type="submit" class="qm-btn qm-send" id="qmSend" hidden>Enviar solicitud</button>
+      </div>
+    </form>
   </div>
-  <nav class="nav" aria-label="Navegación del deck">
-    <button class="nav-btn prev" aria-label="Anterior">←</button>
-    <button class="nav-btn next" aria-label="Siguiente">→</button>
-  </nav>
+</div>
 
-  <script src="deck.js?v=20260417t"></script>
+<script>
+  // ===== WhatsApp: desactivado hasta tener numero real =====
+  // Para re-activar: definir WHATSAPP_NUMBER, volver a poner los botones .js-wa
+  // (hero, cierre y flotante) y enlazarlos a https://wa.me/<numero>.
+
+  // ===== Carrusel de portafolio: flechas (desktop) + puntos (móvil) =====
+  (function(){
+    const track = document.querySelector('.carousel');
+    if(!track) return;
+    const cards = track.querySelectorAll('.ev-card');
+    // flechas
+    document.querySelectorAll('.carousel-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        const step = cards[0] ? cards[0].getBoundingClientRect().width + 14 : 300;
+        track.scrollBy({ left: parseInt(btn.dataset.dir, 10) * step, behavior: 'smooth' });
+      });
+    });
+    // puntos indicadores
+    const dotsWrap = document.querySelector('.carousel-dots');
+    if(dotsWrap && cards.length){
+      cards.forEach(function(_, i){
+        const d = document.createElement('span');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        dotsWrap.appendChild(d);
+      });
+      const dots = dotsWrap.querySelectorAll('.dot');
+      track.addEventListener('scroll', function(){
+        const unit = track.scrollWidth / cards.length;
+        const i = Math.min(cards.length - 1, Math.round(track.scrollLeft / unit));
+        dots.forEach(function(d, j){ d.classList.toggle('active', j === i); });
+      }, { passive: true });
+    }
+  })();
+
+  // ===== "Tu app" en el iPhone: cicla ícono + nombre =====
+  (function(){
+    const icon = document.getElementById('mineIcon');
+    const lbl = document.getElementById('mineLbl');
+    if(!icon || !lbl) return;
+    const tile = icon.closest('.app');
+    // tap en la casilla "tu app" abre el correo (WhatsApp se re-agrega cuando haya numero)
+    tile.style.cursor = 'pointer';
+    tile.addEventListener('click', function(){
+      window.location.href = 'mailto:contacto@hha.digital';
+    });
+    const S = {
+      tienda:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 9V7.5a4.5 4.5 0 0 1 9 0V9H19l-1 10.5H6L5 9h2.5zm2 0h5V7.5a2.5 2.5 0 0 0-5 0V9z"/></svg>',
+      local:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 13a4 4 0 1 1 1.3-7.8 4 4 0 0 1 9.4 0A4 4 0 1 1 18 13v1H6v-1zm0 3h12v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2z"/></svg>',
+      gym:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="9.5" width="2.2" height="5" rx="0.8"/><rect x="5" y="7.5" width="2.4" height="9" rx="0.9"/><rect x="7.4" y="11" width="9.2" height="2" rx="1"/><rect x="16.6" y="7.5" width="2.4" height="9" rx="0.9"/><rect x="19.3" y="9.5" width="2.2" height="5" rx="0.8"/></svg>',
+      vet:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="9" r="1.7"/><circle cx="12" cy="7.4" r="1.9"/><circle cx="16" cy="9" r="1.7"/><path d="M12 12c2.6 0 4.6 2 4.6 3.9 0 1.5-1.2 2.2-2.5 1.8-.7-.2-1.4-.5-2.1-.5s-1.4.3-2.1.5c-1.3.4-2.5-.3-2.5-1.8C7.4 14 9.4 12 12 12z"/></svg>',
+      spark:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l1.9 5.6 5.6 1.9-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.9z"/><path d="M18.6 14l.8 2.2 2.1.8-2.1.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg>'
+    };
+    const apps = [
+      [S.spark,'Tu App'],
+      [S.tienda,'Tienda'], [S.vet,'Mascota'], [S.gym,'Gym'],
+      [S.local,'Local'], [S.spark,'Tu App']
+    ];
+    const last = apps.length - 1;
+    function setApp(k){ icon.innerHTML = apps[k][0]; lbl.textContent = apps[k][1]; }
+    if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){ setApp(last); return; }
+    let timer = null;
+    function play(){
+      if(timer) return;
+      let i = 0; setApp(0);
+      timer = setInterval(function(){
+        i = i + 1;
+        tile.classList.add('swap');
+        setTimeout(function(){ setApp(i); tile.classList.remove('swap'); }, 180);
+        if(i >= last){ clearInterval(timer); timer = null; } // cicla una vez y se queda en "Tu App"
+      }, 1000);
+    }
+    // reinicia cada vez que el teléfono vuelve a entrar en pantalla
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ play(); }
+          else { if(timer){ clearInterval(timer); timer = null; } setApp(0); }
+        });
+      }, { threshold: 0.5 });
+      io.observe(tile);
+    } else { play(); }
+  })();
+
+  // ===== Wizard de cotización (Web3Forms) =====
+  (function(){
+    const modal = document.getElementById('quoteModal');
+    if(!modal) return;
+    const form = document.getElementById('quoteForm');
+    const steps = [...form.querySelectorAll('.qm-step[data-step]')].filter(s => s.dataset.step !== 'done');
+    const doneStep = form.querySelector('[data-step="done"]');
+    const bar = document.getElementById('qmBar');
+    const label = document.getElementById('qmStepLabel');
+    const foot = document.getElementById('qmFoot');
+    const backBtn = document.getElementById('qmBack');
+    const nextBtn = document.getElementById('qmNext');
+    const sendBtn = document.getElementById('qmSend');
+    const rubroWrap = document.getElementById('qmRubro');
+    const rubroVal = document.getElementById('qmRubroVal');
+    const budgetWrap = document.getElementById('qmBudget');
+    const budgetVal = document.getElementById('qmBudgetVal');
+    const plazoWrap = document.getElementById('qmPlazo');
+    const plazoVal = document.getElementById('qmPlazoVal');
+    const ACCESS_KEY = '613ca9ed-c753-4210-883b-0f4eb3878944';
+    const total = steps.length;
+    let cur = 0, lastFocus = null;
+
+    function setError(i, msg){ const e = steps[i].querySelector('[data-error]'); if(e) e.textContent = msg || ''; }
+
+    function showStep(i){
+      cur = i;
+      steps.forEach((s, idx) => { s.hidden = idx !== i; });
+      doneStep.hidden = true;
+      foot.hidden = false;
+      bar.style.width = ((i + 1) / total * 100) + '%';
+      label.textContent = 'Paso ' + (i + 1) + ' de ' + total;
+      backBtn.hidden = i === 0;
+      nextBtn.hidden = i === total - 1;
+      sendBtn.hidden = i !== total - 1;
+      const f = steps[i].querySelector('textarea, input:not([type=hidden]):not(.qm-hp), .qm-chip, .qm-opt');
+      if(f) setTimeout(() => f.focus(), 60);
+    }
+
+    function openModal(){
+      lastFocus = document.activeElement;
+      modal.hidden = false; modal.classList.add('open');
+      document.body.classList.add('qm-lock');
+      form.querySelectorAll('[data-error]').forEach(e => e.textContent = '');
+      showStep(0);
+    }
+    function closeModal(){
+      modal.classList.remove('open'); modal.hidden = true;
+      document.body.classList.remove('qm-lock');
+      if(lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    document.querySelectorAll('.js-open-quote').forEach(b => b.addEventListener('click', function(e){ e.preventDefault(); openModal(); }));
+    modal.querySelectorAll('[data-qm-close]').forEach(b => b.addEventListener('click', closeModal));
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+    rubroWrap.addEventListener('click', function(e){
+      const c = e.target.closest('.qm-chip'); if(!c) return;
+      rubroWrap.querySelectorAll('.qm-chip').forEach(x => x.classList.remove('sel'));
+      c.classList.add('sel'); rubroVal.value = c.dataset.val; setError(1, '');
+      setTimeout(() => { if(cur === 1) showStep(2); }, 240);
+    });
+    budgetWrap.addEventListener('click', function(e){
+      const o = e.target.closest('.qm-opt'); if(!o) return;
+      budgetWrap.querySelectorAll('.qm-opt').forEach(x => x.classList.remove('sel'));
+      o.classList.add('sel'); budgetVal.value = o.dataset.val; setError(2, '');
+      setTimeout(() => { if(cur === 2) showStep(3); }, 240);
+    });
+    plazoWrap.addEventListener('click', function(e){
+      const o = e.target.closest('.qm-opt'); if(!o) return;
+      plazoWrap.querySelectorAll('.qm-opt').forEach(x => x.classList.remove('sel'));
+      o.classList.add('sel'); plazoVal.value = o.dataset.val; setError(3, '');
+      setTimeout(() => { if(cur === 3) showStep(4); }, 240);
+    });
+
+    function validate(i){
+      setError(i, '');
+      if(i === 0 && form.idea.value.trim().length < 10){ setError(0, 'Cuéntanos un poco más sobre tu idea.'); return false; }
+      if(i === 1 && !rubroVal.value){ setError(1, 'Elige una opción.'); return false; }
+      if(i === 2 && !budgetVal.value){ setError(2, 'Elige una opción.'); return false; }
+      if(i === 3 && !plazoVal.value){ setError(3, 'Elige una opción.'); return false; }
+      if(i === 4){
+        if(!form.nombre.value.trim()){ setError(4, 'Falta tu nombre.'); return false; }
+        if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.correo.value.trim())){ setError(4, 'Revisa tu correo.'); return false; }
+        if(form.telefono.value.replace(/\D/g, '').length < 7){ setError(4, 'Revisa tu teléfono.'); return false; }
+      }
+      return true;
+    }
+
+    nextBtn.addEventListener('click', function(){ if(validate(cur) && cur < total - 1) showStep(cur + 1); });
+    backBtn.addEventListener('click', function(){ if(cur > 0) showStep(cur - 1); });
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      if(form.botcheck && form.botcheck.checked) return;
+      if(!validate(4)) return;
+      sendBtn.disabled = true; sendBtn.textContent = 'Enviando…';
+      try{
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: ACCESS_KEY,
+            subject: 'Nueva solicitud de cotización · hha.digital',
+            from_name: 'hha.digital',
+            Idea: form.idea.value.trim(),
+            Rubro: rubroVal.value,
+            Presupuesto: budgetVal.value,
+            Plazo: plazoVal.value,
+            Nombre: form.nombre.value.trim(),
+            Correo: form.correo.value.trim(),
+            Telefono: form.telefono.value.trim()
+          })
+        });
+        const data = await res.json();
+        if(data.success){
+          steps.forEach(s => s.hidden = true); foot.hidden = true; doneStep.hidden = false;
+          bar.style.width = '100%'; label.textContent = 'Listo';
+        } else { throw new Error(data.message || 'error'); }
+      }catch(err){
+        setError(4, 'No se pudo enviar. Reintenta o escríbenos a contacto@hha.digital.');
+      }finally{
+        sendBtn.disabled = false; sendBtn.textContent = 'Enviar solicitud';
+      }
+    });
+  })();
+</script>
 </body>
 </html>

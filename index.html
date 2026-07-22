@@ -46,6 +46,9 @@
     GOOGLE_ADS_LABEL: '_S70CMGp8tQcELSMu6pE',
     META_PIXEL_ID:    '000000000000000'
   };
+  // URL de tu calendario para agendar la reunion (Google Calendar "Horarios de citas", gratis).
+  // Vacio = la pantalla de exito dice "te escribimos para coordinar". Pega tu link y sube el archivo.
+  window.HHA_BOOKING_URL = '';
   // Un ID esta "seteado" si no conserva placeholders (X's, ceros, o la palabra CONVERSION_LABEL).
   window.hhaIsSet = function(v){
     return !!v && !/X{3,}/i.test(v) && !/^0+$/.test(v) && v.indexOf('CONVERSION_LABEL') === -1;
@@ -111,7 +114,7 @@
     --muted-on-dark:rgba(255,255,255,0.66);
     --muted-on-light:#5b5b5b;
     --line-on-light:rgba(10,10,10,0.14);
-    --pad-y:clamp(4.5rem,11vw,9rem);
+    --pad-y:clamp(3.5rem,8vw,6rem);
     --pad-x:clamp(1.25rem,5vw,4.5rem);
     --wrap:1200px;
   }
@@ -932,6 +935,45 @@
     html{scroll-behavior:auto}
     *{animation-duration:0.001ms!important;animation-iteration-count:1!important;transition-duration:0.001ms!important}
   }
+  /* ============ PLANES ============ */
+  #planes .eyebrow{color:#5c78ff}
+  .plans-head{max-width:720px}
+  .plans-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:0.9;letter-spacing:0.005em;font-size:clamp(2.2rem,7vw,4rem);margin-top:0.6rem}
+  .plans-lede{margin-top:1rem;color:var(--muted-on-dark);font-size:clamp(0.95rem,2.2vw,1.1rem);line-height:1.5;max-width:52ch}
+  .cur-row{display:flex;align-items:center;gap:0.9rem;flex-wrap:wrap;margin-top:1.8rem}
+  .cur-label{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted-on-dark)}
+  .cur-switch{display:inline-flex;border:1px solid rgba(255,255,255,0.12);border-radius:3px;overflow:hidden;background:var(--ink-soft)}
+  .cur-btn{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.85rem;padding:0.5rem 0.95rem;background:transparent;color:var(--muted-on-dark);border:0;cursor:pointer;transition:background .15s,color .15s}
+  .cur-btn+.cur-btn{border-left:1px solid rgba(255,255,255,0.12)}
+  .cur-btn.on{background:var(--brand);color:#fff}
+  .plans-grid{display:grid;grid-template-columns:1fr;gap:1.1rem;margin-top:2.4rem;align-items:stretch}
+  @media(min-width:920px){.plans-grid{grid-template-columns:repeat(3,1fr);gap:1.3rem}}
+  .plan{background:var(--ink-soft);border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:1.6rem 1.4rem 1.5rem;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
+  .plan:hover{border-color:rgba(92,120,255,0.5);transform:translateY(-3px)}
+  .plan-tag{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.64rem;letter-spacing:0.22em;text-transform:uppercase;color:#5c78ff}
+  .plan-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;margin-top:0.5rem;line-height:1.05}
+  .plan-sub{color:var(--muted-on-dark);font-size:0.9rem;margin-top:0.4rem;line-height:1.4}
+  .plan-price{margin-top:1.2rem}
+  .plan-price .from{font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted-on-dark)}
+  .plan-price .amt{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:2.6rem;line-height:0.95;letter-spacing:0.01em;margin-top:0.15rem}
+  .plan-price .mant{font-size:0.8rem;color:var(--muted-on-dark);margin-top:0.35rem}
+  .plan-incl{font-size:0.84rem;font-weight:600;color:#5c78ff;margin-top:1.2rem;padding-top:1.1rem;border-top:1px solid rgba(255,255,255,0.12)}
+  .plan-list{list-style:none;margin:0.7rem 0 1rem;display:flex;flex-direction:column;gap:0.55rem;flex:1}
+  .plan-list.base{margin-top:1.2rem;padding-top:1.1rem;border-top:1px solid rgba(255,255,255,0.12)}
+  .plan-list li{font-size:0.88rem;line-height:1.35;padding-left:1.4rem;position:relative;color:#e7e7e7}
+  .plan-list li strong{color:#fff;font-weight:700}
+  .plan-list li::before{content:'';position:absolute;left:0;top:0.25em;width:0.7rem;height:0.4rem;border-left:2px solid #5c78ff;border-bottom:2px solid #5c78ff;transform:rotate(-45deg)}
+  .plan-eg{font-size:0.76rem;color:var(--muted-on-dark);margin:0 0 1.2rem;font-style:italic}
+  .plan .btn{width:100%;justify-content:center}
+  .plans-foot{margin-top:2.2rem;font-size:1.05rem;color:#fff;line-height:1.5;text-align:center}
+  .plans-foot a,.plans-foot .plans-foot-link{color:#5c78ff;border:0;border-bottom:2px solid #5c78ff;text-decoration:none;cursor:pointer;padding:0 0 1px;background:none;font:inherit;font-weight:700}
+  .plans-foot a:hover,.plans-foot .plans-foot-link:hover{color:#fff;border-color:#fff}
+  /* chip de plan + boton agendar en el modal */
+  .qm-planchip{margin:0 0 0.2rem;padding:0.5rem 1.4rem 0;display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--brand)}
+  .qm-planchip strong{font-weight:700}
+  .qm-planchip-change{background:none;border:0;color:var(--muted-on-light);font-size:0.72rem;text-decoration:underline;cursor:pointer;padding:0}
+  .qm-book{display:inline-flex;text-decoration:none;margin-top:0.4rem}
+  .qm-book-fallback{margin-top:0.6rem}
 </style>
 </head>
 <body>
@@ -1014,43 +1056,6 @@
     </div>
   </section>
 
-  <!-- ================= FILA 2: DIFERENCIA | CÓMO SE PAGA ================= -->
-  <section class="section s-paper">
-    <div class="wrap">
-      <div class="pair">
-        <div class="col">
-          <span class="eyebrow">La diferencia</span>
-          <h2 class="pair-title">De <span class="was">inquilino</span> a <span class="mk">dueño</span>.</h2>
-          <div class="pillars">
-            <div class="pillar">
-              <span class="num">01</span>
-              <h3>A tu manera</h3>
-              <p>Cada función existe porque tú la necesitas. Nada genérico, nada de más.</p>
-            </div>
-            <div class="pillar">
-              <span class="num">02</span>
-              <h3>Dueño de tu información</h3>
-              <p>Tus datos no viven en la plataforma de otro: son tuyos y portables cuando los necesites.</p>
-            </div>
-            <div class="pillar">
-              <span class="num">03</span>
-              <h3>Una app, no diez</h3>
-              <p>Una sola aplicación reemplaza la pila de suscripciones que hoy pagas por separado.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <span class="eyebrow">Cero letra chica</span>
-          <h2 class="pair-title">Un pago. <span class="hl">Cero sorpresas</span>.</h2>
-          <ul class="pay-mini">
-            <li><b>Pagas el desarrollo una vez</b> y la app es tuya, con código y datos, desde el día uno.</li>
-            <li><b>La mantención es opcional:</b> si quieres la cuidamos por ti; si no, te la llevas completa.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ================= FILA 3: TRABAJO | CIERRE ================= -->
   <section class="section s-ink">
     <div class="wrap">
@@ -1118,6 +1123,133 @@
     </div>
   </section>
 
+  <!-- ================= FILA 2: DIFERENCIA | CÓMO SE PAGA ================= -->
+  <section class="section s-paper">
+    <div class="wrap">
+      <div class="pair">
+        <div class="col">
+          <span class="eyebrow">La diferencia</span>
+          <h2 class="pair-title">De <span class="was">inquilino</span> a <span class="mk">dueño</span>.</h2>
+          <div class="pillars">
+            <div class="pillar">
+              <span class="num">01</span>
+              <h3>A tu manera</h3>
+              <p>Cada función existe porque tú la necesitas. Nada genérico, nada de más.</p>
+            </div>
+            <div class="pillar">
+              <span class="num">02</span>
+              <h3>Dueño de tu información</h3>
+              <p>Tus datos no viven en la plataforma de otro: son tuyos y portables cuando los necesites.</p>
+            </div>
+            <div class="pillar">
+              <span class="num">03</span>
+              <h3>Una app, no diez</h3>
+              <p>Una sola aplicación reemplaza la pila de suscripciones que hoy pagas por separado.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <span class="eyebrow">Cero letra chica</span>
+          <h2 class="pair-title">Un pago. <span class="hl">Cero sorpresas</span>.</h2>
+          <ul class="pay-mini">
+            <li><b>Pagas el desarrollo una vez</b> y la app es tuya, con código y datos, desde el día uno.</li>
+            <li><b>La mantención es opcional:</b> si quieres la cuidamos por ti; si no, te la llevas completa.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PLANES ================= -->
+  <section class="section" id="planes">
+    <div class="wrap">
+      <div class="plans-head">
+        <span class="eyebrow">Planes y precios</span>
+        <h2 class="plans-title">Elige <span class="mk">tu plan</span>.</h2>
+        <p class="plans-lede">El alcance real define el número final, y lo cerramos en una reunión.</p>
+        <div class="cur-row">
+          <span class="cur-label">Moneda</span>
+          <div class="cur-switch" id="curSwitch">
+            <button class="cur-btn" data-cur="cop" type="button">COP</button>
+            <button class="cur-btn" data-cur="clp" type="button">CLP</button>
+            <button class="cur-btn" data-cur="usd" type="button">USD</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="plans-grid">
+
+        <article class="plan" data-plan="Solución puntual">
+          <span class="plan-tag">Tier 1</span>
+          <h3 class="plan-name">Solución puntual</h3>
+          <p class="plan-sub">Software que resuelve un problema puntual.</p>
+          <div class="plan-price">
+            <div class="from">Desde</div>
+            <div class="amt" data-price="t1">…</div>
+            <div class="mant">+ mantención opcional desde <span data-mant="t1">…</span>/mes</div>
+          </div>
+          <ul class="plan-list base">
+            <li><strong>Diseño</strong> con tu logo y tus colores</li>
+            <li>Un chatbot con IA, o una automatización</li>
+            <li>Se conecta a tu WhatsApp o tu web</li>
+            <li>Una función, resuelta bien</li>
+            <li>Tuyo: el código y los datos</li>
+            <li>Lista en 1 a 2 semanas</li>
+          </ul>
+          <p class="plan-eg">Ej: asistente de atención al cliente</p>
+          <button class="btn btn-brand js-plan" type="button">Quiero este</button>
+        </article>
+
+        <article class="plan" data-plan="Tu app a medida">
+          <span class="plan-tag">Tier 2</span>
+          <h3 class="plan-name">Tu app a medida</h3>
+          <p class="plan-sub">Tu negocio operando en una app.</p>
+          <div class="plan-price">
+            <div class="from">Desde</div>
+            <div class="amt" data-price="t2">…</div>
+            <div class="mant">+ mantención opcional desde <span data-mant="t2">…</span>/mes</div>
+          </div>
+          <p class="plan-incl">Todo lo anterior y:</p>
+          <ul class="plan-list">
+            <li><strong>Diseño</strong> hecho a tu medida</li>
+            <li>Base de datos + login multiusuario</li>
+            <li>Panel de administración con reportes</li>
+            <li>IA integrada a tus procesos</li>
+            <li>Actualizaciones en tiempo real</li>
+            <li>Instalable en el celular</li>
+          </ul>
+          <p class="plan-eg">Ej: Meditación, Mascotas, Gestión de proyectos</p>
+          <button class="btn btn-brand js-plan" type="button">Quiero este</button>
+        </article>
+
+        <article class="plan" data-plan="Tu plataforma">
+          <span class="plan-tag">Tier 3</span>
+          <h3 class="plan-name">Tu plataforma</h3>
+          <p class="plan-sub">Un sistema completo con IA profunda.</p>
+          <div class="plan-price">
+            <div class="from">Desde</div>
+            <div class="amt" data-price="t3">…</div>
+            <div class="mant">+ mantención opcional desde <span data-mant="t3">…</span>/mes</div>
+          </div>
+          <p class="plan-incl">Todo lo anterior y:</p>
+          <ul class="plan-list">
+            <li><strong>Diseño</strong> premium, con estudio de tus usuarios</li>
+            <li>Roles y permisos por tipo de usuario</li>
+            <li>Multi-sucursal (una plataforma, muchos)</li>
+            <li>IA profunda: agentes y RAG sobre tus documentos</li>
+            <li>Integraciones: pagos, facturación electrónica, ERP</li>
+            <li>App móvil publicable en tiendas</li>
+          </ul>
+          <p class="plan-eg">Ej: Vida nocturna, Software financiero</p>
+          <button class="btn btn-brand js-plan" type="button">Quiero este</button>
+        </article>
+
+      </div>
+
+      <p class="plans-foot">¿Tienes otra idea o no sabes por dónde empezar? <button type="button" class="js-open-quote plans-foot-link">Rellena el formulario aquí.</button></p>
+    </div>
+  </section>
+
   <!-- ================= FAQ ================= -->
   <section class="section s-paper" aria-labelledby="faq-title">
     <div class="wrap">
@@ -1176,50 +1308,28 @@
       <span class="qm-step-label" id="qmStepLabel">Paso 1 de 5</span>
       <button class="qm-close" type="button" data-qm-close aria-label="Cerrar">&times;</button>
     </div>
+    <div class="qm-planchip" id="qmPlanChip" hidden>Plan elegido: <strong id="qmPlanName"></strong> <button type="button" class="qm-planchip-change" id="qmPlanChange">cambiar</button></div>
     <form class="qm-form" id="quoteForm" novalidate>
       <input type="checkbox" name="botcheck" class="qm-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-      <div class="qm-step" data-step="1">
+      <div class="qm-step" data-key="idea">
         <span class="eyebrow">Tu idea</span>
         <h3 class="qm-title" id="qm-title">Cuéntanos tu idea.</h3>
-        <p class="qm-help">¿Qué quieres construir y qué esperas que haga la app?</p>
+        <p class="qm-help">¿Qué quieres construir y qué esperas que haga?</p>
         <textarea name="idea" class="qm-input qm-area" required placeholder="Ej: una app para gestionar las reservas, los clientes y los pagos de mi restaurante…"></textarea>
         <p class="qm-error" data-error></p>
       </div>
 
-      <div class="qm-step" data-step="2" hidden>
-        <span class="eyebrow">Categoría</span>
-        <h3 class="qm-title">¿Qué tipo de proyecto es?</h3>
-        <p class="qm-help">Elige el más cercano.</p>
-        <div class="qm-chips" id="qmRubro">
-          <button type="button" class="qm-chip" data-val="Retail">Retail</button>
-          <button type="button" class="qm-chip" data-val="Salud">Salud</button>
-          <button type="button" class="qm-chip" data-val="Educación">Educación</button>
-          <button type="button" class="qm-chip" data-val="Gastronomía">Gastronomía</button>
-          <button type="button" class="qm-chip" data-val="Financiero">Financiero</button>
-          <button type="button" class="qm-chip" data-val="Entretención">Entretención</button>
-          <button type="button" class="qm-chip" data-val="Proyecto personal">Proyecto personal</button>
-          <button type="button" class="qm-chip" data-val="Otro">Otro</button>
-        </div>
-        <input type="hidden" name="rubro" id="qmRubroVal">
-        <p class="qm-error" data-error></p>
-      </div>
-
-      <div class="qm-step" data-step="3" hidden>
+      <div class="qm-step" data-key="presupuesto" hidden>
         <span class="eyebrow">Presupuesto</span>
         <h3 class="qm-title">¿En qué rango te mueves?</h3>
         <p class="qm-help">Solo para orientarnos, un rango basta.</p>
-        <div class="qm-opts" id="qmBudget">
-          <button type="button" class="qm-opt" data-val="Menos de $1M">Menos de $1.000.000</button>
-          <button type="button" class="qm-opt" data-val="$1M a $3M">$1.000.000 a $3.000.000</button>
-          <button type="button" class="qm-opt" data-val="$3M a $8M">$3.000.000 a $8.000.000</button>
-          <button type="button" class="qm-opt" data-val="Más de $8M">Más de $8.000.000</button>
-        </div>
+        <div class="qm-opts" id="qmBudget"></div>
         <input type="hidden" name="presupuesto" id="qmBudgetVal">
         <p class="qm-error" data-error></p>
       </div>
 
-      <div class="qm-step" data-step="4" hidden>
+      <div class="qm-step" data-key="plazo" hidden>
         <span class="eyebrow">Plazo</span>
         <h3 class="qm-title">¿Para cuándo lo necesitas?</h3>
         <p class="qm-help">Nos ayuda a organizar el trabajo.</p>
@@ -1232,21 +1342,23 @@
         <p class="qm-error" data-error></p>
       </div>
 
-      <div class="qm-step" data-step="5" hidden>
+      <div class="qm-step" data-key="datos" hidden>
         <span class="eyebrow">Casi listo</span>
         <h3 class="qm-title">¿Cómo te contactamos?</h3>
-        <p class="qm-help">Te respondemos rápido con una propuesta.</p>
+        <p class="qm-help">Coordinamos una reunión corta y llegamos con todo estudiado.</p>
         <input name="nombre" class="qm-input" required placeholder="Tu nombre">
         <input name="correo" type="email" class="qm-input" required placeholder="Tu correo">
         <input name="telefono" type="tel" class="qm-input" required placeholder="Tu teléfono">
         <p class="qm-error" data-error></p>
       </div>
 
-      <div class="qm-step qm-success" data-step="done" hidden>
+      <div class="qm-step qm-success" data-key="done" hidden>
         <div class="qm-check" aria-hidden="true">&#10003;</div>
-        <h3 class="qm-title">¡Listo! Recibimos tu solicitud.</h3>
-        <p class="qm-help">Te contactamos muy pronto. Gracias por confiar en nosotros.</p>
-        <button type="button" class="btn btn-brand" data-qm-close>Cerrar</button>
+        <h3 class="qm-title">¡Gracias por confiar en nosotros!</h3>
+        <p class="qm-help">El siguiente paso es una reunión corta. Llegamos con todo estudiado para conversar tu proyecto. Nos vemos ahí.</p>
+        <a class="btn btn-brand qm-book" id="qmBook" href="#" target="_blank" rel="noopener" hidden>Agenda tu reunión</a>
+        <p class="qm-help qm-book-fallback" id="qmBookFallback" hidden>Te escribimos muy pronto para coordinar la reunión.</p>
+        <button type="button" class="qm-btn" data-qm-close>Cerrar</button>
       </div>
 
       <div class="qm-foot" id="qmFoot">
@@ -1341,50 +1453,114 @@
     } else { play(); }
   })();
 
-  // ===== Wizard de cotización (Web3Forms) =====
+  // ===== Moneda (planes) + Wizard de cotización (2 caminos, Web3Forms) =====
   (function(){
+    // ---- Precios por moneda: valores fijos aprobados, NO conversion en vivo ----
+    const PRICES = {
+      cop: { t1:{dev:'$4.000.000', mant:'$500.000'}, t2:{dev:'$12.000.000', mant:'$900.000'}, t3:{dev:'$45.000.000', mant:'$2.500.000'} },
+      clp: { t1:{dev:'$1.000.000', mant:'$120.000'}, t2:{dev:'$3.000.000', mant:'$220.000'}, t3:{dev:'$11.000.000', mant:'$600.000'} },
+      usd: { t1:{dev:'US$1.000', mant:'US$120'}, t2:{dev:'US$3.000', mant:'US$220'}, t3:{dev:'US$11.000', mant:'US$650'} }
+    };
+    let CUR = 'usd';
+
+    function detectCurrency(){
+      const p = (new URLSearchParams(location.search).get('cur') || '').toLowerCase();
+      if(PRICES[p]) return p;
+      let saved = null; try{ saved = localStorage.getItem('hha_cur'); }catch(e){}
+      if(saved && PRICES[saved]) return saved;
+      try{
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        if(tz === 'America/Bogota') return 'cop';
+        if(tz === 'America/Santiago') return 'clp';
+      }catch(e){}
+      return 'usd';
+    }
+    function renderPrices(){
+      const P = PRICES[CUR];
+      ['t1','t2','t3'].forEach(t => {
+        const d = document.querySelector('[data-price="'+t+'"]'); if(d) d.textContent = P[t].dev;
+        const m = document.querySelector('[data-mant="'+t+'"]'); if(m) m.textContent = P[t].mant;
+      });
+      document.querySelectorAll('.cur-btn').forEach(b => b.classList.toggle('on', b.dataset.cur === CUR));
+    }
+    function budgetRanges(){
+      const P = PRICES[CUR];
+      return ['Menos de '+P.t1.dev, P.t1.dev+' a '+P.t2.dev, P.t2.dev+' a '+P.t3.dev, 'Más de '+P.t3.dev];
+    }
+    // Si algo de la moneda falla, no debe impedir que el wizard de abajo se bindee.
+    try {
+      CUR = detectCurrency();
+      renderPrices();
+      const curSwitch = document.getElementById('curSwitch');
+      if(curSwitch){
+        curSwitch.addEventListener('click', function(e){
+          const b = e.target.closest('.cur-btn'); if(!b) return;
+          CUR = b.dataset.cur; try{ localStorage.setItem('hha_cur', CUR); }catch(err){}
+          renderPrices();
+        });
+      }
+    } catch(e){ /* CUR queda en 'usd'; PRICES/budgetRanges siguen disponibles */ }
+
+    // ---- Wizard ----
     const modal = document.getElementById('quoteModal');
     if(!modal) return;
     const form = document.getElementById('quoteForm');
-    const steps = [...form.querySelectorAll('.qm-step[data-step]')].filter(s => s.dataset.step !== 'done');
-    const doneStep = form.querySelector('[data-step="done"]');
     const bar = document.getElementById('qmBar');
     const label = document.getElementById('qmStepLabel');
     const foot = document.getElementById('qmFoot');
     const backBtn = document.getElementById('qmBack');
     const nextBtn = document.getElementById('qmNext');
     const sendBtn = document.getElementById('qmSend');
-    const rubroWrap = document.getElementById('qmRubro');
-    const rubroVal = document.getElementById('qmRubroVal');
+    const planChip = document.getElementById('qmPlanChip');
+    const planName = document.getElementById('qmPlanName');
     const budgetWrap = document.getElementById('qmBudget');
     const budgetVal = document.getElementById('qmBudgetVal');
     const plazoWrap = document.getElementById('qmPlazo');
     const plazoVal = document.getElementById('qmPlazoVal');
     const ACCESS_KEY = '613ca9ed-c753-4210-883b-0f4eb3878944';
-    const total = steps.length;
-    let cur = 0, lastFocus = null;
+    const BOOKING_URL = window.HHA_BOOKING_URL || '';
 
-    function setError(i, msg){ const e = steps[i].querySelector('[data-error]'); if(e) e.textContent = msg || ''; }
+    const stepEls = {};
+    form.querySelectorAll('.qm-step[data-key]').forEach(s => { stepEls[s.dataset.key] = s; });
+    const SEQ_PLAN = ['idea','plazo','datos'];
+    const SEQ_GEN  = ['idea','presupuesto','plazo','datos'];
+    let seq = SEQ_GEN, cur = 0, selectedPlan = '', lastFocus = null;
+
+    function stepErr(key, msg){ const e = stepEls[key].querySelector('[data-error]'); if(e) e.textContent = msg || ''; }
 
     function showStep(i){
       cur = i;
-      steps.forEach((s, idx) => { s.hidden = idx !== i; });
-      doneStep.hidden = true;
+      Object.keys(stepEls).forEach(k => { stepEls[k].hidden = (k !== seq[i]); });
       foot.hidden = false;
-      bar.style.width = ((i + 1) / total * 100) + '%';
-      label.textContent = 'Paso ' + (i + 1) + ' de ' + total;
-      backBtn.hidden = i === 0;
-      nextBtn.hidden = i === total - 1;
-      sendBtn.hidden = i !== total - 1;
-      const f = steps[i].querySelector('textarea, input:not([type=hidden]):not(.qm-hp), .qm-chip, .qm-opt');
+      bar.style.width = ((i + 1) / seq.length * 100) + '%';
+      label.textContent = 'Paso ' + (i + 1) + ' de ' + seq.length;
+      backBtn.hidden = (i === 0);
+      nextBtn.hidden = (i === seq.length - 1);
+      sendBtn.hidden = (i !== seq.length - 1);
+      const f = stepEls[seq[i]].querySelector('textarea, input:not([type=hidden]):not(.qm-hp), .qm-opt');
       if(f) setTimeout(() => f.focus(), 60);
     }
 
-    function openModal(){
+    function buildBudget(){
+      budgetVal.value = '';
+      budgetWrap.innerHTML = budgetRanges().map(r => '<button type="button" class="qm-opt" data-val="'+r+'">'+r+'</button>').join('');
+    }
+
+    function openModal(mode, plan){
       lastFocus = document.activeElement;
+      form.querySelectorAll('[data-error]').forEach(e => e.textContent = '');
+      // Reset de estado residual entre aperturas: evita mandar presupuesto/plazo viejos.
+      budgetVal.value = ''; plazoVal.value = '';
+      form.querySelectorAll('.qm-opt.sel').forEach(o => o.classList.remove('sel'));
+      if(mode === 'plan'){
+        seq = SEQ_PLAN; selectedPlan = plan || '';
+        planName.textContent = selectedPlan; planChip.hidden = false;
+      } else {
+        seq = SEQ_GEN; selectedPlan = '';
+        planChip.hidden = true; buildBudget();
+      }
       modal.hidden = false; modal.classList.add('open');
       document.body.classList.add('qm-lock');
-      form.querySelectorAll('[data-error]').forEach(e => e.textContent = '');
       showStep(0);
     }
     function closeModal(){
@@ -1393,61 +1569,60 @@
       if(lastFocus && lastFocus.focus) lastFocus.focus();
     }
 
-    document.querySelectorAll('.js-open-quote').forEach(b => b.addEventListener('click', function(e){ e.preventDefault(); openModal(); }));
+    document.querySelectorAll('.js-open-quote').forEach(b => b.addEventListener('click', function(e){ e.preventDefault(); openModal('generic'); }));
+    document.querySelectorAll('.js-plan').forEach(b => b.addEventListener('click', function(e){ e.preventDefault(); const card = b.closest('[data-plan]'); openModal('plan', card ? card.dataset.plan : ''); }));
     modal.querySelectorAll('[data-qm-close]').forEach(b => b.addEventListener('click', closeModal));
+    const planChange = document.getElementById('qmPlanChange');
+    if(planChange) planChange.addEventListener('click', closeModal);
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
 
-    rubroWrap.addEventListener('click', function(e){
-      const c = e.target.closest('.qm-chip'); if(!c) return;
-      rubroWrap.querySelectorAll('.qm-chip').forEach(x => x.classList.remove('sel'));
-      c.classList.add('sel'); rubroVal.value = c.dataset.val; setError(1, '');
-      setTimeout(() => { if(cur === 1) showStep(2); }, 240);
-    });
     budgetWrap.addEventListener('click', function(e){
       const o = e.target.closest('.qm-opt'); if(!o) return;
       budgetWrap.querySelectorAll('.qm-opt').forEach(x => x.classList.remove('sel'));
-      o.classList.add('sel'); budgetVal.value = o.dataset.val; setError(2, '');
-      setTimeout(() => { if(cur === 2) showStep(3); }, 240);
+      o.classList.add('sel'); budgetVal.value = o.dataset.val; stepErr('presupuesto', '');
+      const idx = seq.indexOf('presupuesto');
+      setTimeout(() => { if(cur === idx) showStep(idx + 1); }, 240);
     });
     plazoWrap.addEventListener('click', function(e){
       const o = e.target.closest('.qm-opt'); if(!o) return;
       plazoWrap.querySelectorAll('.qm-opt').forEach(x => x.classList.remove('sel'));
-      o.classList.add('sel'); plazoVal.value = o.dataset.val; setError(3, '');
-      setTimeout(() => { if(cur === 3) showStep(4); }, 240);
+      o.classList.add('sel'); plazoVal.value = o.dataset.val; stepErr('plazo', '');
+      const idx = seq.indexOf('plazo');
+      setTimeout(() => { if(cur === idx) showStep(idx + 1); }, 240);
     });
 
-    function validate(i){
-      setError(i, '');
-      if(i === 0 && form.idea.value.trim().length < 10){ setError(0, 'Cuéntanos un poco más sobre tu idea.'); return false; }
-      if(i === 1 && !rubroVal.value){ setError(1, 'Elige una opción.'); return false; }
-      if(i === 2 && !budgetVal.value){ setError(2, 'Elige una opción.'); return false; }
-      if(i === 3 && !plazoVal.value){ setError(3, 'Elige una opción.'); return false; }
-      if(i === 4){
-        if(!form.nombre.value.trim()){ setError(4, 'Falta tu nombre.'); return false; }
-        if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.correo.value.trim())){ setError(4, 'Revisa tu correo.'); return false; }
-        if(form.telefono.value.replace(/\D/g, '').length < 7){ setError(4, 'Revisa tu teléfono.'); return false; }
+    function validate(key){
+      stepErr(key, '');
+      if(key === 'idea' && form.idea.value.trim().length < 10){ stepErr('idea', 'Cuéntanos un poco más sobre tu idea.'); return false; }
+      if(key === 'presupuesto' && !budgetVal.value){ stepErr('presupuesto', 'Elige una opción.'); return false; }
+      if(key === 'plazo' && !plazoVal.value){ stepErr('plazo', 'Elige una opción.'); return false; }
+      if(key === 'datos'){
+        if(!form.nombre.value.trim()){ stepErr('datos', 'Falta tu nombre.'); return false; }
+        if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.correo.value.trim())){ stepErr('datos', 'Revisa tu correo.'); return false; }
+        if(form.telefono.value.replace(/\D/g, '').length < 7){ stepErr('datos', 'Revisa tu teléfono.'); return false; }
       }
       return true;
     }
 
-    nextBtn.addEventListener('click', function(){ if(validate(cur) && cur < total - 1) showStep(cur + 1); });
+    nextBtn.addEventListener('click', function(){ if(validate(seq[cur]) && cur < seq.length - 1) showStep(cur + 1); });
     backBtn.addEventListener('click', function(){ if(cur > 0) showStep(cur - 1); });
 
     form.addEventListener('submit', async function(e){
       e.preventDefault();
       if(form.botcheck && form.botcheck.checked) return;
-      if(!validate(4)) return;
+      if(!validate('datos')) return;
       sendBtn.disabled = true; sendBtn.textContent = 'Enviando…';
       try{
         const attr = (window.hhaGetAttribution && window.hhaGetAttribution()) || {};
         const payload = {
           access_key: ACCESS_KEY,
-          subject: 'Nueva solicitud de cotización · hha.digital',
+          subject: 'Nueva solicitud · hha.digital',
           from_name: 'hha.digital',
+          Plan: selectedPlan || '(sin plan · genérico)',
           Idea: form.idea.value.trim(),
-          Rubro: rubroVal.value,
-          Presupuesto: budgetVal.value,
+          Presupuesto: budgetVal.value || '(no preguntado · vino por plan)',
           Plazo: plazoVal.value,
+          Moneda: CUR.toUpperCase(),
           Nombre: form.nombre.value.trim(),
           Correo: form.correo.value.trim(),
           Telefono: form.telefono.value.trim(),
@@ -1471,7 +1646,7 @@
         if(data.success){
           // ---- Conversion: se dispara solo aqui (envio exitoso). Cada tag ya tiene su guarda. ----
           try{
-            var evParams = { rubro: rubroVal.value, presupuesto: budgetVal.value, plazo: plazoVal.value };
+            var evParams = { plan: selectedPlan, presupuesto: budgetVal.value, plazo: plazoVal.value, moneda: CUR };
             if(window.gtag){
               gtag('event', 'generate_lead', evParams);
               var T = window.HHA_TRACK || {};
@@ -1481,11 +1656,17 @@
             }
             if(window.fbq){ fbq('track', 'Lead', evParams); }
           }catch(_){}
-          steps.forEach(s => s.hidden = true); foot.hidden = true; doneStep.hidden = false;
+          // pantalla de exito + agendar reunion
+          const book = document.getElementById('qmBook');
+          const fallback = document.getElementById('qmBookFallback');
+          if(BOOKING_URL){ book.href = BOOKING_URL; book.hidden = false; fallback.hidden = true; }
+          else { book.hidden = true; fallback.hidden = false; }
+          Object.keys(stepEls).forEach(k => { stepEls[k].hidden = (k !== 'done'); });
+          foot.hidden = true; planChip.hidden = true;
           bar.style.width = '100%'; label.textContent = 'Listo';
         } else { throw new Error(data.message || 'error'); }
       }catch(err){
-        setError(4, 'No se pudo enviar. Reintenta o escríbenos a contacto@hha.digital.');
+        stepErr('datos', 'No se pudo enviar. Reintenta o escríbenos a contacto@hha.digital.');
       }finally{
         sendBtn.disabled = false; sendBtn.textContent = 'Enviar solicitud';
       }

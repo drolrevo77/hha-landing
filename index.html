@@ -872,7 +872,8 @@
   .faq summary::-webkit-details-marker{display:none}
   .faq summary::after{content:"+";position:absolute;right:0.1rem;top:0.85rem;font-weight:400;font-size:1.6rem;line-height:1;color:var(--brand);transition:transform .2s ease}
   .faq details[open] summary::after{transform:rotate(45deg)}
-  .faq p{margin:0;padding:0 0 1.15rem;color:var(--muted-on-light);font-size:1rem;line-height:1.55;max-width:66ch}
+  .faq p{margin:0;padding:0 0 1.15rem;color:var(--muted-on-light);font-size:1rem;line-height:1.55}
+  .faq p a{color:var(--brand);font-weight:600}
   .foot-copy{flex-basis:100%;opacity:0.5;font-size:0.72rem;letter-spacing:0.04em;margin-top:0.5rem}
 
   /* ============ WIZARD DE COTIZACIÓN (modal) ============ */
@@ -940,9 +941,13 @@
   .plans-head{max-width:720px}
   .plans-title{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:0.9;letter-spacing:0.005em;font-size:clamp(2.2rem,7vw,4rem);margin-top:0.6rem}
   .plans-lede{margin-top:1rem;color:var(--muted-on-dark);font-size:clamp(0.95rem,2.2vw,1.1rem);line-height:1.5;max-width:52ch}
-  .cur-row{display:flex;align-items:center;gap:0.9rem;flex-wrap:wrap;margin-top:1.8rem}
-  .cur-label{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted-on-dark)}
-  .cur-switch{display:inline-flex;border:1px solid rgba(255,255,255,0.12);border-radius:3px;overflow:hidden;background:var(--ink-soft)}
+  .cur-row{display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;margin-top:1.8rem}
+  .cur-note{font-size:0.9rem;color:var(--muted-on-dark)}
+  .cur-note strong{color:#fff;font-weight:700}
+  .cur-toggle{background:none;border:0;color:#5c78ff;font:inherit;font-size:0.82rem;text-decoration:underline;cursor:pointer;padding:0}
+  .cur-toggle:hover{color:#fff}
+  .cur-switch{display:none;border:1px solid rgba(255,255,255,0.12);border-radius:3px;overflow:hidden;background:var(--ink-soft)}
+  .cur-switch.show{display:inline-flex}
   .cur-btn{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.85rem;padding:0.5rem 0.95rem;background:transparent;color:var(--muted-on-dark);border:0;cursor:pointer;transition:background .15s,color .15s}
   .cur-btn+.cur-btn{border-left:1px solid rgba(255,255,255,0.12)}
   .cur-btn.on{background:var(--brand);color:#fff}
@@ -998,7 +1003,6 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c.6 0 1 .4 1 1v11c0 .6-.4 1-1 1H8.5L4 20.5V5c0-.6.4-1 1-1z"/></svg>
             Cuéntanos tu idea
           </button>
-          <a class="secondary-link" href="mailto:contacto@hha.digital">o escríbenos a contacto@hha.digital</a>
         </div>
       </div>
 
@@ -1116,7 +1120,6 @@
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c.6 0 1 .4 1 1v11c0 .6-.4 1-1 1H8.5L4 20.5V5c0-.6.4-1 1-1z"/></svg>
               Solicita tu cotización
             </button>
-            <a class="secondary-link" href="mailto:contacto@hha.digital">o escríbenos a contacto@hha.digital</a>
           </div>
         </div>
       </div>
@@ -1168,7 +1171,8 @@
         <h2 class="plans-title">Elige <span class="mk">tu plan</span>.</h2>
         <p class="plans-lede">El alcance real define el número final, y lo cerramos en una reunión.</p>
         <div class="cur-row">
-          <span class="cur-label">Moneda</span>
+          <span class="cur-note">Precios en <strong id="curName">USD</strong>.</span>
+          <button type="button" class="cur-toggle" id="curToggle">ver en otra moneda</button>
           <div class="cur-switch" id="curSwitch">
             <button class="cur-btn" data-cur="cop" type="button">COP</button>
             <button class="cur-btn" data-cur="clp" type="button">CLP</button>
@@ -1258,11 +1262,11 @@
       <div class="faq">
         <details>
           <summary>¿Cuánto cuesta?</summary>
-          <p>Depende de tu proyecto, porque cada app es a medida. La primera conversación y la cotización son gratis y sin compromiso.</p>
+          <p>Depende del alcance de tu proyecto. Míralo en nuestros <a href="#planes">planes y precios</a>.</p>
         </details>
         <details>
           <summary>¿Cuánto se demora?</summary>
-          <p>De 2 a 3 semanas desde que definimos juntos qué vamos a construir.</p>
+          <p>Depende del alcance de tu proyecto. Míralo en nuestros <a href="#planes">planes y precios</a>.</p>
         </details>
         <details>
           <summary>¿La app queda a mi nombre?</summary>
@@ -1287,8 +1291,6 @@
   <div class="foot-inner">
     <span class="foot-sign">Tu idea, tu software.</span>
     <span class="brand">hha.digital</span>
-    <span class="sep">/</span>
-    <a href="mailto:contacto@hha.digital">contacto@hha.digital</a>
     <span class="foot-copy">© 2026 hha.digital. Todos los derechos reservados.</span>
   </div>
 </footer>
@@ -1410,10 +1412,10 @@
     const lbl = document.getElementById('mineLbl');
     if(!icon || !lbl) return;
     const tile = icon.closest('.app');
-    // tap en la casilla "tu app" abre el correo (WhatsApp se re-agrega cuando haya numero)
+    // tap en la casilla "tu app" abre el formulario (unico canal de recepcion)
     tile.style.cursor = 'pointer';
     tile.addEventListener('click', function(){
-      window.location.href = 'mailto:contacto@hha.digital';
+      var q = document.querySelector('.js-open-quote'); if(q) q.click();
     });
     const S = {
       tienda:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 9V7.5a4.5 4.5 0 0 1 9 0V9H19l-1 10.5H6L5 9h2.5zm2 0h5V7.5a2.5 2.5 0 0 0-5 0V9z"/></svg>',
@@ -1482,6 +1484,7 @@
         const m = document.querySelector('[data-mant="'+t+'"]'); if(m) m.textContent = P[t].mant;
       });
       document.querySelectorAll('.cur-btn').forEach(b => b.classList.toggle('on', b.dataset.cur === CUR));
+      const nameEl = document.getElementById('curName'); if(nameEl) nameEl.textContent = CUR.toUpperCase();
     }
     function budgetRanges(){
       const P = PRICES[CUR];
@@ -1492,11 +1495,16 @@
       CUR = detectCurrency();
       renderPrices();
       const curSwitch = document.getElementById('curSwitch');
+      const curToggle = document.getElementById('curToggle');
+      if(curToggle && curSwitch){
+        curToggle.addEventListener('click', function(){ curSwitch.classList.toggle('show'); });
+      }
       if(curSwitch){
         curSwitch.addEventListener('click', function(e){
           const b = e.target.closest('.cur-btn'); if(!b) return;
           CUR = b.dataset.cur; try{ localStorage.setItem('hha_cur', CUR); }catch(err){}
           renderPrices();
+          curSwitch.classList.remove('show');
         });
       }
     } catch(e){ /* CUR queda en 'usd'; PRICES/budgetRanges siguen disponibles */ }
@@ -1666,7 +1674,7 @@
           bar.style.width = '100%'; label.textContent = 'Listo';
         } else { throw new Error(data.message || 'error'); }
       }catch(err){
-        stepErr('datos', 'No se pudo enviar. Reintenta o escríbenos a contacto@hha.digital.');
+        stepErr('datos', 'No se pudo enviar. Reintenta en un momento.');
       }finally{
         sendBtn.disabled = false; sendBtn.textContent = 'Enviar solicitud';
       }

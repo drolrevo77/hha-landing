@@ -31,6 +31,74 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
+<!-- ===== Tracking / medicion (HHA dueno). Reemplaza los placeholders por los IDs reales
+     de tus cuentas a nombre de HHA y vuelve a subir index.html a Hostinger.
+       GA4_ID           = Google Analytics 4     ("G-XXXXXXXXXX")
+       GOOGLE_ADS_ID    = Google Ads             ("AW-XXXXXXXXXX")
+       GOOGLE_ADS_LABEL = etiqueta de la conversion de Google Ads
+       META_PIXEL_ID    = Meta Pixel / Dataset   ("000000000000000")
+     Mientras un valor conserve las "X" (o el pixel sea 000...), ese tag NO carga y la pagina
+     sigue funcionando igual. La conversion se dispara en el envio exitoso del formulario. ===== -->
+<script>
+  window.HHA_TRACK = {
+    GA4_ID:           'G-K4ZKW56K5F',
+    GOOGLE_ADS_ID:    'AW-18342659636',
+    GOOGLE_ADS_LABEL: '_S70CMGp8tQcELSMu6pE',
+    META_PIXEL_ID:    '000000000000000'
+  };
+  // Un ID esta "seteado" si no conserva placeholders (X's, ceros, o la palabra CONVERSION_LABEL).
+  window.hhaIsSet = function(v){
+    return !!v && !/X{3,}/i.test(v) && !/^0+$/.test(v) && v.indexOf('CONVERSION_LABEL') === -1;
+  };
+
+  // ---- Google gtag.js (GA4 y/o Google Ads) ----
+  (function(){
+    var T = window.HHA_TRACK, ids = [];
+    if(window.hhaIsSet(T.GA4_ID)) ids.push(T.GA4_ID);
+    if(window.hhaIsSet(T.GOOGLE_ADS_ID)) ids.push(T.GOOGLE_ADS_ID);
+    if(!ids.length) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag('js', new Date());
+    ids.forEach(function(id){ gtag('config', id); });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ids[0];
+    document.head.appendChild(s);
+  })();
+
+  // ---- Meta Pixel ----
+  (function(){
+    var T = window.HHA_TRACK;
+    if(!window.hhaIsSet(T.META_PIXEL_ID)) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', T.META_PIXEL_ID);
+    fbq('track', 'PageView');
+  })();
+
+  // ---- Atribucion de origen del lead (UTM + gclid/fbclid), primer toque de la sesion ----
+  (function(){
+    try{
+      var KEY = 'hha_attribution';
+      if(sessionStorage.getItem(KEY)) return; // no sobrescribir el primer toque
+      var p = new URLSearchParams(location.search);
+      var keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'];
+      var data = {}, any = false;
+      keys.forEach(function(k){ var val = p.get(k); if(val){ data[k] = val; any = true; } });
+      data.landing_page = location.pathname + location.search;
+      data.referrer = document.referrer || '';
+      if(any || document.referrer){ sessionStorage.setItem(KEY, JSON.stringify(data)); }
+    }catch(e){}
+  })();
+  window.hhaGetAttribution = function(){
+    try{ return JSON.parse(sessionStorage.getItem('hha_attribution') || '{}'); }catch(e){ return {}; }
+  };
+</script>
+
 <style>
   :root{
     --ink:#0a0a0a;
@@ -1105,7 +1173,7 @@
   <div class="qm-card">
     <div class="qm-head">
       <div class="qm-progress"><span class="qm-bar" id="qmBar"></span></div>
-      <span class="qm-step-label" id="qmStepLabel">Paso 1 de 4</span>
+      <span class="qm-step-label" id="qmStepLabel">Paso 1 de 5</span>
       <button class="qm-close" type="button" data-qm-close aria-label="Cerrar">&times;</button>
     </div>
     <form class="qm-form" id="quoteForm" novalidate>
@@ -1371,24 +1439,48 @@
       if(!validate(4)) return;
       sendBtn.disabled = true; sendBtn.textContent = 'Enviando…';
       try{
+        const attr = (window.hhaGetAttribution && window.hhaGetAttribution()) || {};
+        const payload = {
+          access_key: ACCESS_KEY,
+          subject: 'Nueva solicitud de cotización · hha.digital',
+          from_name: 'hha.digital',
+          Idea: form.idea.value.trim(),
+          Rubro: rubroVal.value,
+          Presupuesto: budgetVal.value,
+          Plazo: plazoVal.value,
+          Nombre: form.nombre.value.trim(),
+          Correo: form.correo.value.trim(),
+          Telefono: form.telefono.value.trim(),
+          // Origen del lead (atribucion). Llega en el correo para saber que campana/anuncio lo trajo.
+          Origen_source: attr.utm_source || '(directo)',
+          Origen_medium: attr.utm_medium || '',
+          Origen_campana: attr.utm_campaign || '',
+          Origen_keyword: attr.utm_term || '',
+          Origen_anuncio: attr.utm_content || '',
+          Origen_gclid: attr.gclid || '',
+          Origen_fbclid: attr.fbclid || '',
+          Origen_landing: attr.landing_page || '',
+          Origen_referrer: attr.referrer || ''
+        };
         const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            access_key: ACCESS_KEY,
-            subject: 'Nueva solicitud de cotización · hha.digital',
-            from_name: 'hha.digital',
-            Idea: form.idea.value.trim(),
-            Rubro: rubroVal.value,
-            Presupuesto: budgetVal.value,
-            Plazo: plazoVal.value,
-            Nombre: form.nombre.value.trim(),
-            Correo: form.correo.value.trim(),
-            Telefono: form.telefono.value.trim()
-          })
+          body: JSON.stringify(payload)
         });
         const data = await res.json();
         if(data.success){
+          // ---- Conversion: se dispara solo aqui (envio exitoso). Cada tag ya tiene su guarda. ----
+          try{
+            var evParams = { rubro: rubroVal.value, presupuesto: budgetVal.value, plazo: plazoVal.value };
+            if(window.gtag){
+              gtag('event', 'generate_lead', evParams);
+              var T = window.HHA_TRACK || {};
+              if(window.hhaIsSet && window.hhaIsSet(T.GOOGLE_ADS_ID) && window.hhaIsSet(T.GOOGLE_ADS_LABEL)){
+                gtag('event', 'conversion', { send_to: T.GOOGLE_ADS_ID + '/' + T.GOOGLE_ADS_LABEL });
+              }
+            }
+            if(window.fbq){ fbq('track', 'Lead', evParams); }
+          }catch(_){}
           steps.forEach(s => s.hidden = true); foot.hidden = true; doneStep.hidden = false;
           bar.style.width = '100%'; label.textContent = 'Listo';
         } else { throw new Error(data.message || 'error'); }

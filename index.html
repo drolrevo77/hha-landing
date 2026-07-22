@@ -489,6 +489,9 @@
     margin:0.6rem 0 0.6rem;
   }
   .pillar p{font-size:1rem;line-height:1.55;color:var(--muted-on-light)}
+  .pay-a{display:grid;gap:1.9rem;margin-top:clamp(2.5rem,6vw,4rem)}
+  .pay-a .pay-stmt{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.2rem,2.6vw,1.5rem);line-height:1.15;background:var(--brand);color:#fff;display:inline-block;padding:0.08em 0.3em}
+  .pay-a p{margin-top:0.55rem;font-size:1rem;line-height:1.5;color:var(--muted-on-light)}
 
   /* ============ INDUSTRIAS ============ */
   .ind-grid{
@@ -719,7 +722,7 @@
   footer.site{
     background:#000;
     color:rgba(255,255,255,0.7);
-    padding:2.5rem var(--pad-x) 6rem;
+    padding:clamp(3rem,7vw,5rem) var(--pad-x) 5rem;
     border-top:1px solid rgba(255,255,255,0.1);
   }
   .foot-inner{
@@ -727,25 +730,32 @@
     margin:0 auto;
     display:flex;
     flex-wrap:wrap;
-    align-items:center;
-    gap:0.6rem 1.4rem;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:2.4rem 3rem;
+  }
+  .foot-cta{max-width:38ch}
+  .foot-cta .eyebrow{color:#5c78ff}
+  .foot-cta .pair-title{color:#fff;margin-top:0.5rem}
+  .foot-cta .final-cta{margin-top:clamp(1.3rem,3vw,1.9rem)}
+  .foot-meta{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:0.35rem;
     font-family:'JetBrains Mono',monospace;
     font-size:0.8rem;
     letter-spacing:0.08em;
   }
   .foot-sign{
-    flex-basis:100%;
     font-family:'Space Grotesk',sans-serif;
     font-weight:700;
     font-size:clamp(1.15rem,2.6vw,1.6rem);
     letter-spacing:-0.01em;
     color:#fff;
-    margin-bottom:1.1rem;
+    margin-bottom:0.5rem;
   }
-  .foot-inner a{text-decoration:none;color:rgba(255,255,255,0.7)}
-  .foot-inner a:hover{color:#fff}
-  .foot-inner .sep{opacity:0.4}
-  .foot-inner .brand{color:#fff;font-size:0.95rem}
+  .foot-meta .brand{color:#fff;font-size:0.95rem}
 
   /* ============ FLOATING WHATSAPP ============ */
   .wa-float{
@@ -810,9 +820,6 @@
   .ap-tag{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--brand)}
   .pair-note{margin-top:0.8rem;font-size:0.8rem;line-height:1.4;color:var(--muted-on-light)}
   .s-ink .pair-note{color:var(--muted-on-dark)}
-  .pay-mini{list-style:none;margin-top:1.2rem;display:grid;gap:0.8rem}
-  .pay-mini li{padding-left:0.9rem;border-left:2px solid var(--brand);font-size:0.92rem;line-height:1.42}
-  .pay-mini b{font-family:'Space Grotesk',sans-serif;font-weight:700}
   .s-ink .branch-b{background:var(--ink-soft);border-color:rgba(255,255,255,0.16)}
 
   /* iPhone: nuestra app dorada resalta; las demás atenuadas */
@@ -852,7 +859,6 @@
     .pillar p{font-size:0.76rem;line-height:1.36}
     .applist li{padding:0.45rem 0.55rem}
     .ap-name{font-size:0.78rem}
-    .pay-mini li{font-size:0.8rem}
     .final-cta{flex-direction:column;align-items:flex-start;gap:0.6rem;margin-top:1rem}
     .final-cta .btn{padding:0.7rem 0.95rem;font-size:0.82rem}
     /* Carrusel de proyectos: una tarjeta a la vez + puntitos */
@@ -874,7 +880,7 @@
   .faq details[open] summary::after{transform:rotate(45deg)}
   .faq p{margin:0;padding:0 0 1.15rem;color:var(--muted-on-light);font-size:1rem;line-height:1.55}
   .faq p a{color:var(--brand);font-weight:600}
-  .foot-copy{flex-basis:100%;opacity:0.5;font-size:0.72rem;letter-spacing:0.04em;margin-top:0.5rem}
+  .foot-copy{opacity:0.5;font-size:0.72rem;letter-spacing:0.04em;margin-top:0.3rem}
 
   /* ============ WIZARD DE COTIZACIÓN (modal) ============ */
   .qm{position:fixed;inset:0;z-index:200;display:none}
@@ -1060,72 +1066,6 @@
     </div>
   </section>
 
-  <!-- ================= FILA 3: TRABAJO | CIERRE ================= -->
-  <section class="section s-ink">
-    <div class="wrap">
-      <div class="pair">
-        <div class="col">
-          <span class="eyebrow">Desarrollos</span>
-          <h2 class="pair-title">Algunos de nuestros <span class="mk">desarrollos</span>.</h2>
-          <div class="carousel-wrap">
-            <ul class="carousel" role="list">
-              <li class="ev-card" style="--ev-grad:linear-gradient(135deg,#0033ff,#0026c9)">
-                <div class="ev-shot"><span class="ev-name">App para<br>mascotas</span></div>
-                <div class="ev-body">
-                  <p>Vacunas, historial médico, citas, nutrición y ficha de emergencia de cada mascota.</p>
-                  <span class="ev-tag">Mascotas</span>
-                </div>
-              </li>
-              <li class="ev-card inv" style="--ev-grad:#ffffff">
-                <div class="ev-shot"><span class="ev-name">App para<br>vida nocturna</span></div>
-                <div class="ev-body">
-                  <p>Listas de invitados y control de acceso en la puerta, en tiempo real, con informes por noche.</p>
-                  <span class="ev-tag">Entretención</span>
-                </div>
-              </li>
-              <li class="ev-card" style="--ev-grad:linear-gradient(135deg,#0033ff,#0026c9)">
-                <div class="ev-shot"><span class="ev-name">App de<br>meditación</span></div>
-                <div class="ev-body">
-                  <p>Rutina diaria de práctica: mantras, posturas, ayunos e historial con estadísticas.</p>
-                  <span class="ev-tag">Bienestar</span>
-                </div>
-              </li>
-              <li class="ev-card inv" style="--ev-grad:#ffffff">
-                <div class="ev-shot"><span class="ev-name">App de<br>contabilidad</span></div>
-                <div class="ev-body">
-                  <p>Contabilidad y cumplimiento tributario: flujo de caja, libro mayor, balances y F29.</p>
-                  <span class="ev-tag">Finanzas</span>
-                </div>
-              </li>
-              <li class="ev-card" style="--ev-grad:linear-gradient(135deg,#0033ff,#0026c9)">
-                <div class="ev-shot"><span class="ev-name">App de gestión<br>de proyectos</span></div>
-                <div class="ev-body">
-                  <p>Panel de administración que monitorea las horas de trabajo de cada empleado, por proyecto.</p>
-                  <span class="ev-tag">Operación</span>
-                </div>
-              </li>
-            </ul>
-            <div class="carousel-dots" aria-hidden="true"></div>
-            <div class="carousel-nav">
-              <button class="carousel-btn" type="button" aria-label="Anterior" data-dir="-1">‹</button>
-              <button class="carousel-btn" type="button" aria-label="Siguiente" data-dir="1">›</button>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <span class="eyebrow">Hablemos</span>
-          <h2 class="pair-title"><span style="display:block">¿Tienes una idea?</span> <span class="mk" style="display:inline-block;margin-top:0.1em">Construyámosla.</span></h2>
-          <div class="final-cta">
-            <button class="btn btn-brand js-open-quote" type="button">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c.6 0 1 .4 1 1v11c0 .6-.4 1-1 1H8.5L4 20.5V5c0-.6.4-1 1-1z"/></svg>
-              Solicita tu cotización
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ================= FILA 2: DIFERENCIA | CÓMO SE PAGA ================= -->
   <section class="section s-paper">
     <div class="wrap">
@@ -1154,10 +1094,16 @@
         <div class="col">
           <span class="eyebrow">Cero letra chica</span>
           <h2 class="pair-title">Un pago. <span class="hl">Cero sorpresas</span>.</h2>
-          <ul class="pay-mini">
-            <li><b>Pagas el desarrollo una vez</b> y la app es tuya, con código y datos, desde el día uno.</li>
-            <li><b>La mantención es opcional:</b> si quieres la cuidamos por ti; si no, te la llevas completa.</li>
-          </ul>
+          <div class="pay-a">
+            <div>
+              <span class="pay-stmt">Lo pagas una vez.</span>
+              <p>La app es tuya, con código y datos, desde el día uno.</p>
+            </div>
+            <div>
+              <span class="pay-stmt">La mantención es opcional.</span>
+              <p>Si la quieres, la cuidamos por ti; si no, sigues por tu cuenta.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1167,8 +1113,8 @@
   <section class="section" id="planes">
     <div class="wrap">
       <div class="plans-head">
-        <span class="eyebrow">Planes y precios</span>
-        <h2 class="plans-title">Elige <span class="mk">tu plan</span>.</h2>
+        <span class="eyebrow">Precios</span>
+        <h2 class="plans-title">¿Qué <span class="mk">necesitas</span>?</h2>
         <p class="plans-lede">El alcance real define el número final, y lo cerramos en una reunión.</p>
         <div class="cur-row">
           <span class="cur-note">Precios en <strong id="curName">USD</strong>.</span>
@@ -1254,19 +1200,71 @@
     </div>
   </section>
 
+  <!-- ================= DESARROLLOS (ancho completo) ================= -->
+  <section class="section s-ink">
+    <div class="wrap">
+      <span class="eyebrow">Desarrollos</span>
+      <h2 class="pair-title">Para que te hagas una <span class="mk">idea</span>.</h2>
+      <div class="carousel-wrap">
+        <ul class="carousel" role="list">
+          <li class="ev-card" style="--ev-grad:linear-gradient(135deg,#0033ff,#0026c9)">
+            <div class="ev-shot"><span class="ev-name">App para<br>mascotas</span></div>
+            <div class="ev-body">
+              <p>Vacunas, historial médico, citas, nutrición y ficha de emergencia de cada mascota.</p>
+              <span class="ev-tag">Mascotas</span>
+            </div>
+          </li>
+          <li class="ev-card inv" style="--ev-grad:#ffffff">
+            <div class="ev-shot"><span class="ev-name">App para<br>vida nocturna</span></div>
+            <div class="ev-body">
+              <p>Listas de invitados y control de acceso en la puerta, en tiempo real, con informes por noche.</p>
+              <span class="ev-tag">Entretención</span>
+            </div>
+          </li>
+          <li class="ev-card" style="--ev-grad:linear-gradient(135deg,#0033ff,#0026c9)">
+            <div class="ev-shot"><span class="ev-name">App de<br>meditación</span></div>
+            <div class="ev-body">
+              <p>Rutina diaria de práctica: mantras, posturas, ayunos e historial con estadísticas.</p>
+              <span class="ev-tag">Bienestar</span>
+            </div>
+          </li>
+          <li class="ev-card inv" style="--ev-grad:#ffffff">
+            <div class="ev-shot"><span class="ev-name">App de<br>contabilidad</span></div>
+            <div class="ev-body">
+              <p>Contabilidad y cumplimiento tributario: flujo de caja, libro mayor, balances y F29.</p>
+              <span class="ev-tag">Finanzas</span>
+            </div>
+          </li>
+          <li class="ev-card" style="--ev-grad:linear-gradient(135deg,#0033ff,#0026c9)">
+            <div class="ev-shot"><span class="ev-name">App de gestión<br>de proyectos</span></div>
+            <div class="ev-body">
+              <p>Panel de administración que monitorea las horas de trabajo de cada empleado, por proyecto.</p>
+              <span class="ev-tag">Operación</span>
+            </div>
+          </li>
+        </ul>
+        <div class="carousel-dots" aria-hidden="true"></div>
+        <div class="carousel-nav">
+          <button class="carousel-btn" type="button" aria-label="Anterior" data-dir="-1">‹</button>
+          <button class="carousel-btn" type="button" aria-label="Siguiente" data-dir="1">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= FAQ ================= -->
   <section class="section s-paper" aria-labelledby="faq-title">
     <div class="wrap">
       <span class="eyebrow">Preguntas frecuentes</span>
-      <h2 class="pair-title" id="faq-title">Lo que sueles preguntarte.</h2>
+      <h2 class="pair-title" id="faq-title">Lo que más nos preguntan.</h2>
       <div class="faq">
         <details>
           <summary>¿Cuánto cuesta?</summary>
-          <p>Depende del alcance de tu proyecto. Míralo en nuestros <a href="#planes">planes y precios</a>.</p>
+          <p>Depende del alcance de tu proyecto. Míralo en nuestros <a href="#planes">precios</a>.</p>
         </details>
         <details>
           <summary>¿Cuánto se demora?</summary>
-          <p>Depende del alcance de tu proyecto. Míralo en nuestros <a href="#planes">planes y precios</a>.</p>
+          <p>Depende del alcance de tu proyecto. Míralo en nuestros <a href="#planes">precios</a>.</p>
         </details>
         <details>
           <summary>¿La app queda a mi nombre?</summary>
@@ -1277,8 +1275,8 @@
           <p>No. La mantención es opcional: si no la quieres, te entregamos todo y sigues por tu cuenta.</p>
         </details>
         <details>
-          <summary>¿Necesito saber de tecnología?</summary>
-          <p>Para nada. Nos encargamos de todo: diseño, desarrollo, hosting y puesta en marcha. Tú solo la usas.</p>
+          <summary>¿Y si no sé nada de tecnología?</summary>
+          <p>No importa. Tú conoces tu negocio; de la tecnología nos encargamos nosotros: diseño, desarrollo, hosting y puesta en marcha.</p>
         </details>
       </div>
     </div>
@@ -1289,9 +1287,21 @@
 <!-- ================= FOOTER ================= -->
 <footer class="site">
   <div class="foot-inner">
-    <span class="foot-sign">Tu idea, tu software.</span>
-    <span class="brand">hha.digital</span>
-    <span class="foot-copy">© 2026 hha.digital. Todos los derechos reservados.</span>
+    <div class="foot-cta">
+      <span class="eyebrow">Hablemos</span>
+      <h2 class="pair-title"><span style="display:block">¿Tienes una idea?</span> <span class="mk" style="display:inline-block;margin-top:0.1em">Construyámosla.</span></h2>
+      <div class="final-cta">
+        <button class="btn btn-brand js-open-quote" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c.6 0 1 .4 1 1v11c0 .6-.4 1-1 1H8.5L4 20.5V5c0-.6.4-1 1-1z"/></svg>
+          Solicita tu cotización
+        </button>
+      </div>
+    </div>
+    <div class="foot-meta">
+      <span class="foot-sign">Tu idea, tu software.</span>
+      <span class="brand">hha.digital</span>
+      <span class="foot-copy">© 2026 hha.digital. Todos los derechos reservados.</span>
+    </div>
   </div>
 </footer>
 
@@ -1310,7 +1320,7 @@
       <span class="qm-step-label" id="qmStepLabel">Paso 1 de 5</span>
       <button class="qm-close" type="button" data-qm-close aria-label="Cerrar">&times;</button>
     </div>
-    <div class="qm-planchip" id="qmPlanChip" hidden>Plan elegido: <strong id="qmPlanName"></strong> <button type="button" class="qm-planchip-change" id="qmPlanChange">cambiar</button></div>
+    <div class="qm-planchip" id="qmPlanChip" hidden>Elegiste: <strong id="qmPlanName"></strong> <button type="button" class="qm-planchip-change" id="qmPlanChange">cambiar</button></div>
     <form class="qm-form" id="quoteForm" novalidate>
       <input type="checkbox" name="botcheck" class="qm-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
